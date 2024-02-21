@@ -40,6 +40,27 @@ function loadView($name)
 }
 
 /**
+ *admin view
+ * @param string $name
+ * @return void
+ *
+ */
+
+
+//loadView('home')
+function adminView($name)
+{
+    //check file
+    $pathView = basePath("views/admin/{$name}.view.php");
+    if(file_exists($pathView)){
+        require $pathView;
+    }else{
+        echo "view {$name} not existed";
+    }
+
+}
+
+/**
  *load view
  * @param string $name
  * @return void
@@ -47,12 +68,59 @@ function loadView($name)
  */
 function loadPartial($name){
     $pathPartial = basePath("views/partials/{$name}.php");
+//    dd($pathPartial);
     if(file_exists($pathPartial)){
         require $pathPartial;
     }else{
         echo "partial {$name} not existed";
     }
 }
+
+/**
+ *admin partial
+ * @param string $name
+ * @return void
+ *
+ */
+function loadAdminPartial($name){
+    $pathPartial = basePath("views/partials/admin/{$name}.php");
+//    dd($pathPartial);
+    if(file_exists($pathPartial)){
+        require $pathPartial;
+    }else{
+        echo "partial {$name} not existed";
+    }
+}
+
+
+
+/**
+ *inspector function
+ * @param mixed $variable
+ * @return void
+ *
+ */
+function inspect($variable)
+{
+    echo '<pre>';
+    var_dump($variable);
+    echo '</pre>';
+}
+
+/**
+ *die and dump function
+ * @param mixed $variable
+ * @return void
+ *
+ */
+function dd($variable){
+    echo '<pre>';
+    var_dump($variable);
+    echo '</pre>';
+    die();
+}
+
+
 
 
 
