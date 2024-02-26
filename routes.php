@@ -19,6 +19,6 @@ $router->get('404' , 'Controller/error/404.php');
 $router->get('/administrator' , 'Controller/admin/index.php');
 
 //single-video-page
-$router->get('/single-video' , 'Controller/admin/single-page.php');
+$router->get('/single-video' , 'Controller/single-page.php');
 
 
