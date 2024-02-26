@@ -1308,7 +1308,7 @@ body {
 
 }
 
-.sidebar-brand:active
+.sidebar-brand:hover , .sidebar-brand:active
  {
 
     .icon-sidebar-ho {
