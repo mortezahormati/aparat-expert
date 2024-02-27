@@ -18,7 +18,13 @@
         <!--begin::Mobile logo-->
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
             <a href="../../demo1/dist/index.html" class="d-lg-none">
-                <img alt="Logo" src="upload/logos/logo-2.svg" class="h-30px" />
+                <img alt="Logo" src="<?= asset('upload/logos/logo-2.svg')?>" class="h-30px" />
+            </a>
+        </div>
+        <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
+            <a href="#" class="btn btn-sm btn-primary " style="border-radius:50px">
+
+                <span class="font-weight-600 text-sm-left">بارگذاری ویدیو</span>
             </a>
         </div>
         <!--end::Mobile logo-->
@@ -337,7 +343,7 @@
                                         <!--end::Section-->
                                         <!--begin::Illustration-->
                                         <div class="text-center px-4">
-                                            <img class="mw-100 mh-200px" alt="image" src="assets/media/illustrations/sketchy-1/1.png" />
+                                            <img class="mw-100 mh-200px" alt="image" src="<?= asset('')?>assets/media/illustrations/sketchy-1/1.png" />
                                         </div>
                                         <!--end::Illustration-->
                                     </div>
@@ -581,7 +587,7 @@
                     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
                         <!--begin::Menu wrapper-->
                         <div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                            <img src="upload/avatars/150-26.jpg" alt="user" />
+                            <img src="<?= asset('upload/avatars/150-26.jpg')?>" alt="user" />
                         </div>
                         <!--begin::Menu-->
                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -590,7 +596,7 @@
                                 <div class="menu-content d-flex align-items-center px-3">
                                     <!--begin::Avatar-->
                                     <div class="symbol symbol-50px me-5">
-                                        <img alt="Logo" src="upload/avatars/150-26.jpg" />
+                                        <img alt="Logo" src="<?= asset('upload/avatars/150-26.jpg')?>" />
                                     </div>
                                     <!--end::Avatar-->
                                     <!--begin::Username-->
@@ -599,7 +605,7 @@
                                         </div>
                                         <a href="#" class="fw-bold text-muted text-hover-primary fs-7">
                                             <span>تنظیمات</span>
-                                            <img src="upload/aparat/svgexport-7.svg" width="14px" alt="">
+                                            <img src="<?= asset('upload/aparat/svgexport-7.svg')?>" width="14px" alt="">
                                         </a>
                                     </div>
                                     <!--end::Username-->
@@ -612,7 +618,7 @@
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
                                 <a href="../../demo1/dist/account/overview.html" class="menu-link px-5">
-                                    <img src="upload/aparat/svgexport-8.svg"  width="16px" alt="">
+                                    <img src="<?= asset('upload/aparat/svgexport-8.svg')?>"  width="16px" alt="">
                                     <span class="menu-text m-2">صفحه اصلی آپارات</span>
                                 </a>
                             </div>
@@ -620,7 +626,7 @@
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
                                 <a href="../../demo1/dist/pages/projects/list.html" class="menu-link px-5">
-                                    <img src="upload/aparat/svgexport-14.svg" width="16px" alt="">
+                                    <img src="<?= asset('upload/aparat/svgexport-14.svg')?>" width="16px" alt="">
                                     <span class="menu-text m-2">ویدیوهای من </span>
                                 </a>
                             </div>
@@ -628,7 +634,7 @@
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
                                 <a href="../../demo1/dist/authentication/flows/basic/sign-in.html" class="menu-link px-5">
-                                    <img src="upload/aparat/svgexport-13.svg" width="16px" alt="">
+                                    <img src="<?= asset('upload/aparat/svgexport-13.svg')?>" width="16px" alt="">
                                     <span class="menu-text m-2">خروج از حساب کاربری</span>
 
                                 </a>

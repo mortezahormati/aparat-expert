@@ -44,7 +44,7 @@
                                 <div id="trailer"
                                      class="section d-flex justify-content-center embed-responsive embed-responsive-16by9">
                                     <video class="embed-responsive-item" controls loop muted>
-                                        <source src="upload/videos/digital-timer.mp4" type="video/mp4">
+                                        <source src="<?= asset('upload/videos/digital-timer.mp4') ?>" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
@@ -63,7 +63,7 @@
                                     <div class="col-md-2 text-left">
                                         <p>
                                             <?= number_format('8543'); ?>
-                                            <img src="upload/aparat/svgexport-47.svg" width="14px" alt="">
+                                            <img src="<?= asset('upload/videos/digital-timer.mp4') ?>" width="14px" alt="">
                                         </p>
                                     </div>
 
@@ -75,7 +75,7 @@
 
                                     <div class="col-md-5">
                                         <a class="btn-link">
-                                            <img class="rounded-circle" src="upload/channel_banner/nm2.webp"
+                                            <img class="rounded-circle" src="<?= asset('upload/channel_banner/nm2.webp') ?>"
                                                  style="width: 60px" alt="">
                                             <span style="font-size: 12px">
                                             نام کانال ویدیو
@@ -92,7 +92,7 @@
 
                                         <a href="" class="btn-link ml-3 mt-4"
                                            style="text-decoration: none; color: #000000b2;">
-                                            <img class="rounded-circle" src="upload/aparat/svgexport-49.svg"
+                                            <img class="rounded-circle" src="<?= asset('upload/aparat/svgexport-49.svg') ?>"
                                                  style="width: 24px" alt="">
                                             <span style="font-size: 12px">
                                            16
@@ -101,7 +101,7 @@
                                         </a>
                                         <a href="" class="btn-link ml-3 mt-4"
                                            style="text-decoration: none; color: #000000b2;">
-                                            <img class="rounded-circle" src="upload/aparat/svgexport-50.svg"
+                                            <img class="rounded-circle" src="<?= asset('upload/aparat/svgexport-50.svg') ?>"
                                                  style="width: 24px" alt="">
                                             <span style="font-size: 12px">
                                            ذخیره
@@ -110,7 +110,7 @@
                                         </a>
                                         <a href="" class="btn-link ml-3 mt-4"
                                            style="text-decoration: none; color: #000000b2;">
-                                            <img class="rounded-circle" src="upload/aparat/svgexport-51.svg"
+                                            <img class="rounded-circle" src="<?= asset('upload/aparat/svgexport-51.svg') ?>"
                                                  style="width: 24px" alt="">
                                             <span style="font-size: 12px">
                                            دانلود
@@ -118,7 +118,7 @@
 
                                         </a>
                                         <a href="" class="btn   btn-danger ml-3" style="border-radius: 5%">
-                                            <img src="upload/aparat/svgexport-55.svg" alt="" width="14px">
+                                            <img src="<?= asset('upload/aparat/svgexport-55.svg') ?>" alt="" width="14px">
                                             <span>دنبال کردن</span>
                                         </a>
 
@@ -175,7 +175,7 @@
                                                         <!--begin::Author-->
                                                         <div class="ml-2">
                                                             <div  class="text-small text-success">
-                                                                <img src="upload/avatars/150-1.jpg" class="rounded-circle" width="50px" alt="">
+                                                                <img src="<?= asset('upload/avatars/150-1.jpg') ?>" class="rounded-circle" width="50px" alt="">
                                                             </div>
                                                         </div>
                                                         <!--end::Author-->

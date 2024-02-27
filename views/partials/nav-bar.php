@@ -12,7 +12,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a href="">
-            <img src="upload/logo.png" alt="" height="50px">
+            <img src="<?= asset('upload/logo.png') ?>" alt="" height="50px">
         </a>
     </div>
     <div class="col-md-6">

@@ -1,5 +1,7 @@
 <?php
 
+const BASE_URL = 'http://aparat-expert.local/';
+
 /**
  * get the base path of file in root
  *@param string $path
@@ -118,6 +120,12 @@ function dd($variable){
     var_dump($variable);
     echo '</pre>';
     die();
+}
+
+
+
+function asset($name){
+    return BASE_URL."$name";
 }
 
 

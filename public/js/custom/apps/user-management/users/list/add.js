@@ -47,11 +47,11 @@ var KTUsersAddUser = function () {
         submitButton.addEventListener('click', e => {
             e.preventDefault();
 
+
             // Validate form before submit
             if (validator) {
                 validator.validate().then(function (status) {
                     console.log('validated!');
-
                     if (status == 'Valid') {
                         // Show loading indication
                         submitButton.setAttribute('data-kt-indicator', 'on');
@@ -79,6 +79,7 @@ var KTUsersAddUser = function () {
                             }).then(function (result) {
                                 if (result.isConfirmed) {
                                     modal.hide();
+                                    location.reload()
                                 }
                             });
 
@@ -104,68 +105,43 @@ var KTUsersAddUser = function () {
         const cancelButton = element.querySelector('[data-kt-users-modal-action="cancel"]');
         cancelButton.addEventListener('click', e => {
             e.preventDefault();
+            modal.hide();
 
-            Swal.fire({
-                text: "Are you sure you would like to cancel?",
-                icon: "warning",
-                showCancelButton: true,
-                buttonsStyling: false,
-                confirmButtonText: "Yes, cancel it!",
-                cancelButtonText: "No, return",
-                customClass: {
-                    confirmButton: "btn btn-primary",
-                    cancelButton: "btn btn-active-light"
-                }
-            }).then(function (result) {
-                if (result.value) {
-                    form.reset(); // Reset form			
-                    modal.hide();	
-                } else if (result.dismiss === 'cancel') {
-                    Swal.fire({
-                        text: "Your form has not been cancelled!.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-primary",
-                        }
-                    });
-                }
-            });
+            // Swal.fire({
+            //     text: "Are you sure you would like to cancel?",
+            //     icon: "warning",
+            //     showCancelButton: true,
+            //     buttonsStyling: false,
+            //     confirmButtonText: "Yes, cancel it!",
+            //     cancelButtonText: "No, return",
+            //     customClass: {
+            //         confirmButton: "btn btn-primary",
+            //         cancelButton: "btn btn-active-light"
+            //     }
+            // }).then(function (result) {
+            //     if (result.value) {
+            //         form.reset(); // Reset form
+            //
+            //     } else if (result.dismiss === 'cancel') {
+            //         Swal.fire({
+            //             text: "Your form has not been cancelled!.",
+            //             icon: "error",
+            //             buttonsStyling: false,
+            //             confirmButtonText: "Ok, got it!",
+            //             customClass: {
+            //                 confirmButton: "btn btn-primary",
+            //             }
+            //         });
+            //     }
+            // });
         });
 
         // Close button handler
         const closeButton = element.querySelector('[data-kt-users-modal-action="close"]');
         closeButton.addEventListener('click', e => {
             e.preventDefault();
+            modal.hide();
 
-            Swal.fire({
-                text: "Are you sure you would like to cancel?",
-                icon: "warning",
-                showCancelButton: true,
-                buttonsStyling: false,
-                confirmButtonText: "Yes, cancel it!",
-                cancelButtonText: "No, return",
-                customClass: {
-                    confirmButton: "btn btn-primary",
-                    cancelButton: "btn btn-active-light"
-                }
-            }).then(function (result) {
-                if (result.value) {
-                    form.reset(); // Reset form			
-                    modal.hide();	
-                } else if (result.dismiss === 'cancel') {
-                    Swal.fire({
-                        text: "Your form has not been cancelled!.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-primary",
-                        }
-                    });
-                }
-            });
         });
     }
 

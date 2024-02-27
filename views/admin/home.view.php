@@ -34,7 +34,7 @@
                                 <!--begin::Card body-->
                                 <div class="card-body justify-content-center text-center pt-1">
                                     <!--begin::Users-->
-                                    <img src="upload/aparat/svgexport-17.svg" width="24px" alt="">
+                                    <img src="<?= asset('upload/aparat/svgexport-17.svg') ?>" width="24px" alt="">
                                     <span>ویدیوی های شما</span>
                                     <!--end::Permissions-->
                                 </div>
@@ -58,7 +58,7 @@
                                 <!--begin::Card body-->
                                 <div class="card-body justify-content-center text-center pt-1">
                                     <!--begin::Users-->
-                                    <img src="upload/aparat/svgexport-18.svg" width="24px" alt="">
+                                    <img src="<?= asset('upload/aparat/svgexport-18.svg') ?>" width="24px" alt="">
                                     <span>دنبال کنندگان</span>
                                     <!--end::Permissions-->
                                 </div>
@@ -82,7 +82,7 @@
                                 <!--begin::Card body-->
                                 <div class="card-body justify-content-center text-center pt-1">
                                     <!--begin::Users-->
-                                    <img src="upload/aparat/svgexport-10.svg" width="24px" alt="">
+                                    <img src="<?= asset('upload/aparat/svgexport-10.svg') ?>" width="24px" alt="">
                                     <span>بازدید ویدیو</span>
                                     <!--end::Permissions-->
                                 </div>
@@ -106,7 +106,7 @@
                                 <!--begin::Card body-->
                                 <div class="card-body justify-content-center text-center pt-1">
                                     <!--begin::Users-->
-                                    <img src="upload/aparat/svgexport-19.svg" width="24px" alt="">
+                                    <img src="<?= asset('upload/aparat/svgexport-19.svg') ?>" width="24px" alt="">
                                     <span>بازدید امروز</span>
                                     <!--end::Permissions-->
                                 </div>
@@ -134,7 +134,7 @@
 
                                             <a href="#" class="btn btn-sm  btn-outline-dark">
                                                 <span class="text-sm">مشاهده همه</span>
-                                                <img src="upload/icons/duotune/arrows/arr021.svg" width="14px" alt="">
+                                                <img src="<?= asset('upload/icons/duotune/arrows/arr021.svg') ?>" width="14px" alt="">
                                             </a>
                                         </div>
                                         <!--end::Card title-->
@@ -142,7 +142,7 @@
                                     <!--end::Card header-->
                                     <!--begin::Card body-->
                                     <div class="card-body mt-12 pt-3 text-center justify-content-center">
-                                        <img src="upload/aparat/empty-video.png" alt="">
+                                        <img src="<?= asset('upload/aparat/empty-video.png') ?>" alt="">
                                         <!--end::Permissions-->
                                     </div>
 
@@ -160,7 +160,7 @@
 
                                             <a href="#" class="btn btn-sm  btn-outline-dark">
                                                 <span class="text-sm">مشاهده همه</span>
-                                                <img src="upload/icons/duotune/arrows/arr021.svg" width="14px" alt="">
+                                                <img src="<?= asset('upload/icons/duotune/arrows/arr021.svg') ?>" width="14px" alt="">
                                             </a>
                                         </div>
                                         <!--end::Card title-->
@@ -168,7 +168,7 @@
                                     <!--end::Card header-->
                                     <!--begin::Card body-->
                                     <div class="card-body mt-12 pt-3 text-center justify-content-center">
-                                        <img src="upload/aparat/empty-comment.png" alt="">
+                                        <img src="<?= asset('upload/aparat/empty-comment.png')?>" alt="">
                                         <!--end::Permissions-->
                                     </div>
 
@@ -195,35 +195,4 @@
 <!--begin::Activities drawer-->
 
 
-<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
-    <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
-    <span class="svg-icon">
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-					<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
-					<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
-				</svg>
-			</span>
-    <!--end::Svg Icon-->
-</div>
-<script src="js/jquery.min.js"></script>
-<!--end::Scrolltop-->
-<!--end::Main-->
-<!--<script>var hostUrl = "assets/";</script>-->
-<!--begin::Javascript-->
-<!--begin::Global Javascript Bundle(used by all pages)-->
-<script src="plugins/global/plugins.bundle.js"></script>
-<script src="js/scripts.bundle.js"></script>
-<!--<!--end::Global Javascript Bundle-->-->
-<!--<!--begin::Page Vendors Javascript(used by this page)-->-->
-<script src="plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-<!--<!--end::Page Vendors Javascript-->-->
-<!--begin::Page Custom Javascript(used by this page)-->
-<script src="js/custom/widgets.js"></script>
-<script src="js/custom/apps/chat/chat.js"></script>
-<script src="js/custom/modals/create-app.js"></script>
-<script src="js/custom/modals/upgrade-plan.js"></script>
-<!--end::Page Custom Javascript-->
-<!--end::Javascript-->
-</body>
-<!--end::Body-->
-</html>
+

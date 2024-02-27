@@ -88,16 +88,16 @@
         <li class="sidebar-brand ">
             <div class="row mr-4">
                 <a href="#" class="mr-1">
-                    <img src="upload/twit.png" style="width: 24px" alt="">
+                    <img src="<?= asset('upload/twit.png') ?>" style="width: 24px" alt="">
                 </a>
                 <a href="#" class="mr-1">
-                    <img src="upload/ins.png" style="width: 24px" alt="">
+                    <img src="<?= asset('upload/ins.png') ?>" style="width: 24px" alt="">
                 </a>
                 <a href="#" class="mr-1">
-                    <img src="upload/tele.png" style="width: 24px" alt="">
+                    <img src="<?= asset('upload/tele.png') ?>" style="width: 24px" alt="">
                 </a>
                 <a href="#" class="mr-1">
-                    <img src="upload/linkedin.png" style="width: 24px" alt="">
+                    <img src="<?= asset('upload/linkedin.png') ?>" style="width: 24px" alt="">
                 </a>
 
             </div>

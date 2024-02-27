@@ -1,5 +1,5 @@
-<script src="js/jquery-3.5.1.slim.min.js"></script>
-<script src="js/bootstrap.bundle.js"></script> <!-- Menu Toggle Script -->
+<script src="<?= asset('js/jquery-3.5.1.slim.min.js') ?>"></script>
+<script src="<?= asset('js/bootstrap.bundle.js') ?>"></script> <!-- Menu Toggle Script -->
 <script>
     $(document).ready(function () {
         $(".video-play").on("mouseover", function (event) {

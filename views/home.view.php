@@ -18,7 +18,7 @@
                 <div class="container  ">
                     <div class="row  ">
                         <div class="col-md-12 ">
-                            <img src="upload/banner.png" style="width: 100%" alt="">
+                            <img src="<?= asset('upload/banner.png') ?>" style="width: 100%" alt="">
                         </div>
                     </div>
                 </div>

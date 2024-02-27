@@ -3,7 +3,7 @@
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <!--begin::Logo-->
         <a href="../../demo1/dist/index.html">
-            <img alt="Logo" src="upload/logo.png" class="h-50px logo" />
+            <img alt="Logo" src="<?= asset('upload/logo.png') ?>" class="h-50px logo" />
         </a>
         <!--end::Logo-->
         <!--begin::Aside toggler-->
@@ -30,7 +30,7 @@
                 <div class="menu-item" style="text-align: center">
                     <div class="menu-content p-8 justify-content-center">
                         <div class="cursor-pointer symbol symbol-150px symbol-md-150px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                            <img src="upload/avatars/150-26.jpg" alt="user" />
+                            <img src="<?= asset('upload/avatars/150-26.jpg') ?>" alt="user" />
                         </div>
                     </div>
 
@@ -41,7 +41,7 @@
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
 											<span class="svg-icon svg-icon-2">
-                                                <img src="upload/aparat/svgexport-8.svg" alt="" >
+                                                <img src="<?= asset('upload/aparat/svgexport-8.svg') ?>" alt="" >
 											
 											</span>
                                             <!--end::Svg Icon-->
@@ -55,7 +55,7 @@
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
 											<span class="svg-icon svg-icon-2">
-                                                <img src="upload/aparat/svgexport-10.svg" alt="" >
+                                                <img src="<?= asset('upload/aparat/svgexport-10.svg') ?>" alt="" >
 
 											</span>
                                             <!--end::Svg Icon-->
@@ -68,7 +68,7 @@
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
 											<span class="svg-icon svg-icon-2">
-                                                <img src="upload/aparat/svgexport-12.svg" alt="" >
+                                                <img src="<?= asset('upload/aparat/svgexport-12.svg') ?>" alt="" >
 
 											</span>
                                             <!--end::Svg Icon-->
@@ -81,7 +81,7 @@
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
 											<span class="svg-icon svg-icon-2">
-                                                <img src="upload/aparat/svgexport-11.svg" alt="" >
+                                                <img src="<?= asset('upload/aparat/svgexport-11.svg') ?>" alt="" >
 
 											</span>
                                             <!--end::Svg Icon-->
@@ -94,7 +94,7 @@
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
 											<span class="svg-icon svg-icon-2">
-                                                <img src="upload/aparat/svgexport-13.svg" alt="" >
+                                                <img src="<?= asset('upload/aparat/svgexport-13.svg') ?>" alt="" >
 
 											</span>
                                             <!--end::Svg Icon-->
@@ -107,7 +107,7 @@
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
 											<span class="svg-icon svg-icon-2">
-                                                <img src="upload/aparat/svgexport-16.svg" alt="" >
+                                                <img src="<?= asset('upload/aparat/svgexport-16.svg') ?>" alt="" >
 
 											</span>
                                             <!--end::Svg Icon-->
