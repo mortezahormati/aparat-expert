@@ -23,6 +23,7 @@ $router->get('/administrator/category' , 'Controller/admin/category/index.php');
 //$router->get('/administrator/category/create' , 'Controller/admin/category/create.php');
 
 $router->get('/administrator/category/ajax' , 'Controller/admin/category/ajax.request.php');
+$router->post('/administrator/category/ajax' , 'Controller/admin/category/ajax.request.php');
 //$router->get('/category' , 'Controller/admin/category/index.php');
 //$router->get('/category/create' , 'Controller/admin/category/create.php');
 //single-video-page

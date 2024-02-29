@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <a href="/login.php" style="padding: 0.5rem 1rem;color: #6f7285;text-decoration: none">
+                    <a href="<?= asset('login') ?>" style="padding: 0.5rem 1rem;color: #6f7285;text-decoration: none">
                         <i class="fa fa-user"></i>
                         <span class="font-weight-600 text-sm-left">ورود و ثبت نام </span>
                     </a>

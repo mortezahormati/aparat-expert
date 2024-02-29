@@ -25,12 +25,20 @@
                                 <!--begin::Card title-->
 
                                     <!--begin::Search-->
-                                   <div class="row w-100">
+                                   <div class="row w-100 align-items-center">
                                        <div class="col-md-6">
                                            <h6>دسته بندی ها </h6>
                                        </div>
                                        <div class="col-md-4">
-
+<!--                                           <div class="d-flex align-items-center position-relative my-1">-->
+<!--                                               <span class="svg-icon svg-icon-1 position-absolute ms-6">-->
+<!--													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">-->
+<!--														<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"></rect>-->
+<!--														<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"></path>-->
+<!--													</svg>-->
+<!--												</span>-->
+<!--                                               <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search user">-->
+<!--                                           </div>-->
                                        </div>
                                        <div class="col-md-2 mr-4 text-left">
                                            <a  data-bs-toggle="modal" data-bs-target="#kt_modal_add_user" class=" btn-sm btn-success text-white px-3">
@@ -159,7 +167,7 @@
                                 <!--end::Table-->
                                 <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true" style="display: none;">
                                     <!--begin::Modal dialog-->
-                                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                                    <div class="modal-dialog modal-dialog-centered mw-850px">
                                         <!--begin::Modal content-->
                                         <div class="modal-content">
                                             <!--begin::Modal header-->
@@ -184,7 +192,7 @@
                                             <!--begin::Modal body-->
                                             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                                 <!--begin::Form-->
-                                                <form id="kt_modal_add_user_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#">
+                                                <form id="kt_modal_add_user_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" method="post" action="#">
                                                     <!--begin::Scroll-->
                                                     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px" style="max-height: 3px;">
                                                         <!--begin::Input group-->
@@ -215,8 +223,8 @@
                                                             <label class="required fw-bold fs-6 mb-2">دسته بندی والد</label>
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
-                                                            <select name="parent_id" id="select_cat">
-      <option id="category"></option>
+                                                            <select name="parent_id" class="form-control form-control-solid mb-3"  id="select_cat">
+
                                                             </select>
                                                             <!--end::Input-->
                                                             <div class="fv-plugins-message-container invalid-feedback"></div>
@@ -229,10 +237,10 @@
                                                     <!--end::Scroll-->
                                                     <!--begin::Actions-->
                                                     <div class="text-center pt-15">
-                                                        <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
-                                                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                                                            <span class="indicator-label">Submit</span>
-                                                            <span class="indicator-progress">Please wait...
+                                                        <button type="reset" class="btn-sm  btn-outline-danger me-3" data-kt-users-modal-action="cancel">لغو</button>
+                                                        <button type="submit" class="btn-sm btn-danger" data-kt-users-modal-action="submit">
+                                                            <span class="indicator-label">ارسال</span>
+                                                            <span class="indicator-progress">لطفا منتظر بمانید
 																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                                         </button>
                                                     </div>
@@ -265,42 +273,20 @@
 
 <?php loadAdminPartial('footer'); ?>
 <script>
-    // $(document).ready(function(){
         $(document).on('show.bs.modal','#kt_modal_add_user' ,  function (e) {
-
             $.ajax({
                 type: "GET",
                 url: 'http://aparat-expert.local/administrator/category/ajax',
                 datatype: 'json',
                 success: function(datas){
-
-                    var select = document.getElementById('select_cat');
-
-                    var options = "";
-
-                    console.log(datas)
-
-                    // for(let i = 0; i<datas.length;i++){
-                    //     console.log(datas[i])
-                    // }
-
-//                     for (let data of datas) {
-//
-//                             // options.push(`<option value=${data.id}>${data.name}</option>`);
-//                             //interpolation
-// console.log(data)
-//
-//                     }
-//
-//                     $(select).html(options);
-
+                    // console.log(datas);
+                     var data2 = JSON.parse(datas);
+                     $("#select_cat").append(`<option value="null" >بدون دسته بندی  </option>`)
+                        for (let data of data2) {
+                           $("#select_cat").append(`<option value="${data.id}" >${data.persian_name}  </option>`)
+                        }
                 }
-
             });
-            // $.get('http://aparat-expert.local/administrator/category/ajax' , null, function (data) {
-            //     console.log(data);
-            // })
         });
-    // });
 </script>
 <!--begin::Wrapper-->

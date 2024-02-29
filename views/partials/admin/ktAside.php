@@ -37,7 +37,7 @@
                 </div>
                
                 <div class="menu-item mt-8">
-                    <a class="menu-link active" href="#">
+                    <a class="menu-link active" href="<?= asset('administrator') ?>">
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
 											<span class="svg-icon svg-icon-2">
@@ -102,6 +102,22 @@
                         <span class="menu-title">آمار بازدید</span>
                     </a>
                 </div>
+                <!--                ADMIN MENU ITEM -->
+
+                <div class="menu-item">
+                    <a class="menu-link active" href="<?= asset('administrator/category') ?>">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+											<span class="svg-icon svg-icon-2">
+                                                <img src="<?= asset('upload/aparat/svgexport-9.svg') ?>" alt="" >
+
+											</span>
+                                            <!--end::Svg Icon-->
+										</span>
+                        <span class="menu-title">دسته بندی ها </span>
+                    </a>
+                </div>
+                <!--                END ADMIN MENU-->
                 <div class="menu-item mt-16 ">
                     <a class="menu-link active" href="#">
 										<span class="menu-icon">
@@ -115,6 +131,10 @@
                         <span class="menu-title">خروج از حساب کاربری</span>
                     </a>
                 </div>
+
+
+
+
             </div>
             <!--end::Menu-->
         </div>

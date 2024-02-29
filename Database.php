@@ -30,11 +30,12 @@ class Database
      * @param mixed $query
      * @throws PDOException
      */
-    public function query($query)
+    public function query($query , $params=[])
     {
         try {
+
             $sta = $this->conn->prepare($query);
-            $sta->execute();
+            sizeof($params) > 0 ? $sta->execute($params): $sta->execute();
             return $sta;
         } catch (PDOException $e) {
             throw new Exception("query failed because :  {$e->getMessage()}");
