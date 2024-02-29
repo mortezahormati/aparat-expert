@@ -84,33 +84,24 @@
                                             <!--begin::Table body-->
                                             <tbody class="text-gray-600 fw-bold text-center">
 
-                                            <tr class="odd">
-                                                <!--begin::Checkbox-->
+                                            <?php foreach ($categories as $ca): ?>
+                                            <tr class="<?=  $ca['id']%2 === 0 ? 'even' : 'odd'  ?>">
 
-                                                <!--end::Checkbox-->
-                                                <!--begin::User=-->
                                                 <td class=" align-items-center">
-                                                    <!--begin:: Avatar -->
-
-                                                    <!--end::Avatar-->
-                                                    <!--begin::User details-->
-
-                                                        <span class="text-center">e.smith@kpmg.com.au</span>
-
-                                                    <!--begin::User details-->
+                                                        <span class="text-center"> <?= $ca['persian_name'] ?></span>
                                                 </td>
                                                 <!--end::User=-->
                                                 <!--begin::Role=-->
-                                                <td>Administrator</td>
+                                                <td> <?= $ca['name'] ?></td>
 
-                                                <td data-order="2021-06-24T10:30:00+04:30">24 Jun 2021, 10:30 am</td>
+                                                <td data-order="2021-06-24T10:30:00+04:30"> <?= date('Y-m-d' , strtotime($ca['created_at']))  ?></td>
                                                 <!--begin::Joined-->
                                                 <!--begin::Action=-->
                                                 <td class="">
 
                                                     <!--begin::Menu-->
                                                         <!--begin::Menu item-->
-                                                            <a href="../../demo1/dist/apps/user-management/users/view.html" class=" btn-sm btn-info px-3">ویرایش</a>
+                                                            <a id="" href="../../demo1/dist/apps/user-management/users/view.html" class=" btn-sm btn-info px-3">ویرایش</a>
                                                         <!--end::Menu item-->
                                                         <!--begin::Menu item-->
 
@@ -121,42 +112,9 @@
                                                 </td>
                                                 <!--end::Action=-->
                                             </tr>
-                                            <tr class="even">
-                                                <!--begin::Checkbox-->
 
-                                                <!--end::Checkbox-->
-                                                <!--begin::User=-->
-                                                <td class= align-items-center">
-                                                    <!--begin:: Avatar -->
-                                                    <!--end::Avatar-->
-                                                    <!--begin::User details-->
+                                            <?php endforeach; ?>
 
-                                                        <span class="text-center">e.smith@kpmg.com.au</span>
-
-                                                    <!--begin::User details-->
-                                                </td>
-                                                <!--end::User=-->
-                                                <!--begin::Role=-->
-                                                <td>Administrator</td>
-
-                                                <td data-order="2021-06-24T10:30:00+04:30">24 Jun 2021, 10:30 am</td>
-                                                <!--begin::Joined-->
-                                                <!--begin::Action=-->
-                                                <td class="">
-
-                                                    <!--begin::Menu-->
-                                                    <!--begin::Menu item-->
-                                                    <a href="../../demo1/dist/apps/user-management/users/view.html" class=" btn-sm btn-info px-3">ویرایش</a>
-                                                    <!--end::Menu item-->
-                                                    <!--begin::Menu item-->
-
-                                                    <a href="#" class="btn-sm btn-danger px-3" data-kt-users-table-filter="delete_row">حذف</a>
-
-                                                    <!--end::Menu item-->
-                                                    <!--end::Menu-->
-                                                </td>
-                                                <!--end::Action=-->
-                                            </tr>
 
                                             </tbody>
                                             <!--end::Table body-->
@@ -254,6 +212,95 @@
                                     </div>
                                     <!--end::Modal dialog-->
                                 </div>
+                                <div class="modal fade" id="kt_modal_edit_category" tabindex="-1" aria-hidden="true" style="display: none;">
+                                    <!--begin::Modal dialog-->
+                                    <div class="modal-dialog modal-dialog-centered mw-850px">
+                                        <!--begin::Modal content-->
+                                        <div class="modal-content">
+                                            <!--begin::Modal header-->
+                                            <div class="modal-header" id="kt_modal_edit_user_header">
+                                                <!--begin::Modal title-->
+                                                <h2 class="fw-bolder">دسته بندی جدید</h2>
+                                                <!--end::Modal title-->
+                                                <!--begin::Close-->
+                                                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                    <span class="svg-icon svg-icon-1">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																		<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+																		<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+																	</svg>
+																</span>
+                                                    <!--end::Svg Icon-->
+                                                </div>
+                                                <!--end::Close-->
+                                            </div>
+                                            <!--end::Modal header-->
+                                            <!--begin::Modal body-->
+                                            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                                                <!--begin::Form-->
+                                                <form id="kt_modal_edit_category_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" method="post" action="#">
+                                                    <!--begin::Scroll-->
+                                                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px" style="max-height: 3px;">
+                                                        <!--begin::Input group-->
+
+                                                        <!--end::Input group-->
+                                                        <!--begin::Input group-->
+                                                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                                                            <!--begin::Label-->
+                                                            <label class="required fw-bold fs-6 mb-2">نام لاتین</label>
+                                                            <!--end::Label-->
+                                                            <!--begin::Input-->
+                                                            <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name" value="Emma Smith">
+                                                            <!--end::Input-->
+                                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                        <!--end::Input group-->
+                                                        <!--begin::Input group-->
+                                                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                                                            <!--begin::Label-->
+                                                            <label class="required fw-bold fs-6 mb-2">نام فارسی</label>
+                                                            <!--end::Label-->
+                                                            <!--begin::Input-->
+                                                            <input type="text" name="persian_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" value="e.smith@kpmg.com.au">
+                                                            <!--end::Input-->
+                                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                        </div>
+                                                        <div class="fv-row mb-7 fv-plugins-icon-container">
+                                                            <!--begin::Label-->
+                                                            <label class="required fw-bold fs-6 mb-2">دسته بندی والد</label>
+                                                            <!--end::Label-->
+                                                            <!--begin::Input-->
+                                                            <select name="parent_id" class="form-control form-control-solid mb-3"  id="select_cat">
+
+                                                            </select>
+                                                            <!--end::Input-->
+                                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                                        </div>
+                                                        <!--end::Input group-->
+                                                        <!--begin::Input group-->
+
+                                                        <!--end::Input group-->
+                                                    </div>
+                                                    <!--end::Scroll-->
+                                                    <!--begin::Actions-->
+                                                    <div class="text-center pt-15">
+                                                        <button type="reset" class="btn-sm  btn-outline-danger me-3" data-kt-users-modal-action="cancel">لغو</button>
+                                                        <button type="submit" class="btn-sm btn-danger" data-kt-users-modal-action="submit">
+                                                            <span class="indicator-label">ارسال</span>
+                                                            <span class="indicator-progress">لطفا منتظر بمانید
+																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                        </button>
+                                                    </div>
+                                                    <!--end::Actions-->
+                                                    <div></div></form>
+                                                <!--end::Form-->
+                                            </div>
+                                            <!--end::Modal body-->
+                                        </div>
+                                        <!--end::Modal content-->
+                                    </div>
+                                    <!--end::Modal dialog-->
+                                </div>
                             </div>
                             <!--end::Card body-->
                         </div>
@@ -274,12 +321,12 @@
 <?php loadAdminPartial('footer'); ?>
 <script>
         $(document).on('show.bs.modal','#kt_modal_add_user' ,  function (e) {
+            $("#select_cat").html('');
             $.ajax({
                 type: "GET",
                 url: 'http://aparat-expert.local/administrator/category/ajax',
                 datatype: 'json',
                 success: function(datas){
-                    // console.log(datas);
                      var data2 = JSON.parse(datas);
                      $("#select_cat").append(`<option value="null" >بدون دسته بندی  </option>`)
                         for (let data of data2) {

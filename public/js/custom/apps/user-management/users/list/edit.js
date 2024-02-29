@@ -3,8 +3,8 @@
 // Class definition
 var KTUsersAddUser = function () {
     // Shared variables
-    const element = document.getElementById('kt_modal_add_user');
-    const form = element.querySelector('#kt_modal_add_user_form');
+    const element = document.getElementById('kt_modal_edit_category');
+    const form = element.querySelector('#kt_modal_edit_category_form');
     const modal = new bootstrap.Modal(element);
 
     // Init add schedule modal
@@ -67,7 +67,7 @@ var KTUsersAddUser = function () {
                         // Show loading indication
                         submitButton.setAttribute('data-kt-indicator', 'on');
 
-                        // Disable button to avoid multiple click 
+                        // Disable button to avoid multiple click
                         submitButton.disabled = true;
 
                         var data = $("#kt_modal_add_user_form").serialize();
@@ -80,7 +80,7 @@ var KTUsersAddUser = function () {
                             // Enable button
                             submitButton.disabled = false;
 
-                            // Show popup confirmation 
+                            // Show popup confirmation
                             Swal.fire({
                                 text: "Form has been successfully submitted!",
                                 icon: "success",

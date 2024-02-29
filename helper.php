@@ -50,11 +50,13 @@ function loadView($name)
 
 
 //loadView('home')
-function adminView($name)
+function adminView($name , $data=[])
 {
     //check file
     $pathView = basePath("views/admin/{$name}.view.php");
     if(file_exists($pathView)){
+
+        extract($data);
         require $pathView;
     }else{
         echo "view {$name} not existed";

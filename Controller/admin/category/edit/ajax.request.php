@@ -8,8 +8,9 @@ $db = new Database($config);
 if (strtolower($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'xmlhttprequest' && $_SERVER['REQUEST_METHOD']==='GET') {
 
 
-    $sql = "SELECT id,persian_name from category";
-    $data = $db->query($sql)->fetchAll();
+    $id = $_GET['id'];
+    $sql = "SELECT id,persian_name from category where id=:id";
+    $data = $db->query($sql)->fetch();
 
     echo json_encode($data);
 
