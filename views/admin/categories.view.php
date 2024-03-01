@@ -101,7 +101,7 @@
 
                                                     <!--begin::Menu-->
                                                         <!--begin::Menu item-->
-                                                            <a id="" href="../../demo1/dist/apps/user-management/users/view.html" class=" btn-sm btn-info px-3">ویرایش</a>
+                                                            <a id="cat-<?= $ca['id'] ?>" data-bs-toggle="modal" data-bs-target="#kt_modal_edit_category" class=" btn-sm btn-info px-3">ویرایش</a>
                                                         <!--end::Menu item-->
                                                         <!--begin::Menu item-->
 
@@ -218,12 +218,12 @@
                                         <!--begin::Modal content-->
                                         <div class="modal-content">
                                             <!--begin::Modal header-->
-                                            <div class="modal-header" id="kt_modal_edit_user_header">
+                                            <div class="modal-header" id="kt_modal_edit_category_header">
                                                 <!--begin::Modal title-->
                                                 <h2 class="fw-bolder">دسته بندی جدید</h2>
                                                 <!--end::Modal title-->
                                                 <!--begin::Close-->
-                                                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-edit-modal-action="close">
                                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                                     <span class="svg-icon svg-icon-1">
 																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -241,8 +241,9 @@
                                                 <!--begin::Form-->
                                                 <form id="kt_modal_edit_category_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" method="post" action="#">
                                                     <!--begin::Scroll-->
-                                                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px" style="max-height: 3px;">
+                                                    <div class="d-flex flex-column scroll-y me-n7 pe-7  " id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px" style="max-height: 3px;">
                                                         <!--begin::Input group-->
+                                                        <input type="hidden" name="cat_id" class="edit-cat-id" value="" >
 
                                                         <!--end::Input group-->
                                                         <!--begin::Input group-->
@@ -251,7 +252,7 @@
                                                             <label class="required fw-bold fs-6 mb-2">نام لاتین</label>
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
-                                                            <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name" value="Emma Smith">
+                                                            <input type="text" name="name" class="form-control edit-name form-control-solid mb-3 mb-lg-0" placeholder="" value="">
                                                             <!--end::Input-->
                                                             <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                                         <!--end::Input group-->
@@ -261,7 +262,7 @@
                                                             <label class="required fw-bold fs-6 mb-2">نام فارسی</label>
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
-                                                            <input type="text" name="persian_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" value="e.smith@kpmg.com.au">
+                                                            <input type="text" name="persian_name" class="form-control edit-persian-name form-control-solid mb-3 mb-lg-0" placeholder="" value="">
                                                             <!--end::Input-->
                                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                                         </div>
@@ -270,7 +271,7 @@
                                                             <label class="required fw-bold fs-6 mb-2">دسته بندی والد</label>
                                                             <!--end::Label-->
                                                             <!--begin::Input-->
-                                                            <select name="parent_id" class="form-control form-control-solid mb-3"  id="select_cat">
+                                                            <select name="parent_id" class="form-control form-control-solid mb-3"  id="edit_select_cat">
 
                                                             </select>
                                                             <!--end::Input-->
@@ -284,8 +285,8 @@
                                                     <!--end::Scroll-->
                                                     <!--begin::Actions-->
                                                     <div class="text-center pt-15">
-                                                        <button type="reset" class="btn-sm  btn-outline-danger me-3" data-kt-users-modal-action="cancel">لغو</button>
-                                                        <button type="submit" class="btn-sm btn-danger" data-kt-users-modal-action="submit">
+                                                        <button type="reset" class="btn-sm  btn-outline-danger me-3" data-kt-edit-modal-action="cancel">لغو</button>
+                                                        <button type="submit" class="btn-sm btn-danger" data-kt-edit-modal-action="submit">
                                                             <span class="indicator-label">ارسال</span>
                                                             <span class="indicator-progress">لطفا منتظر بمانید
 																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -327,11 +328,50 @@
                 url: 'http://aparat-expert.local/administrator/category/ajax',
                 datatype: 'json',
                 success: function(datas){
+
                      var data2 = JSON.parse(datas);
-                     $("#select_cat").append(`<option value="null" >بدون دسته بندی  </option>`)
+                    console.log(data2)
+                     $("#select_cat").append(`<option value="0" >بدون دسته بندی  </option>`)
                         for (let data of data2) {
                            $("#select_cat").append(`<option value="${data.id}" >${data.persian_name}  </option>`)
                         }
+                }
+            })
+        });
+        $(document).on('show.bs.modal','#kt_modal_edit_category' ,  function (e) {
+            $("#edit_select_cat").html('');
+            $(".edit-cat-id").val('')
+            var passedId = e.relatedTarget.id.substring(4);
+
+            $.ajax({
+                type: "GET",
+                url: 'http://aparat-expert.local/administrator/category/edit/ajax',
+                datatype: 'json',
+                data: {'id':passedId},
+                success: function(datas){
+                    var data2 = JSON.parse(datas);
+                    var allCat = data2.all;
+                    var cat = data2.self;
+
+                    //
+
+                    $(".edit-cat-id").val(cat.id)
+
+                    //
+
+                    $(".edit-persian-name").attr('value',cat.persian_name);
+                    $(".edit-name").attr('value',cat.name);
+
+                    if(data2.self.parent_id !== null){
+                        var p_cat = data2.parent;
+                        $("#edit_select_cat").append(`<option value="0">بدون دسته بندی  </option>`)
+                        $("#edit_select_cat").append(`<option value="${p_cat.id}" selected>${p_cat.persian_name}</option>`)
+                    }else{
+                        $("#edit_select_cat").append(`<option value="0" selected >بدون دسته بندی  </option>`)
+                    }
+                    for (let data of allCat) {
+                        $("#edit_select_cat").append(`<option value="${data.id}" >${data.persian_name}  </option>`)
+                    }
                 }
             });
         });

@@ -21,6 +21,7 @@
 <!--<!--end::Page Vendors Javascript-->-->
 <!--begin::Page Custom Javascript(used by this page)-->
 <script src="<?= asset('js/custom/apps/user-management/users/list/add.js') ?>"></script>
+<script src="<?= asset('js/custom/apps/user-management/users/list/edit.js') ?>"></script>
 
 <script src="<?= asset('js/custom/apps/user-management/users/list/table.js') ?>"></script>
 <!--end::Page Custom Javascript-->

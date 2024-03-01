@@ -1,14 +1,14 @@
 "use strict";
 
 // Class definition
-var KTUsersAddUser = function () {
+var KTCategoryEdit = function () {
     // Shared variables
     const element = document.getElementById('kt_modal_edit_category');
     const form = element.querySelector('#kt_modal_edit_category_form');
     const modal = new bootstrap.Modal(element);
 
     // Init add schedule modal
-    var initAddUser = () => {
+    var initEditCat = () => {
 
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         var validator = FormValidation.formValidation(
@@ -51,7 +51,7 @@ var KTUsersAddUser = function () {
 
 
         // Submit button handler
-        const submitButton = element.querySelector('[data-kt-users-modal-action="submit"]');
+        const submitButton = element.querySelector('[data-kt-edit-modal-action="submit"]');
         submitButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -70,7 +70,7 @@ var KTUsersAddUser = function () {
                         // Disable button to avoid multiple click
                         submitButton.disabled = true;
 
-                        var data = $("#kt_modal_add_user_form").serialize();
+                        var data = $("#kt_modal_edit_category_form").serialize();
 
                         // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                         setTimeout(function () {
@@ -93,13 +93,13 @@ var KTUsersAddUser = function () {
                                 if (result.isConfirmed) {
                                     $.ajax({
                                         type: "POST",
-                                        url: 'http://aparat-expert.local/administrator/category/ajax',
+                                        url: 'http://aparat-expert.local/administrator/category/edit/ajax',
                                         datatype: 'json',
                                         data:data,
                                         success: function(data){
-                                            modal.hide();
-                                            // console.log(data)
-                                            location.reload()
+                                            // modal.hide();
+                                            console.log(data)
+                                            // location.reload()
                                         }
                                     })
                                 }
@@ -124,7 +124,7 @@ var KTUsersAddUser = function () {
         });
 
         // Cancel button handler
-        const cancelButton = element.querySelector('[data-kt-users-modal-action="cancel"]');
+        const cancelButton = element.querySelector('[data-kt-edit-modal-action="cancel"]');
         cancelButton.addEventListener('click', e => {
             e.preventDefault();
             modal.hide();
@@ -159,7 +159,7 @@ var KTUsersAddUser = function () {
         });
 
         // Close button handler
-        const closeButton = element.querySelector('[data-kt-users-modal-action="close"]');
+        const closeButton = element.querySelector('[data-kt-edit-modal-action="close"]');
         closeButton.addEventListener('click', e => {
             e.preventDefault();
             modal.hide();
@@ -170,12 +170,12 @@ var KTUsersAddUser = function () {
     return {
         // Public functions
         init: function () {
-            initAddUser();
+            initEditCat();
         }
     };
 }();
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTUsersAddUser.init();
+    KTCategoryEdit.init();
 });
