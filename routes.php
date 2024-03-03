@@ -1,26 +1,19 @@
 <?php
 
-//return [
-//    '/' => 'Controller/home.php',
-//    '/login' => 'Controller/auth/index.php',
-//    '404' => 'Controller/error/404.php',
-//    '/administrator' => 'Controller/admin/index.php' ,
-//];
+
 
 //home
-//$router->get('/' , 'App/Controller/home.php');
 $router->get('/' , 'HomeController@index');
 //login
-//$router->get('/login' , 'App/Controller/auth/login.php');
+$router->get('/login' , 'Auth\LoginController@login');
 ////register
-//$router->get('/register' , 'App/Controller/auth/register.php');
+$router->get('/register' , 'Auth\RegisterController@register');
 ////404
-//$router->get('404' , 'App/Controller/error/404.php');
 ////administrator -home
-//$router->get('/administrator' , 'App/Controller/admin/index.php');
+$router->get('/administrator' , 'Admin\DashboardController@index');
 //
 //////administrator - category
-//$router->get('/administrator/category' , 'App/Controller/admin/category/index.php');
+$router->get('/administrator/category' , 'Admin\CategoryController@index');
 ////$router->get('/administrator/category/create' , 'App/Controller/admin/category/create.php');
 //
 //$router->get('/administrator/category/ajax' , 'App/Controller/admin/category/ajax.request.php');

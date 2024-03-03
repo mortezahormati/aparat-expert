@@ -321,6 +321,8 @@
 
 <?php loadAdminPartial('footer'); ?>
 <script>
+
+        $(document).ready(console.log((`10s`) + 10));
         $(document).on('show.bs.modal','#kt_modal_add_user' ,  function (e) {
             $("#select_cat").html('');
             $.ajax({

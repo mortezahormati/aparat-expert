@@ -75,7 +75,9 @@ class Router{
 
     public function NotFindUri(){
         http_response_code(404);
-        echo "url mored nazar vojod nadarad";
+        $controllerInstance = new \App\Controllers\Error\ErrorController();
+        $controllerInstance->notFind();
+        return;
     }
     public function route($uri , $method_uri ){
         foreach ($this->routes as $route){

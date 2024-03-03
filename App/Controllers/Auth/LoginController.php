@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Auth;
+
 use Framework\Database;
-class HomeController
+
+class LoginController
 {
     protected $db;
     public function __construct()
@@ -11,8 +13,8 @@ class HomeController
         $this->db = new Database($config);
     }
 
-    public function index()
+    public function login()
     {
-        loadView('home');
+        adminView('login');
     }
 }

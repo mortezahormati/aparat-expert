@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 use Framework\Database;
-class HomeController
+
+class DashboardController
 {
     protected $db;
     public function __construct()
@@ -11,8 +12,7 @@ class HomeController
         $this->db = new Database($config);
     }
 
-    public function index()
-    {
-        loadView('home');
+    public function index(){
+        adminView('home');
     }
 }

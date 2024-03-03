@@ -1,2 +1,0 @@
-<?php
-adminView('register');

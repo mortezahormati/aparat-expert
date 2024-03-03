@@ -1,18 +1,22 @@
 <?php
 
-namespace App\Controllers;
+
+namespace App\Controllers\Auth;
+
 use Framework\Database;
-class HomeController
+
+class RegisterController
 {
     protected $db;
+
     public function __construct()
     {
         $config = require basePath('config/db.php');
         $this->db = new Database($config);
     }
 
-    public function index()
+    public function register()
     {
-        loadView('home');
+        adminView('register');
     }
 }
