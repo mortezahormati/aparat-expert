@@ -85,7 +85,7 @@
                                             <tbody class="text-gray-600 fw-bold text-center">
 
                                             <?php foreach ($categories as $ca): ?>
-                                            <tr class="<?=  $ca['id']%2 === 0 ? 'even' : 'odd'  ?>">
+                                            <tr class="<?=  $ca['id']%2 === 0 ? 'even' : 'bg-secondary'  ?>">
 
                                                 <td class=" align-items-center">
                                                         <span class="text-center"> <?= $ca['persian_name'] ?></span>

@@ -32,7 +32,7 @@ function basePath($path = ''){
 function loadView($name)
 {
     //check file
-    $pathView = basePath("views/{$name}.view.php");
+    $pathView = basePath("App/views/{$name}.view.php");
     if(file_exists($pathView)){
         require $pathView;
     }else{
@@ -53,7 +53,7 @@ function loadView($name)
 function adminView($name , $data=[])
 {
     //check file
-    $pathView = basePath("views/admin/{$name}.view.php");
+    $pathView = basePath("App/views/admin/{$name}.view.php");
     if(file_exists($pathView)){
 
         extract($data);
@@ -71,7 +71,7 @@ function adminView($name , $data=[])
  *
  */
 function loadPartial($name){
-    $pathPartial = basePath("views/partials/{$name}.php");
+    $pathPartial = basePath("App/views/partials/{$name}.php");
 //    dd($pathPartial);
     if(file_exists($pathPartial)){
         require $pathPartial;
@@ -87,7 +87,7 @@ function loadPartial($name){
  *
  */
 function loadAdminPartial($name){
-    $pathPartial = basePath("views/partials/admin/{$name}.php");
+    $pathPartial = basePath("App/views/partials/admin/{$name}.php");
 //    dd($pathPartial);
     if(file_exists($pathPartial)){
         require $pathPartial;

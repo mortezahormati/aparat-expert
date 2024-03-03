@@ -1,5 +1,6 @@
 <?php
 
+use Framework\Database;
 $config = require basePath('config/db.php');
 $db = new Database($config);
 $sql="SELECT * from category limit 2 ";

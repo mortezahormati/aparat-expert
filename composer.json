@@ -1,0 +1,17 @@
+{
+    "name": "morteza/aparat-expert",
+    "description": "like aparat site",
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "Framework/",
+            "App\\": "App/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mori3nt3z",
+            "email": "mori3nt3z@gmail.com"
+        }
+    ],
+    "require": {}
+}

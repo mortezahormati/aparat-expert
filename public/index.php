@@ -1,8 +1,14 @@
 <?php
-require '../helper.php';
-require basePath('Database.php');
 
-require basePath('Router.php');
+require __DIR__.'/../vendor/autoload.php';
+
+require '../helper.php';
+
+use Framework\Router;
+
+
+
+
 $router = new Router();
 $routes = require basePath('routes.php');
 //dd($routes);
