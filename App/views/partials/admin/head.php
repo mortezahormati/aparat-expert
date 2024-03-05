@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Keenthemes | Metronic" />
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="icon" type="image/svg" href="<?= asset('upload/aparat/svgexport-4.svg') ?>">
+    <link rel="icon" type="image/ico" href="<?= asset('upload/static/favicon.ico') ?>">
     <title>آپارات - سرویس اشتراک ویدیو</title>
     <!--begin::Fonts-->
     <!--end::Fonts-->

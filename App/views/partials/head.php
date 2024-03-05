@@ -11,9 +11,9 @@
     <script src="<?= asset('js/bootstrap.min.js') ?>"></script>
     <script src="<?= asset('js/jquery.min.js') ?>"></script>
     <script src="<?= asset('js/jquery.nicescroll.min.js') ?>"></script>
+    <link rel="icon" type="image/ico" href="<?= asset('upload/static/favicon.ico') ?>">
 
     <link href="<?= asset('css/custom.css') ?>" rel="stylesheet">
-    <link rel="icon" type="image/svg" href="<?= asset('upload/aparat/svgexport-4.svg') ?>">
     <title>آپارات - سرویس اشتراک ویدیو</title>
 </head>
 <body>

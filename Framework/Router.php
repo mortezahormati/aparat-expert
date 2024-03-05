@@ -1,6 +1,8 @@
 <?php
 
 namespace Framework;
+use App\Controllers\Error\ErrorController;
+
 class Router{
     protected $routes = [];
 
@@ -73,12 +75,6 @@ class Router{
 
     }
 
-    public function NotFindUri(){
-        http_response_code(404);
-        $controllerInstance = new \App\Controllers\Error\ErrorController();
-        $controllerInstance->notFind();
-        return;
-    }
     public function route($uri , $method_uri ){
         foreach ($this->routes as $route){
             if($route['uri'] === $uri && $route['method'] === $method_uri){
@@ -92,7 +88,7 @@ class Router{
                 return;
             }
         }
-        $this->NotFindUri();
+        ErrorController::notFind();
 
     }
 

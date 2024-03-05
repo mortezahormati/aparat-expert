@@ -5,8 +5,23 @@ namespace App\Controllers\Error;
 class ErrorController
 {
 
-    public function notFind()
+    public static function notFind($message="آدرس مورد نظر شما یافت نشد! ")
     {
-        loadView('404');
+        http_response_code(404);
+        loadView('404',[
+            'message' => $message ,
+            'status' => '404'
+        ]);
+    }
+
+
+    public static function notAcceess($message="شما دسترسی به آدرس مورد نطر ندارید ")
+    {
+        http_response_code(404);
+
+        loadView('404',[
+            'message' => $message ,
+            'status' => '403'
+        ]);
     }
 }

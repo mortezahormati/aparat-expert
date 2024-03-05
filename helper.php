@@ -29,11 +29,12 @@ function basePath($path = ''){
 
 
 //loadView('home')
-function loadView($name)
+function loadView($name , $data=[])
 {
     //check file
     $pathView = basePath("App/views/{$name}.view.php");
     if(file_exists($pathView)){
+        extract($data);
         require $pathView;
     }else{
         echo "view {$name} not existed";
@@ -72,7 +73,6 @@ function adminView($name , $data=[])
  */
 function loadPartial($name){
     $pathPartial = basePath("App/views/partials/{$name}.php");
-//    dd($pathPartial);
     if(file_exists($pathPartial)){
         require $pathPartial;
     }else{

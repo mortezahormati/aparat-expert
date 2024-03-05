@@ -43,7 +43,7 @@
                                 <!-- video-->
                                 <div id="trailer"
                                      class="section d-flex justify-content-center embed-responsive embed-responsive-16by9">
-                                    <video class="embed-responsive-item" controls loop muted>
+                                    <video id="video" class="embed-responsive-item" controls loop muted>
                                         <source src="<?= asset('upload/videos/digital-timer.mp4') ?>" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
@@ -273,4 +273,10 @@
 
 
     <!--footer-->
-<?php loadPartial('footer');
+<?php loadPartial('footer'); ?>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var video =$("#video");
+        console.log(video.duration);
+    })
+</script>

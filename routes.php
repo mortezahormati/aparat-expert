@@ -14,16 +14,23 @@ $router->get('/administrator' , 'Admin\DashboardController@index');
 //
 //////administrator - category
 $router->get('/administrator/category' , 'Admin\CategoryController@index');
-////$router->get('/administrator/category/create' , 'App/Controller/admin/category/create.php');
-//
-//$router->get('/administrator/category/ajax' , 'App/Controller/admin/category/ajax.request.php');
-//$router->get('/administrator/category/edit/ajax' , 'App/Controller/admin/category/edit/ajax.request.php');
-//
-//$router->post('/administrator/category/ajax' , 'App/Controller/admin/category/ajax.request.php');
-//$router->post('/administrator/category/edit/ajax' , 'App/Controller/admin/category/edit/ajax.request.php');
-//$router->get('/category' , 'Controller/admin/category/index.php');
-//$router->get('/category/create' , 'Controller/admin/category/create.php');
-//single-video-page
-//$router->get('/single-video' , 'Controller/single-page.php');
+$router->get('/administrator/category/ajax' , 'Admin\CategoryController@create');
+$router->get('/administrator/category/edit/ajax' , 'Admin\CategoryController@update');
+$router->post('/administrator/category/ajax' , 'Admin\CategoryController@create');
+$router->post('/administrator/category/edit/ajax' , 'Admin\CategoryController@update');
+//$router->get('/administrator/category/delete/ajax' , 'Admin\CategoryController@delete');
+$router->post('/administrator/category/delete/ajax' , 'Admin\CategoryController@delete');
 
 
+
+///administrator-users
+
+$router->get('/administrator/users' , 'Admin\UserController@index');
+$router->get('/administrator/users/create' , 'Admin\UserController@create');
+$router->post('/administrator/users/create' , 'Admin\UserController@store');
+
+
+//administrator-video
+$router->get('/administrator/videos','Admin\VideoController@index');
+$router->get('/administrator/videos/create','Admin\VideoController@create');
+$router->get('/administrator/videos/create','Admin\VideoController@store');

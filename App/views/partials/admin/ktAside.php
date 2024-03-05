@@ -35,6 +35,7 @@
                     </div>
 
                 </div>
+
                
                 <div class="menu-item mt-8">
                     <a class="menu-link active" href="<?= asset('administrator') ?>">
@@ -49,7 +50,51 @@
                         <span class="menu-title">داشبورد</span>
                     </a>
                 </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+									<span class="menu-link">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/general/gen009.svg-->
+											<span class="svg-icon svg-icon-2">
+												 <img src="<?= asset('upload/aparat/svgexport-users.svg') ?>"  width="25px" alt="" >
+											</span>
+                                            <!--end::Svg Icon-->
+										</span>
+										<span class="menu-title text-danger">کاربران</span>
+										<span class="menu-arrow"></span>
+									</span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg" style="display: none; overflow: hidden;" kt-hidden-height="117">
+                        <div class="menu-item">
+                            <a class="menu-link" href="<?= asset('administrator/users') ?>">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+                                <span class="menu-title">کاربران</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="<?= asset('administrator/users/create') ?>">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+                                <span class="menu-title">کاربر جدید</span>
+                            </a>
+                        </div>
 
+                    </div>
+                </div>
+                <div class="menu-item ">
+                    <a class="menu-link active" href="<?= asset('administrator/videos')?>">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+											<span class="svg-icon svg-icon-2">
+                                                <img src="<?= asset('upload/aparat/svgexport-10.svg') ?>" alt="" >
+
+											</span>
+                                            <!--end::Svg Icon-->
+										</span>
+                        <span class="menu-title">ویدیوها</span>
+                    </a>
+                </div>
                 <div class="menu-item ">
                     <a class="menu-link active" href="#">
 										<span class="menu-icon">
@@ -131,6 +176,11 @@
                         <span class="menu-title">خروج از حساب کاربری</span>
                     </a>
                 </div>
+
+
+
+
+
 
 
 
