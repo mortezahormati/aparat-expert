@@ -15,10 +15,9 @@ $router->get('/administrator' , 'Admin\DashboardController@index');
 //////administrator - category
 $router->get('/administrator/category' , 'Admin\CategoryController@index');
 $router->get('/administrator/category/ajax' , 'Admin\CategoryController@create');
-$router->get('/administrator/category/edit/ajax' , 'Admin\CategoryController@update');
 $router->post('/administrator/category/ajax' , 'Admin\CategoryController@create');
+$router->get('/administrator/category/edit/ajax' , 'Admin\CategoryController@update');
 $router->post('/administrator/category/edit/ajax' , 'Admin\CategoryController@update');
-//$router->get('/administrator/category/delete/ajax' , 'Admin\CategoryController@delete');
 $router->post('/administrator/category/delete/ajax' , 'Admin\CategoryController@delete');
 
 
@@ -28,6 +27,7 @@ $router->post('/administrator/category/delete/ajax' , 'Admin\CategoryController@
 $router->get('/administrator/users' , 'Admin\UserController@index');
 $router->get('/administrator/users/create' , 'Admin\UserController@create');
 $router->post('/administrator/users/create' , 'Admin\UserController@store');
+$router->get('/administrator/user' , 'Admin\UserController@show');
 
 
 //administrator-video

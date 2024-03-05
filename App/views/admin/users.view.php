@@ -75,7 +75,7 @@
                                                 <th class="min-w-125px sorting">
                                                     تاریخ ایجاد کاربر
                                                 </th>
-                                                <th class=" min-w-100px sorting_disabled">
+                                                <th class=" min-w-150px sorting_disabled">
                                                     عملیات
                                                 </th>
                                             </tr>
@@ -97,10 +97,13 @@
                                                     <td class="">
 
                                                         <a href="#" id="cat-<?= $us['id'] ?>"
-                                                           class=" btn-sm btn-info px-3">ویرایش</a>
+                                                           class=" btn-sm btn-info px-2 ">ویرایش</a>
 
-                                                        <a href="#"  class=' btn-sm btn-danger px-3'
+                                                        <a href="#"  class=' btn-sm btn-danger mr-1 px-2'
                                                            data-id='<?= $us['id'] ?>'>حذف </a>
+
+                                                        <a href="#"  class=' btn-sm btn-success mr-1 px-2'
+                                                           data-id='<?= $us['id'] ?>'>مشاهده </a>
 
                                                     </td>
                                                 </tr>

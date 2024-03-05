@@ -261,6 +261,20 @@
                                     <!--end::Col-->
                                 </div>
 
+                                <div class="row mb-4">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-bold fs-6">رمزعبور</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8">
+                                        <input type="password" name="password"
+                                               class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                               placeholder="رمز عبور خود را وارد نمایید" value="">
+                                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+
                                 <div class="row mb-2">
                                     <!--begin::Label-->
                                     <h5 class="col-lg-4 col-form-label fw-bold fs-2">شبکه های اجتماعی</h5>
