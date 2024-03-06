@@ -27,7 +27,8 @@ $router->post('/administrator/category/delete/ajax' , 'Admin\CategoryController@
 $router->get('/administrator/users' , 'Admin\UserController@index');
 $router->get('/administrator/users/create' , 'Admin\UserController@create');
 $router->post('/administrator/users/create' , 'Admin\UserController@store');
-$router->get('/administrator/user' , 'Admin\UserController@show');
+$router->get('/administrator/users/{id}' , 'Admin\UserController@show');
+$router->post('administrator/users/update/{id}' , 'Admin\UserController@update');
 
 
 //administrator-video

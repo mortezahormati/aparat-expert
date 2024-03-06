@@ -96,8 +96,7 @@
                                                     <td data-order=""> <?= date('Y-m-d', strtotime($us['created_at'])) ?></td>
                                                     <td class="">
 
-                                                        <a href="#" id="cat-<?= $us['id'] ?>"
-                                                           class=" btn-sm btn-info px-2 ">ویرایش</a>
+                                                        <a href="<?= asset('administrator/users/'.$us['id']) ?>" class=" btn-sm btn-info px-2 ">ویرایش</a>
 
                                                         <a href="#"  class=' btn-sm btn-danger mr-1 px-2'
                                                            data-id='<?= $us['id'] ?>'>حذف </a>

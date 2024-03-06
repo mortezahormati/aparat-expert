@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Admin;
 
+use Cassandra\Date;
 use Framework\Database;
 
 class UserController
@@ -29,39 +30,41 @@ class UserController
     public function create()
     {
 
-         adminView('usersAdd');
+        adminView('usersAdd');
 
     }
 
-    private function uploadingFiles($image , $dir)
+    private function uploadingFiles($image, $dir)
     {
 //        $upload = 'users-image'.DIRECTORY_SEPARATOR;
-        if(!is_dir($dir)){
+        if (!is_dir($dir)) {
             mkdir($dir);
         }
-        $imageName = uniqid().'--'.$image['name'];
-        move_uploaded_file($image['tmp_name'] , $dir , $imageName);
+        $imageName = uniqid() . '--' . $image['name'];
+
+        move_uploaded_file($image['tmp_name'], $dir . $imageName);
         return $imageName;
     }
 
     private function redirect($name)
     {
-         header($this->base_redirect_url.$name);
+        header($this->base_redirect_url . $name);
     }
+
     public function store()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 
-            if(!empty($_FILES)){
-                if(!empty($_FILES['avatar_image'])  && $_FILES['avatar_image']['error'] === UPLOAD_ERR_OK ){
+            if (!empty($_FILES)) {
+                if (!empty($_FILES['avatar_image']) && $_FILES['avatar_image']['error'] === UPLOAD_ERR_OK) {
                     $avatarImage = $_FILES['avatar_image'];
-                    $upload = 'users-image'.DIRECTORY_SEPARATOR;
-                    $this->uploadingFiles($avatarImage , $upload);
+                    $upload = 'users-image' . DIRECTORY_SEPARATOR;
+                    $avatarImageName = $this->uploadingFiles($avatarImage, $upload);
                 }
-                if(!empty($_FILES['channel_cover_image'])  && $_FILES['channel_cover_image']['error'] === UPLOAD_ERR_OK ){
+                if (!empty($_FILES['channel_cover_image']) && $_FILES['channel_cover_image']['error'] === UPLOAD_ERR_OK) {
                     $channelCoverImage = $_FILES['channel_cover_image'];
-                    $upload = 'users-channel-image-cover'.DIRECTORY_SEPARATOR;
-                    $this->uploadingFiles($channelCoverImage , $upload);
+                    $upload = 'users-channel-image-cover' . DIRECTORY_SEPARATOR;
+                    $channelCoverImageName = $this->uploadingFiles($channelCoverImage, $upload);
 
                 }
             }
@@ -71,8 +74,8 @@ class UserController
             $sql = "insert into users ( nick_name,name,family,email,phone_number,chanel_name,password,channel_description,web_url,telegram_address,facebook_address,avatar_image,channel_cover_image,role,created_at,updated_at )
                     values (:nick_name,:name,:family,:email,:phone_number,:chanel_name,:password,:channel_description,:web_url,:telegram_address,:facebook_address,:avatar_image,:channel_cover_image,:role,:created_at,:updated_at)";
             $params = [
-                'nick_name' => $_POST['nick_name'] ,
-                'name' => $_POST['name'] ,
+                'nick_name' => $_POST['nick_name'],
+                'name' => $_POST['name'],
                 'family' => $_POST['family'],
                 'email' => $_POST['email'],
                 'phone_number' => $_POST['phone_number'],
@@ -80,13 +83,13 @@ class UserController
                 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
                 'channel_description' => $_POST['channel_description'] ?? null,
                 'web_url' => $_POST['web_url'] ?? null,
-                'telegram_address' => $_POST['telegram_address']?? null,
-                'facebook_address' => $_POST['facebook_address'?? null],
-                'avatar_image' => $avatarImageName ? 'users-image/'.$avatarImageName :null,
-                'channel_cover_image' => $channelCoverImageName ? 'users-channel-image-cover/'.$channelCoverImageName :null,
-                'role' => $_POST['role'] === "on" ? 'admin' :'user' ,
-                'created_at' => $_POST['created_at'],
-                'updated_at' => $_POST['updated_at'],
+                'telegram_address' => $_POST['telegram_address'] ?? null,
+                'facebook_address' => $_POST['facebook_address' ?? null],
+                'avatar_image' => $avatarImageName ? 'users-image/' . $avatarImageName : null,
+                'channel_cover_image' => $channelCoverImageName ? 'users-channel-image-cover/' . $channelCoverImageName : null,
+                'role' => $_POST['role'] === "on" ? 'admin' : 'user',
+                'created_at' => date('Y-m-d'),
+                'updated_at' => null,
             ];
             $this->db->query($sql, $params);
 
@@ -96,9 +99,26 @@ class UserController
     }
 
 
-    public function show()
+    public function show($params)
     {
-        adminView('user');
+        $sql = "select * from users where id=:id";
+        $p = [
+            'id' => $params['id']
+        ];
+        $user = $this->db->query($sql, $p)->fetch();
+
+        adminView('user', [
+            'user' => $user
+        ]);
+    }
+
+    public function update($params)
+    {
+        $sql = "UPDATE users SET nick_name=:nick_name,name = :name,family=:family,email=:email,
+                 phone_number=:phone_number,chanel_name=:chanel_name,password=:password,
+                 channel_description=:channel_description,web_url=:web_url,telegram_address=:telegram_address,
+                 facebook_address=:facebook_address,avatar_image=:avatar_image,channel_cover_image=:channel_cover_image,
+                 role=:role,created_at=:created_at,updated_at=:updated_at WHERE id=:id";
     }
 
 }

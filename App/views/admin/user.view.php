@@ -26,7 +26,7 @@
                                 <!--begin::Card title-->
                                 <div class="row w-100 align-items-center">
                                     <div class="col-md-6">
-                                        <h6>فرم اطلاعات کاربر جدید </h6>
+                                        <h6>فرم اطلاعات کاربر <?= $user['name'].'   '.$user['family'] ?> </h6>
                                     </div>
                                     <div class="col-md-4">
 
@@ -40,6 +40,9 @@
                             <!--begin::Form-->
                             <!--begin::Card body-->
                             <div class="card-body border-top p-9">
+                                <form id="kt_account_profile_details_form" method="post" action="<?= asset('administrator/users/update/'.$user['id']) ?>"
+                                      class="form fv-plugins-bootstrap5 fv-plugins-framework" enctype="multipart/form-data">
+
 
 
                                     <!--begin::Input group-->
@@ -54,7 +57,9 @@
                                                  style="background-image: url('<?= asset('upload/media/avatars/blank.png') ?> ')">
                                                 <!--begin::Preview existing avatar-->
                                                 <div class="image-input-wrapper w-200px h-200px"
-                                                     style="background-image: url('<?= asset('upload/media/avatars/150-26.jpg') ?> ')"></div>
+                                                     style="background-image: url('<?= asset($user['avatar_image']) ?> ')">
+
+                                                </div>
                                                 <!--end::Preview existing avatar-->
                                                 <!--begin::Label-->
 
@@ -74,7 +79,7 @@
                                         <div class="col-lg-8">
                                             <input type="text" name="nick_name"
                                                    class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                                   placeholder="نام کاربری" value="" readonly>
+                                                   placeholder="نام کاربری" value="<?= $user['nick_name'] ?>" >
                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                         </div>
                                         <!--end::Col-->
@@ -92,7 +97,7 @@
                                                 <div class="col-lg-6 fv-row fv-plugins-icon-container">
                                                     <input type="text" name="family"
                                                            class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                                           placeholder="نام کوچک" value="" readonly>
+                                                           placeholder="نام کوچک" value="<?= $user['name'] ?>" >
                                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                                 </div>
                                                 <!--end::Col-->
@@ -100,7 +105,7 @@
                                                 <div class="col-lg-6 fv-row fv-plugins-icon-container">
                                                     <input type="text" name="name"
                                                            class="form-control form-control-lg form-control-solid"
-                                                           placeholder="فامیلی " value="">
+                                                           placeholder="فامیلی " value="<?= $user['family'] ?>">
                                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                                 </div>
                                                 <!--end::Col-->
@@ -119,7 +124,7 @@
                                         <div class="col-lg-8 fv-row fv-plugins-icon-container">
                                             <input type="email" name="email"
                                                    class="form-control form-control-lg form-control-solid"
-                                                   placeholder="" value="" readonly>
+                                                   placeholder="" value="<?= $user['email'] ?>" >
                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                         </div>
                                         <!--end::Col-->
@@ -137,7 +142,7 @@
                                         <div class="col-lg-8 fv-row fv-plugins-icon-container">
                                             <input type="tel" name="phone_number"
                                                    class="form-control form-control-lg form-control-solid"
-                                                   placeholder="09121234567" value="" readonly>
+                                                   placeholder="09121234567" value="<?= $user['phone_number'] ?>" >
                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                         </div>
                                         <!--end::Col-->
@@ -152,7 +157,7 @@
                                         <div class="col-lg-8 fv-row">
                                             <input type="text" name="website"
                                                    class="form-control form-control-lg form-control-solid"
-                                                   placeholder="example.com" value="" readonly>
+                                                   placeholder="example.com" value="<?= $user['web_url'] ?>" >
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -178,7 +183,7 @@
                                                  style="background-image: url('<?= asset('upload/media/avatars/blank.png') ?> ')">
                                                 <!--begin::Preview existing avatar-->
                                                 <div class="image-input-wrapper w-200px h-200px"
-                                                     style="background-image: url('<?= asset('upload/media/avatars/150-26.jpg') ?> ')"></div>
+                                                     style="background-image: url('<?= asset($user['channel_cover_image']) ?> ')"></div>
                                                 <!--end::Preview existing avatar-->
                                                 <!--begin::Label-->
 
@@ -200,7 +205,7 @@
                                         <div class="col-lg-8 fv-row">
                                             <input type="text" name="chanel_name"
                                                    class="form-control form-control-lg form-control-solid"
-                                                   placeholder="" value="" readonly>
+                                                   placeholder="" value="<?= $user['chanel_name'] ?>" >
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -211,7 +216,7 @@
                                         <!--end::Label-->
                                         <!--begin::Col-->
                                         <div class="col-lg-8 fv-row">
-                                            <textarea class="form-control form-control-lg form-control-solid" rows="3" name="channel_description" placeholder="توضیحاتی در مورد کانال خود بنویسید"></textarea>
+                                            <textarea class="form-control form-control-lg form-control-solid" rows="3" name="channel_description" placeholder="توضیحاتی در مورد کانال خود بنویسید"><?= $user['channel_description'] ?></textarea>
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -237,7 +242,7 @@
                                         <div class="col-lg-8 fv-row">
                                             <input type="text" name="telegram_address"
                                                    class="form-control form-control-lg form-control-solid"
-                                                   placeholder="" value="" readonly>
+                                                   placeholder="" value="<?= $user['telegram_address'] ?>" >
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -251,7 +256,7 @@
                                         <div class="col-lg-8 fv-row">
                                             <input type="text" name="facebook_address"
                                                    class="form-control form-control-lg form-control-solid"
-                                                   placeholder="" value="">
+                                                   placeholder="" value="<?= $user['facebook_address'] ?>">
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -264,16 +269,25 @@
                                         <div class="col-lg-8 d-flex align-items-center">
                                             <div class="form-check form-check-solid form-switch fv-row">
                                                 <input name="role" class="form-check-input w-60px h-30px" type="checkbox"
-                                                       id="allowmarketing" checked="checked">
+                                                       id="allowmarketing"  <?= $user['role'] == 'admin' ? 'checked="checked"' : ''  ?>" >
                                                 <label class="form-check-label" for="allowmarketing"></label>
                                             </div>
                                         </div>
                                         <!--begin::Label-->
                                     </div>
+                                    <div class="row mb-0 text-md-end">
+                                        <div class="col-md-12">
+
+                                            <button type="submit" class="btn btn-danger"
+                                                    id="kt_account_profile_details_submit">به روز رسانی
+                                            </button>
+                                        </div>
+                                    </div>
 
 
                                 <!--end::Input group-->
                             </div>
+                            </form>
                             <!--end::Card body-->
 
 
