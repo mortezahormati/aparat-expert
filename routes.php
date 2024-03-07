@@ -46,3 +46,4 @@ $router->get('/administrator/videos/create','Admin\VideoController@store');
 
 // users
 $router->get('/user/video/create' , 'User\VideoController@create');
+$router->post('/user/video/create' , 'User\VideoController@store');

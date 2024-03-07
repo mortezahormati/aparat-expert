@@ -97,10 +97,9 @@ var KTCategoryEdit = function () {
                                         datatype: 'json',
                                         data:data,
                                         success: function(data){
-                                            // modal.hide();
-                                            //
-                                            // location.reload();
-                                            console.log(data);
+                                            modal.hide();
+
+                                            location.reload();
                                         }
                                     })
                                 }

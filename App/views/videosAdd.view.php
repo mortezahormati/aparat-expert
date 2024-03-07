@@ -9,7 +9,7 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid bg-light p-4">
-            <form class="" action="" method="post" enctype="multipart/form-data">
+            <form class="" action="<?= asset('user/video/create') ?>" method="post" enctype="multipart/form-data">
                 <div class="row mt-4 p-4">
                     <div class="container  ">
                         <div class="row bg-light">
@@ -40,9 +40,9 @@
 
                                     <select class="js-example-basic-single form-control select2 select2-hidden-accessible"
                                             name="category_id" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                        <option value="AL">Alabama</option>
-                                        ...
-                                        <option value="WY">Wyoming</option>
+                                        <?php foreach ($categories as $ca): ?>
+                                        <option value="<?= $ca['id'] ?>"><?= $ca['persian_name'] ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                     <small> انتخاب دسته‌بندی به آپارات کمک می‌کند تا محتوای شما در کنار محتواهای هم
                                         موضوع قرار گیرد.</small>
@@ -53,9 +53,9 @@
                                     <small class="text-danger">(اجباری - حداقل سه مورد)</small>
                                     <select class="js-example-basic-multiple form-control select2 " name="tags[]"
                                             multiple="multiple" style="width: 100%">
-                                        <option value="AL">Alabama</option>
-                                        ...
-                                        <option value="WY">Wyoming</option>
+                                        <?php foreach ($tags as $ta): ?>
+                                            <option value="<?= $ta['id'] ?>"><?= $ta['persian_name'] ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -65,9 +65,9 @@
                                     <select class="js-example-basic-single-2 form-control select2 select2-hidden-accessible"
                                             name="confirm_comment" style="width: 100%;" tabindex="-1"
                                             aria-hidden="true">
-                                        <option value="AL">امکان نظردهی برای همه آزاد باشد</option>
-                                        ...
-                                        <option value="WY">امکان نظردهی برای همه غیر فعال باشد</option>
+                                        <option value="1">امکان نظردهی برای همه آزاد باشد</option>
+
+                                        <option value="2">امکان نظردهی برای همه غیر فعال باشد</option>
                                     </select>
                                     <small> انتخاب دسته‌بندی به آپارات کمک می‌کند تا محتوای شما در کنار محتواهای هم
                                         موضوع قرار گیرد.</small>
@@ -89,11 +89,23 @@
                                     <label>انتخاب ویدیو</label>
                                     <div class="file-upload">
                                         <label>
-                                            <input type="file" name="file">
+                                            <input type="file" name="video">
                                             <img class="form-control" src="<?= asset('upload/static/upload-light.svg') ?>">
                                         </label>
                                     </div>
                                     <input type="text" id="filename" class="filename form-control" disabled>
+
+                                </div>
+                                <div class="form-group">
+                                    <small class="text-danger">*</small>
+                                    <label>انتخاب پوستر ویدیو</label>
+                                    <div class="file-upload-poster" style="width: 150px">
+                                        <label>
+                                            <input type="file" name="video-poster" style="display: none">
+                                            <img class="form-control" src="<?= asset('upload/static/upload-light.svg') ?>">
+                                        </label>
+                                    </div>
+                                    <input style="width: 150px" type="text" id="filename2" class="filename form-control" disabled>
 
                                 </div>
 
@@ -128,6 +140,10 @@
         $(".file-upload input[type=file]").change(function(){
             var filename = $(this).val().replace(/.*\\/, "");
             $("#filename").val(filename);
+        });
+        $(".file-upload-poster input[type=file]").change(function(){
+            var filename2 = $(this).val().replace(/.*\\/, "");
+            $("#filename2").val(filename2);
         });
         $('.js-example-basic-single').select2();
         $('.js-example-basic-multiple').select2();

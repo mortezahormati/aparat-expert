@@ -99,7 +99,7 @@
                                                            data-bs-target="#kt_modal_edit_tag"
                                                            class=" btn-sm btn-info px-3">ویرایش</a>
 
-                                                        <a class='delete-cat btn-sm btn-danger px-3'
+                                                        <a class='delete_tag btn-sm btn-danger px-3'
                                                            data-id='<?= $ca['id'] ?>'>حذف </a>
 
                                                     </td>
@@ -348,7 +348,7 @@
 
     $(document).ready(function () {
 
-        $('.delete-cat').click(function (e) {
+        $('.delete_tag').click(function (e) {
             e.preventDefault()
 
             var deleteid = $(this).data('id');
@@ -370,7 +370,7 @@
 
                     console.log(deleteid);
                     $.ajax({
-                        url: 'http://aparat-expert.local/administrator/category/delete/ajax',
+                        url: 'http://aparat-expert.local/administrator/tag/delete/ajax',
                         type: 'POST',
                         data: { id:deleteid },
                         success: function(response){

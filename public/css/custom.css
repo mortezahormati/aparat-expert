@@ -1408,17 +1408,7 @@ body {
     }
 
 
-    file-upload {
-        position: relative; /* Даем возможность делать позиционирование, внутри данного элемента */
-        overflow: hidden; /* Все что выходит за пределы - скрываем */
-        width: 20%; /* Задаем ширину кнопки выбора файла */
-        height: 20px; /* Задаем высоту кнопки выбора файла */
-        background: #6da047;
-        border-radius: 3px;
-        padding: 8px 4px;
-        color: #fff;
-        text-align: center;
-    }
+
     .file-upload:hover {
         background: #7aad55;
     }
