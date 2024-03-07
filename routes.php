@@ -20,6 +20,13 @@ $router->get('/administrator/category/edit/ajax' , 'Admin\CategoryController@upd
 $router->post('/administrator/category/edit/ajax' , 'Admin\CategoryController@update');
 $router->post('/administrator/category/delete/ajax' , 'Admin\CategoryController@delete');
 
+//administrator tags
+$router->get('/administrator/tag' , 'Admin\TagController@index');
+$router->get('/administrator/tag/ajax' , 'Admin\TagController@create');
+$router->post('/administrator/tag/ajax' , 'Admin\TagController@create');
+$router->get('/administrator/tag/edit/ajax' , 'Admin\TagController@update');
+$router->post('/administrator/tag/edit/ajax' , 'Admin\TagController@update');
+$router->post('/administrator/tag/delete/ajax' , 'Admin\TagController@delete');
 
 
 ///administrator-users
@@ -35,3 +42,7 @@ $router->post('administrator/users/update/{id}' , 'Admin\UserController@update')
 $router->get('/administrator/videos','Admin\VideoController@index');
 $router->get('/administrator/videos/create','Admin\VideoController@create');
 $router->get('/administrator/videos/create','Admin\VideoController@store');
+
+
+// users
+$router->get('/user/video/create' , 'User\VideoController@create');

@@ -26,7 +26,7 @@
                                 <!--begin::Card title-->
                                 <div class="row w-100 align-items-center">
                                     <div class="col-md-6">
-                                        <h6>فرم اطلاعات کاربر <?= $user['name'].'   '.$user['family'] ?> </h6>
+                                        <h4>فرم مشاهده و ویرایش اطلاعات کاربر <?= $user['name'].'   '.$user['family'] ?> </h4>
                                     </div>
                                     <div class="col-md-4">
 
@@ -45,6 +45,7 @@
 
 
 
+
                                     <!--begin::Input group-->
                                     <div class="row mb-4">
                                         <!--begin::Label-->
@@ -58,7 +59,30 @@
                                                 <!--begin::Preview existing avatar-->
                                                 <div class="image-input-wrapper w-200px h-200px"
                                                      style="background-image: url('<?= asset($user['avatar_image']) ?> ')">
-
+                                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                           data-kt-image-input-action="change" data-bs-toggle="tooltip" title=""
+                                                           data-bs-original-title="Change avatar">
+                                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                                        <!--begin::Inputs-->
+                                                        <input type="file" name="avatar_image" accept=".png, .jpg, .jpeg">
+                                                        <input type="hidden" name="avatar_remove">
+                                                        <!--end::Inputs-->
+                                                    </label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Cancel-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                          data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title=""
+                                                          data-bs-original-title="Cancel avatar">
+																<i class="bi bi-x fs-2"></i>
+															</span>
+                                                    <!--end::Cancel-->
+                                                    <!--begin::Remove-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                          data-kt-image-input-action="remove" data-bs-toggle="tooltip" title=""
+                                                          data-bs-original-title="Remove avatar">
+																<i class="bi bi-x fs-2"></i>
+															</span>
+                                                    <!--end::Remove-->
                                                 </div>
                                                 <!--end::Preview existing avatar-->
                                                 <!--begin::Label-->
@@ -184,6 +208,30 @@
                                                 <!--begin::Preview existing avatar-->
                                                 <div class="image-input-wrapper w-200px h-200px"
                                                      style="background-image: url('<?= asset($user['channel_cover_image']) ?> ')"></div>
+                                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                       data-kt-image-input-action="change" data-bs-toggle="tooltip" title=""
+                                                       data-bs-original-title="Change avatar">
+                                                    <i class="bi bi-pencil-fill fs-7"></i>
+                                                    <!--begin::Inputs-->
+                                                    <input type="file" name="avatar_image" accept=".png, .jpg, .jpeg">
+                                                    <input type="hidden" name="avatar_remove">
+                                                    <!--end::Inputs-->
+                                                </label>
+                                                <!--end::Label-->
+                                                <!--begin::Cancel-->
+                                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                      data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title=""
+                                                      data-bs-original-title="Cancel avatar">
+																<i class="bi bi-x fs-2"></i>
+															</span>
+                                                <!--end::Cancel-->
+                                                <!--begin::Remove-->
+                                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                      data-kt-image-input-action="remove" data-bs-toggle="tooltip" title=""
+                                                      data-bs-original-title="Remove avatar">
+																<i class="bi bi-x fs-2"></i>
+															</span>
+                                                <!--end::Remove-->
                                                 <!--end::Preview existing avatar-->
                                                 <!--begin::Label-->
 

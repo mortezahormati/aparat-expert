@@ -33,7 +33,7 @@
         <div class="collapse navbar-collapse" id="navbarsExample02">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="<?= asset('user/video/create') ?>">
                         <button class="btn btn-sm btn-outline-primary " style="border-radius:50px">
                             <i class="fa fa-plus"></i>
                             <span class="font-weight-600 text-sm-left">بارگذاری ویدیو</span>

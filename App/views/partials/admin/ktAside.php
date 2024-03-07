@@ -162,6 +162,19 @@
                         <span class="menu-title">دسته بندی ها </span>
                     </a>
                 </div>
+                <div class="menu-item">
+                    <a class="menu-link active" href="<?= asset('administrator/tag') ?>">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+											<span class="svg-icon svg-icon-2">
+                                                <img src="<?= asset('upload/aparat/svgexport-12.svg') ?>" alt="" >
+
+											</span>
+                                            <!--end::Svg Icon-->
+										</span>
+                        <span class="menu-title">برچسب ها </span>
+                    </a>
+                </div>
                 <!--                END ADMIN MENU-->
                 <div class="menu-item mt-16 ">
                     <a class="menu-link active" href="#">

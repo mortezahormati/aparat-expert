@@ -114,6 +114,8 @@ class UserController
 
     public function update($params)
     {
+        inspect($_POST);
+        dd($_FILES);
         $sql = "UPDATE users SET nick_name=:nick_name,name = :name,family=:family,email=:email,
                  phone_number=:phone_number,chanel_name=:chanel_name,password=:password,
                  channel_description=:channel_description,web_url=:web_url,telegram_address=:telegram_address,
