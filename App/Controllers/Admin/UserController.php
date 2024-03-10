@@ -21,10 +21,6 @@ class UserController
     public function index()
     {
 
-
-//        dd(Validation::alphabet('مرتضی '));
-        dd(Validation::integer('25hhhh'));
-
         $sql = "select id,name,family,created_at,role,nick_name,email from users";
         $users = $this->db->query($sql)->fetchAll();
         adminView('users', [
@@ -59,6 +55,44 @@ class UserController
     public function store()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
+
+            //1- allowed-fields
+            $allowedFields = [
+                'nick_name',
+                'name',
+                'family',
+                'email',
+                'phone_number',
+                'chanel_name',
+                'password',
+                'channel_description',
+                'web_url',
+                'telegram_address',
+                'facebook_address',
+                'avatar_image',
+                'channel_cover_image',
+                'role'
+            ];
+
+
+            $newListData = array_intersect_key($_POST,array_flip($allowedFields));
+            $newListFile = array_intersect_key($_FILES,array_flip($allowedFields));
+
+
+
+
+
+            //2- sanitize-form
+            $newListData = array_map('sanitize' , $newListData);
+
+            //3- new list
+            $newListData = array_merge($newListData , $newListFile);
+
+
+
+
+            //4- required--- validation
+            //5- submit
 
 
 

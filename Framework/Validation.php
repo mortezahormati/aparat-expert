@@ -72,6 +72,21 @@ class Validation
         return is_numeric($value);
     }
 
+    /**
+     * alphabet character accepted
+     * @param string $value
+     * @return bool
+     */
+    public static function validateDate(string $value):bool
+    {
+        $value = trim($value);
+        if(!is_string($value) &&  !is_numeric($value) || strtotime($value) === false){
+            return false;
+        }
+        $date = date_parse($value);
+        return checkdate($date['month'] , $date['day'] , $date['year']);
+    }
+
 
 
 }
