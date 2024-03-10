@@ -49,6 +49,10 @@
                             <!--end::Card header-->
                             <!--begin::Card body-->
                             <div class="card-body pt-0">
+                                <div class="row">
+                                    <?php loadAdminPartial('message'); ?>
+
+                                </div>
                                 <!--begin::Table-->
                                 <div id="kt_table_users_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                                     <div class="table-responsive">
@@ -95,14 +99,23 @@
                                                     <td> <?= $us['role']=='admin' ? 'ادمین' :' کاربر '  ?></td>
                                                     <td data-order=""> <?= date('Y-m-d', strtotime($us['created_at'])) ?></td>
                                                     <td class="">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <a href="<?= asset('administrator/users/'.$us['id']) ?>" class=" btn btn-info ">ویرایش</a>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <form action="<?= asset('administrator/users/delete/'.$us['id']) ?>" method="post">
+                                                                    <input type="hidden" name="_method" value="delete">
+                                                                    <button type="submit"  class=' btn btn-danger mr-1'>حذف
+                                                                    </button>
+                                                                </form>
+                                                            </div>
 
-                                                        <a href="<?= asset('administrator/users/'.$us['id']) ?>" class=" btn-sm btn-info px-2 ">ویرایش</a>
 
-                                                        <a href="#"  class=' btn-sm btn-danger mr-1 px-2'
-                                                           data-id='<?= $us['id'] ?>'>حذف </a>
+                                                        </div>
 
-                                                        <a href="#"  class=' btn-sm btn-success mr-1 px-2'
-                                                           data-id='<?= $us['id'] ?>'>مشاهده </a>
+
+
 
                                                     </td>
                                                 </tr>

@@ -132,7 +132,7 @@ function asset($name){
 
 
 /**
- *die and dump function
+ *sanitize function
  * @param string $dirty
  * @return string
  *
@@ -140,6 +140,17 @@ function asset($name){
 function sanitize(string $dirty):string
 {
     return filter_var(trim($dirty) ,FILTER_SANITIZE_SPECIAL_CHARS );
+}
+
+/**
+ *redirect to route function
+ * @param string $dirty
+ * @return string
+ *
+ */
+function redirect($value='')
+{
+    return header('location:http://aparat-expert.local/'.$value);
 }
 
 

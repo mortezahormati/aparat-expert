@@ -40,9 +40,18 @@
                         <!--begin::Form-->
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
+
                             <form id="kt_account_profile_details_form" method="post" action="<?= asset('administrator/users/create') ?>"
                                   class="form fv-plugins-bootstrap5 fv-plugins-framework" enctype="multipart/form-data">
-
+                                <?php if(!empty($errors)): ?>
+                                <div class="row mb-4">
+                                    <?php foreach ($errors as $error): ?>
+                                        <div class="col-md-12 alert alert-danger">
+                                            <?= $error ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                <?php endif; ?>
                                 <!--begin::Input group-->
                                 <div class="row mb-4">
                                     <!--begin::Label-->
@@ -52,7 +61,7 @@
                                     <div class="col-lg-8">
                                         <!--begin::Image input-->
                                         <div class="image-input image-input-outline" data-kt-image-input="true"
-                                             style="background-image: url('<?= asset('upload/media/avatars/blank.png') ?> ')">
+                                             style="background-image: url('<?=  asset($old_variable['avatar_image']) ?? '' ?> ')">
                                             <!--begin::Preview existing avatar-->
                                             <div class="image-input-wrapper w-200px h-200px"
                                                  style="background-image: url('<?= asset('upload/media/avatars/150-26.jpg') ?> ')"></div>
@@ -63,7 +72,7 @@
                                                    data-bs-original-title="Change avatar">
                                                 <i class="bi bi-pencil-fill fs-7"></i>
                                                 <!--begin::Inputs-->
-                                                <input type="file" name="avatar_image" accept=".png, .jpg, .jpeg">
+                                                <input type="file" name="avatar_image"  accept=".png, .jpg, .jpeg">
                                                 <input type="hidden" name="avatar_remove">
                                                 <!--end::Inputs-->
                                             </label>
@@ -98,7 +107,7 @@
                                     <div class="col-lg-8">
                                         <input type="text" name="nick_name"
                                                class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                               placeholder="نام کاربری" value="">
+                                               placeholder="نام کاربری" value="<?= $old_variable['nick_name'] ?? ''  ?>">
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
                                     </div>
                                     <!--end::Col-->
@@ -114,17 +123,17 @@
                                         <div class="row">
                                             <!--begin::Col-->
                                             <div class="col-lg-6 fv-row fv-plugins-icon-container">
-                                                <input type="text" name="family"
+                                                <input type="text" name="name"
                                                        class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                                       placeholder="نام کوچک" value="">
+                                                       placeholder="نام کوچک" value="<?=  $old_variable['name'] ?? ''  ?>">
                                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                                             </div>
                                             <!--end::Col-->
                                             <!--begin::Col-->
                                             <div class="col-lg-6 fv-row fv-plugins-icon-container">
-                                                <input type="text" name="name"
+                                                <input type="text" name="family"
                                                        class="form-control form-control-lg form-control-solid"
-                                                       placeholder="فامیلی " value="">
+                                                       placeholder="فامیلی " value="<?=  ($old_variable['family']) ?? ''  ?>">
                                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                                             </div>
                                             <!--end::Col-->
@@ -143,7 +152,7 @@
                                     <div class="col-lg-8 fv-row fv-plugins-icon-container">
                                         <input type="email" name="email"
                                                class="form-control form-control-lg form-control-solid"
-                                               placeholder="" value="">
+                                               placeholder="" value="<?=  ($old_variable['email']) ?? ''  ?>">
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
                                     </div>
                                     <!--end::Col-->
@@ -161,7 +170,7 @@
                                     <div class="col-lg-8 fv-row fv-plugins-icon-container">
                                         <input type="tel" name="phone_number"
                                                class="form-control form-control-lg form-control-solid"
-                                               placeholder="09121234567" value="">
+                                               placeholder="09121234567" value="<?=  ($old_variable['phone_number']) ?? ''  ?>">
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
                                     </div>
                                     <!--end::Col-->
@@ -174,9 +183,9 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="text" name="website"
+                                        <input type="text" name="web_url"
                                                class="form-control form-control-lg form-control-solid"
-                                               placeholder="example.com" value="">
+                                               placeholder="example.com" value="<?=  ($old_variable['web_url']) ?? ''  ?>">
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -200,7 +209,7 @@
                                     <div class="col-lg-8">
                                         <!--begin::Image input-->
                                         <div class="image-input image-input-outline" data-kt-image-input="true"
-                                             style="background-image: url('<?= asset('upload/media/avatars/blank.png') ?> ')">
+                                             style="background-image: url('<?=  asset($old_variable['channel_cover_image']) ?? '' ?>')">
                                             <!--begin::Preview existing avatar-->
                                             <div class="image-input-wrapper w-200px h-200px"
                                                  style="background-image: url('<?= asset('upload/media/avatars/150-26.jpg') ?> ')"></div>
@@ -245,7 +254,7 @@
                                     <div class="col-lg-8 fv-row">
                                         <input type="text" name="chanel_name"
                                                class="form-control form-control-lg form-control-solid"
-                                               placeholder="" value="">
+                                               placeholder="" value="<?= $old_variable['chanel_name'] ?? '' ?>">
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -256,7 +265,9 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <textarea class="form-control form-control-lg form-control-solid" rows="3" name="channel_description" placeholder="توضیحاتی در مورد کانال خود بنویسید"></textarea>
+                                        <textarea class="form-control form-control-lg form-control-solid"
+                                                  rows="3" name="channel_description"
+                                                  placeholder="توضیحاتی در مورد کانال خود بنویسید"><?= $old_variable['channel_description'] ?? '' ?></textarea>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -269,7 +280,7 @@
                                     <div class="col-lg-8">
                                         <input type="password" name="password"
                                                class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                               placeholder="رمز عبور خود را وارد نمایید" value="">
+                                               placeholder="رمز عبور خود را وارد نمایید" value="<?= $old_variable['channel_description'] ?? '' ?>">
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
                                     </div>
                                     <!--end::Col-->
@@ -296,7 +307,7 @@
                                     <div class="col-lg-8 fv-row">
                                         <input type="text" name="telegram_address"
                                                class="form-control form-control-lg form-control-solid"
-                                               placeholder="" value="">
+                                               placeholder="" value="<?= $old_variable['telegram_address'] ?? '' ?>">
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -310,7 +321,7 @@
                                     <div class="col-lg-8 fv-row">
                                         <input type="text" name="facebook_address"
                                                class="form-control form-control-lg form-control-solid"
-                                               placeholder="" value="">
+                                               placeholder="" value="<?= $old_variable['facebook_address'] ?? '' ?>">
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -323,7 +334,7 @@
                                     <div class="col-lg-8 d-flex align-items-center">
                                         <div class="form-check form-check-solid form-switch fv-row">
                                             <input name="role" class="form-check-input w-60px h-30px" type="checkbox"
-                                                   id="allowmarketing" checked="checked">
+                                                   id="allowmarketing" <?=  (isset($old_variable)  ? ($old_variable['role'] == 'admin' ? 'checked="checked"':'' ): '')?>>
                                             <label class="form-check-label" for="allowmarketing"></label>
                                         </div>
                                     </div>

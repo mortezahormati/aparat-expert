@@ -36,6 +36,7 @@ $router->get('/administrator/users/create' , 'Admin\UserController@create');
 $router->post('/administrator/users/create' , 'Admin\UserController@store');
 $router->get('/administrator/users/{id}' , 'Admin\UserController@show');
 $router->post('administrator/users/update/{id}' , 'Admin\UserController@update');
+$router->post('/administrator/users/delete/{id}' , 'Admin\UserController@destroy');
 
 
 //administrator-video
