@@ -2,8 +2,9 @@
 
 namespace App\Controllers\Admin;
 
-use Cassandra\Date;
+
 use Framework\Database;
+use Framework\Validation;
 
 class UserController
 {
@@ -19,6 +20,10 @@ class UserController
 
     public function index()
     {
+
+
+//        dd(Validation::alphabet('مرتضی '));
+        dd(Validation::integer('25hhhh'));
 
         $sql = "select id,name,family,created_at,role,nick_name,email from users";
         $users = $this->db->query($sql)->fetchAll();
@@ -54,6 +59,10 @@ class UserController
     public function store()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
+
+
+
+            ///1validate $_Post
 
             if (!empty($_FILES)) {
                 if (!empty($_FILES['avatar_image']) && $_FILES['avatar_image']['error'] === UPLOAD_ERR_OK) {

@@ -36,11 +36,11 @@ class TagController
                 return;
             }
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $sql = "insert into tags (name , persian_name , parent_id) values (:name , :persian_name , :parent_id)";
+                ///
+                $sql = "insert into tags (name , persian_name) values (:name , :persian_name)";
                 $params = [
                     'name' => $_POST['name'],
                     'persian_name' => $_POST['persian_name'],
-                    'parent_id' => $_POST['parent_id'],
                 ];
                 $this->db->query($sql, $params);
 

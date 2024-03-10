@@ -41,7 +41,7 @@
                                         <!--                                           </div>-->
                                     </div>
                                     <div class="col-md-2 mr-4 text-left">
-                                        <a data-bs-toggle="modal" data-bs-target="#kt_modal_add_user"
+                                        <a data-bs-toggle="modal" data-bs-target="#kt_modal_add_tag"
                                            class=" btn-sm btn-success text-white px-3">
                                             <span>افزودن برچسب</span>
                                         </a>
@@ -115,14 +115,14 @@
 
                                 </div>
                                 <!--end::Table-->
-                                <div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true"
+                                <div class="modal fade" id="kt_modal_add_tag" tabindex="-1" aria-hidden="true"
                                      style="display: none;">
                                     <!--begin::Modal dialog-->
                                     <div class="modal-dialog modal-dialog-centered mw-850px">
                                         <!--begin::Modal content-->
                                         <div class="modal-content">
                                             <!--begin::Modal header-->
-                                            <div class="modal-header" id="kt_modal_add_user_header">
+                                            <div class="modal-header" id="kt_modal_add_tag_header">
                                                 <!--begin::Modal title-->
                                                 <h2 class="fw-bolder">برچسب جدید</h2>
                                                 <!--end::Modal title-->
@@ -150,16 +150,16 @@
                                             <!--begin::Modal body-->
                                             <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                                                 <!--begin::Form-->
-                                                <form id="kt_modal_add_user_form"
+                                                <form id="kt_modal_add_tag_form"
                                                       class="form fv-plugins-bootstrap5 fv-plugins-framework"
                                                       method="post" action="#">
                                                     <!--begin::Scroll-->
                                                     <div class="d-flex flex-column scroll-y me-n7 pe-7"
-                                                         id="kt_modal_add_user_scroll" data-kt-scroll="true"
+                                                         id="kt_modal_add_tag_scroll" data-kt-scroll="true"
                                                          data-kt-scroll-activate="{default: false, lg: true}"
                                                          data-kt-scroll-max-height="auto"
-                                                         data-kt-scroll-dependencies="#kt_modal_add_user_header"
-                                                         data-kt-scroll-wrappers="#kt_modal_add_user_scroll"
+                                                         data-kt-scroll-dependencies="#kt_modal_add_tag_header"
+                                                         data-kt-scroll-wrappers="#kt_modal_add_tag_scroll"
                                                          data-kt-scroll-offset="300px" style="max-height: 3px;">
                                                         <!--begin::Input group-->
 
@@ -172,7 +172,7 @@
                                                             <!--begin::Input-->
                                                             <input type="text" name="name"
                                                                    class="form-control form-control-solid mb-3 mb-lg-0"
-                                                                   placeholder="Full name" value="Emma Smith">
+                                                                   placeholder="" value="scary">
                                                             <!--end::Input-->
                                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                                         </div>
@@ -185,8 +185,8 @@
                                                             <!--begin::Input-->
                                                             <input type="text" name="persian_name"
                                                                    class="form-control form-control-solid mb-3 mb-lg-0"
-                                                                   placeholder="example@domain.com"
-                                                                   value="e.smith@kpmg.com.au">
+                                                                   placeholder=""
+                                                                   value="ترسناک">
                                                             <!--end::Input-->
                                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                                         </div>
@@ -260,11 +260,11 @@
                                                       method="post" action="#">
                                                     <!--begin::Scroll-->
                                                     <div class="d-flex flex-column scroll-y me-n7 pe-7  "
-                                                         id="kt_modal_add_user_scroll" data-kt-scroll="true"
+                                                         id="kt_modal_add_tag_scroll" data-kt-scroll="true"
                                                          data-kt-scroll-activate="{default: false, lg: true}"
                                                          data-kt-scroll-max-height="auto"
-                                                         data-kt-scroll-dependencies="#kt_modal_add_user_header"
-                                                         data-kt-scroll-wrappers="#kt_modal_add_user_scroll"
+                                                         data-kt-scroll-dependencies="#kt_modal_add_tag_header"
+                                                         data-kt-scroll-wrappers="#kt_modal_add_tag_scroll"
                                                          data-kt-scroll-offset="300px" style="max-height: 3px;">
                                                         <!--begin::Input group-->
                                                         <input type="hidden" name="tag_id" class="edit-cat-id" value="">
