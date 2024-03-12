@@ -14,8 +14,10 @@
             <!--begin::Wrapper-->
             <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
                 <!--begin::Form-->
-                <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="#">
+                <form class="form w-100" method="post" action="<?= asset('login') ?>">
                     <?php loadAdminPartial('message'); ?>
+                    <?php loadAdminPartial('errors' , ['errors' => $errors ?? []]); ?>
+
                     <!--begin::Heading-->
                     <div class="text-center mb-10">
                         <!--begin::Title-->
@@ -31,7 +33,7 @@
                         <label class="form-label fs-6 fw-bolder text-dark">ایمیل</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input class="form-control form-control-lg form-control-solid" type="text" name="email" autocomplete="off" />
+                        <input class="form-control form-control-lg form-control-solid" type="text" name="email" value="<?= $clientInfo['email'] ?? '' ?>" autocomplete="off" />
                         <!--end::Input-->
                     </div>
                     <!--end::Input group-->
@@ -43,7 +45,7 @@
                             <label class="form-label fw-bolder text-dark fs-6 mb-0">رمز عبور</label>
                             <!--end::Label-->
                             <!--begin::Link-->
-                            <a href="../../demo1/dist/authentication/flows/basic/password-reset.html" class="link-primary fs-6 fw-bolder">فراموشی رمز عبور</a>
+                            <a href="" class="link-primary fs-6 fw-bolder">فراموشی رمز عبور</a>
                             <!--end::Link-->
                         </div>
                         <!--end::Wrapper-->

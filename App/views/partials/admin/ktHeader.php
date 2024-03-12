@@ -59,25 +59,25 @@
                         <!--begin::Menu-->
                         <div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true">
                             <!--begin::Heading-->
-                            <div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-image:url('upload/misc/pattern-1.jpg')">
-                                <!--begin::Title-->
-                                <h3 class="text-white fw-bold px-9 mt-10 mb-6">Notifications
-                                    <span class="fs-8 opacity-75 ps-3">24 reports</span></h3>
-                                <!--end::Title-->
-                                <!--begin::Tabs-->
-                                <ul class="nav nav-line-tabs nav-line-tabs-2x nav-stretch fw-bold px-9">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white opacity-75 opacity-state-100 pb-4" data-bs-toggle="tab" href="#kt_topbar_notifications_1">Alerts</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white opacity-75 opacity-state-100 pb-4 active" data-bs-toggle="tab" href="#kt_topbar_notifications_2">Updates</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white opacity-75 opacity-state-100 pb-4" data-bs-toggle="tab" href="#kt_topbar_notifications_3">Logs</a>
-                                    </li>
-                                </ul>
-                                <!--end::Tabs-->
-                            </div>
+<!--                            <div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-image:url('upload/misc/pattern-1.jpg')">-->
+<!--                                <!--begin::Title-->-->
+<!--                                <h3 class="text-white fw-bold px-9 mt-10 mb-6">Notifications-->
+<!--                                    <span class="fs-8 opacity-75 ps-3">24 reports</span></h3>-->
+<!--                                <!--end::Title-->-->
+<!--                                <!--begin::Tabs-->-->
+<!--                                <ul class="nav nav-line-tabs nav-line-tabs-2x nav-stretch fw-bold px-9">-->
+<!--                                    <li class="nav-item">-->
+<!--                                        <a class="nav-link text-white opacity-75 opacity-state-100 pb-4" data-bs-toggle="tab" href="#kt_topbar_notifications_1">Alerts</a>-->
+<!--                                    </li>-->
+<!--                                    <li class="nav-item">-->
+<!--                                        <a class="nav-link text-white opacity-75 opacity-state-100 pb-4 active" data-bs-toggle="tab" href="#kt_topbar_notifications_2">Updates</a>-->
+<!--                                    </li>-->
+<!--                                    <li class="nav-item">-->
+<!--                                        <a class="nav-link text-white opacity-75 opacity-state-100 pb-4" data-bs-toggle="tab" href="#kt_topbar_notifications_3">Logs</a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                                <!--end::Tabs-->-->
+<!--                            </div>-->
                             <!--end::Heading-->
                             <!--begin::Tab content-->
                             <div class="tab-content">
@@ -601,12 +601,12 @@
                                     <!--end::Avatar-->
                                     <!--begin::Username-->
                                     <div class="d-flex flex-column">
-                                        <div class="fw-bolder d-flex align-items-center fs-5">نام کاربری
+                                        <div class="fw-bolder d-flex align-items-center fs-5">
+                                            <?php if(\Framework\Session::has('user')): ?>
+                                                <?= \Framework\Session::get('user')['nick_name'] ?>
+                                            <?php endif; ?>
                                         </div>
-                                        <a href="#" class="fw-bold text-muted text-hover-primary fs-7">
-                                            <span>تنظیمات</span>
-                                            <img src="<?= asset('upload/aparat/svgexport-7.svg')?>" width="14px" alt="">
-                                        </a>
+
                                     </div>
                                     <!--end::Username-->
                                 </div>
@@ -617,7 +617,7 @@
                             <!--end::Menu separator-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
-                                <a href="../../demo1/dist/account/overview.html" class="menu-link px-5">
+                                <a href="<?= asset('/') ?>" class="menu-link px-5">
                                     <img src="<?= asset('upload/aparat/svgexport-8.svg')?>"  width="16px" alt="">
                                     <span class="menu-text m-2">صفحه اصلی آپارات</span>
                                 </a>

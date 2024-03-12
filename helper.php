@@ -149,9 +149,10 @@ function sanitize(string $dirty):string
  * @return string
  *
  */
-function redirect($value='')
+function redirect($value='' , $data=null):void
 {
-    return header('location:http://aparat-expert.local/'.$value);
+     extract($data);
+     header('location:http://aparat-expert.local/'.$value);
 }
 
 

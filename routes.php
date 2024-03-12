@@ -5,7 +5,8 @@
 //home
 $router->get('/' , 'HomeController@index');
 //login
-$router->get('/login' , 'Auth\LoginController@login');
+$router->get('/login' , 'Auth\LoginController@create');
+$router->post('/login' , 'Auth\LoginController@login');
 ////register
 $router->get('/register' , 'Auth\RegisterController@create');
 $router->post('/register' , 'Auth\RegisterController@store');
