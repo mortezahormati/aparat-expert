@@ -52,10 +52,13 @@
                                 <span>بارگذاری ویدیو</span>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
-                                <i class="fa fa-sign-out"></i>
-                                <span>خروج</span>
-                            </a>
+                            <form class="dropdown-item" method="post" action="<?= asset('logout') ?>" >
+                                <input type="hidden" name="_method" value="logout" >
+                                <button type="submit" class="btn-sm btn-danger">
+                                    <i class="fa fa-sign-out"></i>
+                                    <span>خروج</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 <?php else: ?>
