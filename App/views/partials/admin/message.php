@@ -2,10 +2,7 @@
 
 if(isset($_SESSION['user_deleted_successfully'])){
     echo '<div class="alert alert-success">'.$_SESSION["user_deleted_successfully"].'</div>';
-
-
     unset($_SESSION['user_deleted_successfully']);
-
 }
 
 if(isset($_SESSION['user_deleted_no_successfully'])){
@@ -14,3 +11,15 @@ if(isset($_SESSION['user_deleted_no_successfully'])){
 }
 
 
+if(isset($_SESSION['userUpdatedSuccessfully'])){
+    echo '<div class="alert alert-success">'.$_SESSION["userUpdatedSuccessfully"].'</div>';
+    unset($_SESSION['userUpdatedSuccessfully']);
+}
+
+if(isset($_SESSION['userRegisteredSuccessfully'])){
+    echo '<div class="alert alert-success">'.$_SESSION["userRegisteredSuccessfully"].'</div>';
+    unset($_SESSION['userRegisteredSuccessfully']);
+}
+
+
+//userRegisteredSuccessfully

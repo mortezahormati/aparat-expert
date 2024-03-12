@@ -7,7 +7,8 @@ $router->get('/' , 'HomeController@index');
 //login
 $router->get('/login' , 'Auth\LoginController@login');
 ////register
-$router->get('/register' , 'Auth\RegisterController@register');
+$router->get('/register' , 'Auth\RegisterController@create');
+$router->post('/register' , 'Auth\RegisterController@store');
 ////404
 ////administrator -home
 $router->get('/administrator' , 'Admin\DashboardController@index');

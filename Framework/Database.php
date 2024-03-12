@@ -37,6 +37,7 @@ class Database
         try {
 
             $sta = $this->conn->prepare($query);
+
             sizeof($params) > 0 ? $sta->execute($params): $sta->execute();
             return $sta;
         } catch (PDOException $e) {

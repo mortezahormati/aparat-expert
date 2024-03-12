@@ -46,18 +46,41 @@ class UserController
         return $imageName;
     }
 
-    public function show($params)
-    {
+    protected function getUser($params){
         $sql = "select * from users where id=:id";
         $p = [
             'id' => $params['id']
         ];
-        $user = $this->db->query($sql, $p)->fetch();
-
+        return  $this->db->query($sql, $p)->fetch();
+    }
+    public function show($params)
+    {
+        $user = $this->getUser($params);
         adminView('user', [
             'user' => $user
         ]);
     }
+
+
+
+    public function destroy($params)
+    {
+        if( $_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST) && isset($_POST['_method']) && !empty(isset($_POST['_method']))){
+            $sql = "delete from users where id=:id";
+            $p = [
+                'id' => $params['id']
+            ];
+            $this->db->query($sql, $p);
+            $_SESSION['user_deleted_successfully'] = 'کاربر مورد نظر با موفقیت حذف شد.';
+            redirect("administrator/users");
+            exit();
+        }else{
+            $_SESSION['user_deleted_no_successfully'] = 'حذف کاربر مورد نظر با شکست مواجه شد.';
+            redirect("administrator/users");
+            exit();
+        }
+    }
+
 
     public function store()
     {
@@ -95,10 +118,10 @@ class UserController
             }
             if(!empty($errors)){
                 //reload view with errors
-                 adminView('usersAdd' , [
-                     'errors' => $errors,
+                adminView('usersAdd' , [
+                    'errors' => $errors,
                     'old_variable' => $newListData
-                 ]);
+                ]);
 
             }else{
                 //5- submit
@@ -127,37 +150,79 @@ class UserController
         }
     }
 
-    public function destroy($params)
-    {
-
-        if( $_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST) && isset($_POST['_method']) && !empty(isset($_POST['_method']))){
-            $sql = "delete from users where id=:id";
-            $p = [
-                'id' => $params['id']
-            ];
-            $this->db->query($sql, $p);
-            $_SESSION['user_deleted_successfully'] = 'کاربر مورد نظر با موفقیت حذف شد.';
-            redirect("administrator/users");
-            exit();
-        }else{
-            $_SESSION['user_deleted_no_successfully'] = 'حذف کاربر مورد نظر با شکست مواجه شد.';
-            redirect("administrator/users");
-            exit();
-        }
-    }
-
-
-
-
     public function update($params)
     {
-        inspect($_POST);
-        dd($_FILES);
-        $sql = "UPDATE users SET nick_name=:nick_name,name = :name,family=:family,email=:email,
-                 phone_number=:phone_number,chanel_name=:chanel_name,password=:password,
-                 channel_description=:channel_description,web_url=:web_url,telegram_address=:telegram_address,
-                 facebook_address=:facebook_address,avatar_image=:avatar_image,channel_cover_image=:channel_cover_image,
-                 role=:role,created_at=:created_at,updated_at=:updated_at WHERE id=:id";
+        $user = $this->getUser($params);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
+            //1- allowed-fields
+            $allowedUpdateFields = [
+                'nick_name', 'name', 'family', 'email', 'phone_number', 'chanel_name',
+                'channel_description', 'web_url', 'telegram_address', 'facebook_address',
+                'avatar_image', 'channel_cover_image', 'role'
+            ];
+            $newUserUpdateData = array_intersect_key($_POST,array_flip($allowedUpdateFields));
+
+            //2- sanitize-form
+            $newUserUpdateData = array_map('sanitize' , $newUserUpdateData);
+            //3- uploading files in server
+            if (!empty($_FILES)) {
+                if (!empty($_FILES['avatar_image']) && $_FILES['avatar_image']['error'] === UPLOAD_ERR_OK) {
+                    $avatarImage = $_FILES['avatar_image'];
+                    $upload = 'users-image' . DIRECTORY_SEPARATOR;
+                    $newUserUpdateData['avatar_image'] = 'users-image/'.$this->uploadingFiles($avatarImage, $upload);
+                }else{
+                    $newUserUpdateData['avatar_image'] =$user['avatar_image'];
+                }
+                if (!empty($_FILES['channel_cover_image']) && $_FILES['channel_cover_image']['error'] === UPLOAD_ERR_OK) {
+                    $channelCoverImage = $_FILES['channel_cover_image'];
+                    $upload = 'users-channel-image-cover' . DIRECTORY_SEPARATOR;
+                    $newUserUpdateData['channel_cover_image'] = 'users-channel-image-cover/'.$this->uploadingFiles($channelCoverImage, $upload);
+                }else{
+                    $newUserUpdateData['channel_cover_image'] =$user['channel_cover_image'];
+                }
+            }
+            //4- required--- validation
+            $requiredUpdateFields = ['nick_name', 'name', 'family', 'email', 'phone_number', 'chanel_name'];
+            $errors = [];
+//            dd($_FILES);
+            foreach ($requiredUpdateFields as $filed){
+                if(empty($newUserUpdateData[$filed]) || !Validation::stringSize($newUserUpdateData[$filed])){
+                    $errors[$filed] = ucfirst($filed). ' الزامی میباشد';
+                }
+            }
+            if(!empty($errors)){
+                //reload view with errors
+
+                adminView('user' , [
+                    'errors' => $errors,
+                    'user' => $newUserUpdateData
+                ]);
+
+            }else {
+
+                //5- submit
+                $newUserUpdateData['updated_at'] = date('Y-m-d');
+                $newUserUpdateData['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
+                $newUserUpdateData['role'] = $newUserUpdateData['role'] === "on" ? 'admin' : 'user';
+                $newUserUpdateData['id'] =$user['id'];
+                $fields=[];
+                foreach ($newUserUpdateData as $field => $value){
+                    $fields[] = $field.'=:'.$field;
+                    //convert empty values to null
+
+
+                }
+                $fields = implode(', ' , $fields);
+                $sql = "UPDATE USERS SET {$fields} Where id=:id";
+                $this->db->query($sql,$newUserUpdateData);
+                $_SESSION['userUpdatedSuccessfully'] = 'اطلاعات کاربر با موفقیت به روز رسانی شد.';
+                redirect("administrator/users");
+                exit();
+
+
+            }
+        }
+
     }
 
 }

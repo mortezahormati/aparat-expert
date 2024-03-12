@@ -43,15 +43,8 @@
 
                             <form id="kt_account_profile_details_form" method="post" action="<?= asset('administrator/users/create') ?>"
                                   class="form fv-plugins-bootstrap5 fv-plugins-framework" enctype="multipart/form-data">
-                                <?php if(!empty($errors)): ?>
-                                <div class="row mb-4">
-                                    <?php foreach ($errors as $error): ?>
-                                        <div class="col-md-12 alert alert-danger">
-                                            <?= $error ?>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                                <?php endif; ?>
+                                <?php loadAdminPartial('errors' , ['errors' => $errors ?? []]); ?>
+
                                 <!--begin::Input group-->
                                 <div class="row mb-4">
                                     <!--begin::Label-->

@@ -86,10 +86,11 @@ function loadPartial($name){
  * @return void
  *
  */
-function loadAdminPartial($name){
+function loadAdminPartial($name , $data=[]){
     $pathPartial = basePath("App/views/partials/admin/{$name}.php");
 //    dd($pathPartial);
     if(file_exists($pathPartial)){
+        extract($data);
         require $pathPartial;
     }else{
         echo "partial {$name} not existed";

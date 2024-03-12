@@ -15,6 +15,7 @@
             <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
                 <!--begin::Form-->
                 <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="#">
+                    <?php loadAdminPartial('message'); ?>
                     <!--begin::Heading-->
                     <div class="text-center mb-10">
                         <!--begin::Title-->
@@ -58,7 +59,7 @@
                         <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-danger w-100 mb-5">
                             <span class="indicator-label">ورود</span>
                         </button>
-                            <a href="" class="btn btn-lg btn-info w-100 mb-5 mt-5">ایجاد حساب کاربری</a>
+                            <a href="<?= asset('register') ?>" class="btn btn-lg btn-info w-100 mb-5 mt-5">ایجاد حساب کاربری</a>
                         <!--end::Submit button-->
                         <!--begin::Separator-->
                     </div>

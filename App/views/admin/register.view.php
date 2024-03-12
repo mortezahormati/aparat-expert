@@ -14,9 +14,21 @@
 					</a>
 					<!--end::Logo-->
 					<!--begin::Wrapper-->
-					<div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+					<div class="w-lg-650px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
 						<!--begin::Form-->
-						<form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate" id="kt_sign_up_form">
+						<form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" method="post"
+                              action="<?= asset('register') ?>">
+
+
+<!--                            --><?php //if(!empty($errors)): ?>
+<!--                                <div class="row fv-row">-->
+<!--                                    --><?php //foreach ($errors as $error): ?>
+<!--                                        <div class="col-md-12 alert alert-danger">-->
+<!--                                            --><?php //= $error ?>
+<!--                                        </div>-->
+<!--                                    --><?php //endforeach; ?>
+<!--                                </div>-->
+<!--                            --><?php //endif; ?>
 							<!--begin::Heading-->
 							<div class="mb-10 text-center">
 								<!--begin::Title-->
@@ -26,7 +38,7 @@
 
 							</div>
 							<!--end::Heading-->
-
+                            <?php loadAdminPartial('errors' , ['errors' => $errors ?? []]); ?>
 							<div class="d-flex align-items-center mb-10">
 								<div class="border-bottom border-gray-300 mw-50 w-100"></div>
 								<span class="fw-bold text-gray-400 fs-7 mx-2"></span>
@@ -38,19 +50,19 @@
 								<!--begin::Col-->
 								<div class="col-xl-12 mt-1">
 									<label class="form-label fw-bolder text-dark fs-6">نام</label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first-name" autocomplete="off">
+									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="name" value="<?= $clientInfo['name'] ?? '' ?>" autocomplete="off">
 								<div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
 								<!--end::Col-->
 								<!--begin::Col-->
 								<div class="col-xl-12 mt-1">
 									<label class="form-label fw-bolder text-dark fs-6">نام خانوادگی</label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last-name" autocomplete="off">
+									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="family" value="<?= $clientInfo['family'] ?? '' ?>" autocomplete="off">
 								<div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <div class="col-xl-12 mt-1">
                                     <label class="form-label fw-bolder text-dark fs-6">نام کاربری</label>
-                                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last-name" autocomplete="off">
+                                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="nick_name" value="<?= $clientInfo['nick_name'] ?? '' ?>" autocomplete="off">
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
 								<!--end::Col-->
@@ -59,7 +71,7 @@
 							<!--begin::Input group-->
 							<div class="fv-row mb-7 fv-plugins-icon-container">
 								<label class="form-label fw-bolder text-dark fs-6">ایمیل</label>
-								<input class="form-control form-control-lg form-control-solid" type="email" placeholder="" name="email" autocomplete="off">
+								<input class="form-control form-control-lg form-control-solid" type="email" placeholder="" name="email" value="<?= $clientInfo['email'] ?? '' ?>" autocomplete="off">
 							<div class="fv-plugins-message-container invalid-feedback"></div></div>
 							<!--end::Input group-->
 							<!--begin::Input group-->
@@ -93,13 +105,14 @@
 							<!--end::Input group-->
 							<!--begin::Input group-->
 							<div class="text-center">
-								<button type="button" id="kt_sign_up_submit" class="btn btn-lg btn-danger w-100 mb-5">
+								<button type="submit" id="kt_sign_up_submit" class="btn btn-lg btn-danger w-100 mb-5">
 									<span class="indicator-label">ثبت نام</span>
 								</button>
-                                <a href="" class="btn btn-lg btn-info w-100 mb-5 mt-5">ورود به حساب کاربری</a>
+                                <a href="<?= asset('login') ?>" class="btn btn-lg btn-info w-100 mb-5 mt-5">ورود به حساب کاربری</a>
                             </div>
 							<!--end::Actions-->
-						<div></div></form>
+						<div></div>
+                        </form>
 						<!--end::Form-->
 					</div>
 					<!--end::Wrapper-->

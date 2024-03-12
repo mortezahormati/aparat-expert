@@ -43,6 +43,15 @@
                                 <form id="kt_account_profile_details_form" method="post" action="<?= asset('administrator/users/update/'.$user['id']) ?>"
                                       class="form fv-plugins-bootstrap5 fv-plugins-framework" enctype="multipart/form-data">
 
+                                    <?php if(!empty($errors)): ?>
+                                        <div class="row mb-4">
+                                            <?php foreach ($errors as $error): ?>
+                                                <div class="col-md-12 alert alert-danger">
+                                                    <?= $error ?>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
 
 
 
@@ -119,7 +128,7 @@
                                             <div class="row">
                                                 <!--begin::Col-->
                                                 <div class="col-lg-6 fv-row fv-plugins-icon-container">
-                                                    <input type="text" name="family"
+                                                    <input type="text" name="name"
                                                            class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
                                                            placeholder="نام کوچک" value="<?= $user['name'] ?>" >
                                                     <div class="fv-plugins-message-container invalid-feedback"></div>
@@ -127,7 +136,7 @@
                                                 <!--end::Col-->
                                                 <!--begin::Col-->
                                                 <div class="col-lg-6 fv-row fv-plugins-icon-container">
-                                                    <input type="text" name="name"
+                                                    <input type="text" name="family"
                                                            class="form-control form-control-lg form-control-solid"
                                                            placeholder="فامیلی " value="<?= $user['family'] ?>">
                                                     <div class="fv-plugins-message-container invalid-feedback"></div>
@@ -181,7 +190,7 @@
                                         <div class="col-lg-8 fv-row">
                                             <input type="text" name="website"
                                                    class="form-control form-control-lg form-control-solid"
-                                                   placeholder="example.com" value="<?= $user['web_url'] ?>" >
+                                                   placeholder="example.com" value="<?= $user['web_url'] ?? '' ?>" >
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -213,7 +222,7 @@
                                                        data-bs-original-title="Change avatar">
                                                     <i class="bi bi-pencil-fill fs-7"></i>
                                                     <!--begin::Inputs-->
-                                                    <input type="file" name="avatar_image" accept=".png, .jpg, .jpeg">
+                                                    <input type="file" name="channel_cover_image" accept=".png, .jpg, .jpeg">
                                                     <input type="hidden" name="avatar_remove">
                                                     <!--end::Inputs-->
                                                 </label>
@@ -253,7 +262,7 @@
                                         <div class="col-lg-8 fv-row">
                                             <input type="text" name="chanel_name"
                                                    class="form-control form-control-lg form-control-solid"
-                                                   placeholder="" value="<?= $user['chanel_name'] ?>" >
+                                                   placeholder="" value="<?= $user['chanel_name'] ?? '' ?>" >
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -264,7 +273,7 @@
                                         <!--end::Label-->
                                         <!--begin::Col-->
                                         <div class="col-lg-8 fv-row">
-                                            <textarea class="form-control form-control-lg form-control-solid" rows="3" name="channel_description" placeholder="توضیحاتی در مورد کانال خود بنویسید"><?= $user['channel_description'] ?></textarea>
+                                            <textarea class="form-control form-control-lg form-control-solid" rows="3" name="channel_description" placeholder="توضیحاتی در مورد کانال خود بنویسید"><?= $user['channel_description'] ?? '' ?></textarea>
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -290,7 +299,7 @@
                                         <div class="col-lg-8 fv-row">
                                             <input type="text" name="telegram_address"
                                                    class="form-control form-control-lg form-control-solid"
-                                                   placeholder="" value="<?= $user['telegram_address'] ?>" >
+                                                   placeholder="" value="<?= $user['telegram_address'] ?? '' ?>" >
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -304,7 +313,7 @@
                                         <div class="col-lg-8 fv-row">
                                             <input type="text" name="facebook_address"
                                                    class="form-control form-control-lg form-control-solid"
-                                                   placeholder="" value="<?= $user['facebook_address'] ?>">
+                                                   placeholder="" value="<?= $user['facebook_address'] ?? '' ?>">
                                         </div>
                                         <!--end::Col-->
                                     </div>

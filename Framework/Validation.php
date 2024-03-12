@@ -26,13 +26,16 @@ class Validation
     /**
      * validate email size
      *@param string $value;
-     * @return mixed
+     * @return bool
      */
-    public static function email(string $value):mixed
+    public static function email(string $value):bool
     {
 
         $value = trim($value);
-        return filter_var($value , FILTER_VALIDATE_EMAIL);
+        if(!filter_var($value , FILTER_VALIDATE_EMAIL)){
+            return false;
+        }
+       return true;
 
     }
 
