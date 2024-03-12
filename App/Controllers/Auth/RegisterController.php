@@ -4,6 +4,7 @@
 namespace App\Controllers\Auth;
 
 use Framework\Database;
+use Framework\Session;
 use Framework\Validation;
 
 class RegisterController
@@ -98,7 +99,7 @@ class RegisterController
 
             $sql = "insert into users ({$fields}) values ({$values})";
             $this->db->query($sql ,$newUserData);
-            $_SESSION['userRegisteredSuccessfully'] = ' کاربر با موفقیت ثبت نام شد.';
+            Session::set('userRegisteredSuccessfully' , ' کاربر با موفقیت ثبت نام شد.')  ;
             redirect("login");
             exit();
         }

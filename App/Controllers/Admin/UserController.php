@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 
 use Framework\Database;
+use Framework\Session;
 use Framework\Validation;
 
 class UserController
@@ -71,11 +72,11 @@ class UserController
                 'id' => $params['id']
             ];
             $this->db->query($sql, $p);
-            $_SESSION['user_deleted_successfully'] = 'کاربر مورد نظر با موفقیت حذف شد.';
+            Session::set('user_deleted_successfully' ,'کاربر مورد نظر با موفقیت حذف شد.') ;
             redirect("administrator/users");
             exit();
         }else{
-            $_SESSION['user_deleted_no_successfully'] = 'حذف کاربر مورد نظر با شکست مواجه شد.';
+            Session::set('user_deleted_no_successfully' , 'حذف کاربر مورد نظر با شکست مواجه شد.') ;
             redirect("administrator/users");
             exit();
         }
@@ -215,7 +216,7 @@ class UserController
                 $fields = implode(', ' , $fields);
                 $sql = "UPDATE USERS SET {$fields} Where id=:id";
                 $this->db->query($sql,$newUserUpdateData);
-                $_SESSION['userUpdatedSuccessfully'] = 'اطلاعات کاربر با موفقیت به روز رسانی شد.';
+                Session::set('userUpdatedSuccessfully' , 'اطلاعات کاربر با موفقیت به روز رسانی شد.') ;
                 redirect("administrator/users");
                 exit();
 
