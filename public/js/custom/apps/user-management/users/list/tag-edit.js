@@ -82,10 +82,10 @@ var KTCategoryEdit = function () {
 
                             // Show popup confirmation
                             Swal.fire({
-                                text: "Form has been successfully submitted!",
+                                text: "برچسب مورد نظر با موفقیت به روزرسانی شد .",
                                 icon: "success",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "خیلی خب بزن بریم ...!",
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }
@@ -110,10 +110,10 @@ var KTCategoryEdit = function () {
                     } else {
                         // Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                         Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            text: "مشکلی پیش آمده دقایقی دیگر امتحان کنید.",
                             icon: "error",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "خیلی خب بزن بریم ...!",
                             customClass: {
                                 confirmButton: "btn btn-primary"
                             }

@@ -47,10 +47,12 @@
                                 <i class="fa fa-gear"></i>
                                 <span>تنظیمات</span>
                             </a>
+                            <?php if(\Framework\Session::get('user')['role'] === 'user'): ?>
                             <a class="dropdown-item" href="<?= asset('user/video/create') ?>">
                                 <i class="fa fa-video-camera"></i>
                                 <span>بارگذاری ویدیو</span>
                             </a>
+                            <?php endif; ?>
                             <div class="dropdown-divider"></div>
                             <form class="dropdown-item" method="post" action="<?= asset('logout') ?>" >
                                 <input type="hidden" name="_method" value="logout" >
