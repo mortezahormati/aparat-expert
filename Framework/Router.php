@@ -18,14 +18,14 @@ class Router
      * @return array
      *
      */
-    public function registerRoute($method,$uri,$action,$middleware=[])
+    public function registerRoute($method, $uri, $action , $middleware=[])
     {
         list($controller, $controllerMethod) = explode('@', $action);
         return $this->routes[] = [
             'method' => $method,
             'uri' => $uri,
             'controller' => $controller,
-            'controllerMethod' => $controllerMethod,
+            'controllerMethod' => $controllerMethod ,
             'middleware' => $middleware
         ];
     }
@@ -38,9 +38,9 @@ class Router
      * @return void
      *
      */
-    public function get($uri, $controller , $middleware=[])
+    public function get($uri, $controller , array $middleware=[])
     {
-        $this->registerRoute('GET', $uri, $controller , $middleware);
+        $this->registerRoute('GET', $uri, $controller,$middleware);
     }
 
     /**
@@ -53,7 +53,7 @@ class Router
      */
     public function post($uri, $controller , $middleware=[])
     {
-        $this->registerRoute('POST', $uri, $controller ,$middleware);
+        $this->registerRoute('POST', $uri, $controller , $middleware);
     }
 
     /**
@@ -64,9 +64,9 @@ class Router
      * @return void
      *
      */
-    public function put($uri, $controller , $middleware=[])
+    public function put($uri, $controller,$middleware=[])
     {
-        $this->registerRoute('PUT', $uri, $controller);
+        $this->registerRoute('PUT', $uri, $controller,$middleware);
 
     }
 

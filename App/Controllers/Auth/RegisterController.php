@@ -10,6 +10,7 @@ use Framework\Validation;
 class RegisterController
 {
     protected $db;
+    const DEFAULT_USER_ROLE = 'user';
 
     public function __construct()
     {
@@ -85,6 +86,8 @@ class RegisterController
             $fields=[];
             $values=[];
             $newUserData['password'] = password_hash($newUserData['password'], PASSWORD_DEFAULT);
+            $newUserData['role'] = $this::DEFAULT_USER_ROLE;
+            $newUserData['created_at'] = date('Y-m-d');
             foreach ($newUserData as $field => $value){
                 $fields[] = $field;
                 //convert empty values to null

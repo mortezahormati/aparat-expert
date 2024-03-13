@@ -7,17 +7,27 @@ use Framework\Session;
 class Authorize
 {
 
-    public function isAthenticated()
+    /**is client login
+     * @return bool
+     */
+    public function isAuthenticated():bool
     {
         return Session::has('user');
     }
 
-    public function handle($role)
+    /**handle request for users
+     * @param string $role
+     * @return void
+     */
+    public function handle(string $role):void
     {
-        if ($role === 'guest' && $this->isAthenticated()) {
-            return redirect('');
-        }elseif($role === 'auth' && !$this->isAthenticated()) {
-            return redirect('login');
+
+        if ($role === 'guest' && $this->isAuthenticated()) {
+             redirect('');
+        } elseif ($role === 'auth' && !$this->isAuthenticated()) {
+             redirect('login');
         }
     }
+
+
 }
