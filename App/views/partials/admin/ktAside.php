@@ -64,6 +64,7 @@
                         <span class="menu-title">داشبورد</span>
                     </a>
                 </div>
+                <?php if(\Framework\Session::get('user')['role'] === 'admin'): ?>
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -111,8 +112,27 @@
                         <span class="menu-title">ویدیوها</span>
                     </a>
                 </div>
+
+                <?php endif; ?>
+
+
                 <div class="menu-item ">
                     <a class="menu-link active" href="#">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+											<span class="svg-icon svg-icon-2">
+                                                <img src="<?= asset('upload/aparat/svgexport-11.svg') ?>" alt="">
+
+											</span>
+                                            <!--end::Svg Icon-->
+										</span>
+                        <span class="menu-title">دیدگاه ها</span>
+                    </a>
+                </div>
+
+                <?php if(\Framework\Session::get('user')['role'] === 'user'): ?>
+                    <div class="menu-item ">
+                        <a class="menu-link active" href="#">
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
 											<span class="svg-icon svg-icon-2">
@@ -121,9 +141,9 @@
 											</span>
                                             <!--end::Svg Icon-->
 										</span>
-                        <span class="menu-title">ویدیوهای من</span>
-                    </a>
-                </div>
+                            <span class="menu-title">ویدیوهای من</span>
+                        </a>
+                    </div>
                 <div class="menu-item ">
                     <a class="menu-link active" href="#">
 										<span class="menu-icon">
@@ -142,19 +162,6 @@
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
 											<span class="svg-icon svg-icon-2">
-                                                <img src="<?= asset('upload/aparat/svgexport-11.svg') ?>" alt="">
-
-											</span>
-                                            <!--end::Svg Icon-->
-										</span>
-                        <span class="menu-title">دیدگاه ها</span>
-                    </a>
-                </div>
-                <div class="menu-item ">
-                    <a class="menu-link active" href="#">
-										<span class="menu-icon">
-											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-											<span class="svg-icon svg-icon-2">
                                                 <img src="<?= asset('upload/aparat/svgexport-13.svg') ?>" alt="">
 
 											</span>
@@ -163,8 +170,10 @@
                         <span class="menu-title">آمار بازدید</span>
                     </a>
                 </div>
+                <?php endif; ?>
                 <!--                ADMIN MENU ITEM -->
 
+                <?php if(\Framework\Session::get('user')['role'] === 'admin'): ?>
                 <div class="menu-item">
                     <a class="menu-link active" href="<?= asset('administrator/category') ?>">
 										<span class="menu-icon">
@@ -191,6 +200,7 @@
                         <span class="menu-title">برچسب ها </span>
                     </a>
                 </div>
+                <?php endif; ?>
                 <!--                END ADMIN MENU-->
                 <div class="menu-item mt-16 ">
                     <form class="menu-link " method="post" action="<?= asset('logout') ?>">

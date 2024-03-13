@@ -31,16 +31,16 @@ class CategoryController
             if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 $sql = "SELECT id,persian_name from category";
                 $data = $this->db->query($sql)->fetchAll();
-
                 echo json_encode($data);
                 return;
             }
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $sql = "insert into category (name , persian_name , parent_id) values (:name , :persian_name , :parent_id)";
+                $sql = "insert into category (name , persian_name , parent_id ,created_at) values (:name , :persian_name , :parent_id , :created_at)";
                 $params = [
                     'name' => $_POST['name'],
                     'persian_name' => $_POST['persian_name'],
                     'parent_id' => $_POST['parent_id'],
+                    'created_at' => date('Y-m-d'),
                 ];
                 $this->db->query($sql, $params);
 

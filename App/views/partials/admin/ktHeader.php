@@ -103,12 +103,14 @@
                             </div>
                             <!--end::Menu item-->
                             <!--begin::Menu item-->
+                            <?php if(\Framework\Session::get('user')['role'] === 'user'): ?>
                             <div class="menu-item px-5">
                                 <a href="../../demo1/dist/pages/projects/list.html" class="menu-link px-5">
                                     <img src="<?= asset('upload/aparat/svgexport-14.svg')?>" width="16px" alt="">
                                     <span class="menu-text m-2">ویدیوهای من </span>
                                 </a>
                             </div>
+                            <?php endif; ?>
                             <!--end::Menu item-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
