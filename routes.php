@@ -16,7 +16,7 @@ $router->post('/register' , 'Auth\RegisterController@store' , ['guest']);
 $router->get('/administrator' , 'Admin\DashboardController@index',['auth']);
 //
 //////administrator - category
-$router->get('/administrator/category' , 'Admin\CategoryController@index',['admin','auth']);
+$router->get('/administrator/category' , 'Admin\CategoryController@index',['auth','admin']);
 $router->get('/administrator/category/ajax' , 'Admin\CategoryController@create',['auth']);
 $router->post('/administrator/category/ajax' , 'Admin\CategoryController@create',['auth']);
 $router->get('/administrator/category/edit/ajax' , 'Admin\CategoryController@update',['auth']);
