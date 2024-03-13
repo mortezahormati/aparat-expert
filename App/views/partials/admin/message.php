@@ -20,6 +20,10 @@ if(isset($_SESSION['userRegisteredSuccessfully'])){
     echo '<div class="alert alert-success">'.$_SESSION["userRegisteredSuccessfully"].'</div>';
     unset($_SESSION['userRegisteredSuccessfully']);
 }
+if(isset($_SESSION['ypuHaveNotPermission'])){
+    echo '<div class="alert alert-danger">'.$_SESSION["ypuHaveNotPermission"].'</div>';
+    unset($_SESSION['ypuHaveNotPermission']);
+}
 
 
 //userRegisteredSuccessfully
