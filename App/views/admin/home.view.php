@@ -18,6 +18,13 @@
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
+                   <?php loadAdminPartial('message'); ?>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
                     <div class="row m-4 ">
                         <div class="col-md-3">
                             <!--begin::Card-->
