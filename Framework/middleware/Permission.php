@@ -8,9 +8,6 @@ class Permission
 {
 //user authenticated
 
-    protected $user;
-
-
     public function handle($role)
     {
 
