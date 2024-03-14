@@ -52,13 +52,16 @@
 
                                     <div class="col-md-12 ">
                                         <div class="row justify-content-around  ">
+
+                                            <?php if(!empty($all_videos)): ?>
+                                            <?php foreach($all_videos as $video): ?>
                                             <div class="card bg-light p-2" style="width: 20%;">
-                                                <video poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&amp;quality=90&amp;secret=FlWOqJWqfdFpQl27IzJ8cQ" class="video-play" src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
+                                                <video poster="<?= asset($video['video_image']) ?>" class="video-play" src="<?= asset($video['video_path']) ?>" muted>
                                                 </video>
                                                 <div class="card-body">
-                                                    نام ویدیو
+                                                    <?= $video['title'] ?>
                                                     <br>
-                                                    تعداد بازدید :
+                                                    تعداد بازدید : <?= $video['revision_count'] ?>
 
                                                 </div>
                                                 <div class="card-footer">
@@ -75,75 +78,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card bg-light p-2" style="width: 20%;">
-                                                <video poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&amp;quality=90&amp;secret=FlWOqJWqfdFpQl27IzJ8cQ" class="video-play" src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                                </video>
-                                                <div class="card-body">
-                                                    نام ویدیو
-                                                    <br>
-                                                    تعداد بازدید :
 
-                                                </div>
-                                                <div class="card-footer">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <a href=""  style="border-radius: 8px" class=" p-2  btn-primary text-white" title="ویرایش" ><img src="<?= asset('upload/aparat/svgexport-90.svg') ?>" alt=""></a>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <a href="" style="border-radius: 8px"  class="p-2 btn-danger " title="حذف"><img src="<?= asset('upload/aparat/svgexport-80.svg') ?>" alt=""></a>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <a href="" style="border-radius: 8px"  class="p-2 btn-success " title="لایک"><img src="<?= asset('upload/aparat/svgexport-46.svg') ?>" alt=""></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-light p-2" style="width: 20%;">
-                                                <video poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&amp;quality=90&amp;secret=FlWOqJWqfdFpQl27IzJ8cQ" class="video-play" src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                                </video>
-                                                <div class="card-body">
-                                                    نام ویدیو
-                                                    <br>
-                                                    تعداد بازدید :
-
-                                                </div>
-                                                <div class="card-footer">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <a href=""  style="border-radius: 8px" class=" p-2  btn-primary text-white" title="ویرایش" ><img src="<?= asset('upload/aparat/svgexport-90.svg') ?>" alt=""></a>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <a href="" style="border-radius: 8px"  class="p-2 btn-danger " title="حذف"><img src="<?= asset('upload/aparat/svgexport-80.svg') ?>" alt=""></a>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <a href="" style="border-radius: 8px"  class="p-2 btn-success " title="لایک"><img src="<?= asset('upload/aparat/svgexport-46.svg') ?>" alt=""></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-light p-2" style="width: 20%;">
-                                                <video poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&amp;quality=90&amp;secret=FlWOqJWqfdFpQl27IzJ8cQ" class="video-play" src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                                </video>
-                                                <div class="card-body">
-                                                    نام ویدیو
-                                                    <br>
-                                                    تعداد بازدید :
-
-                                                </div>
-                                                <div class="card-footer">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <a href=""  style="border-radius: 8px" class=" p-2  btn-primary text-white" title="ویرایش" ><img src="<?= asset('upload/aparat/svgexport-90.svg') ?>" alt=""></a>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <a href="" style="border-radius: 8px"  class="p-2 btn-danger " title="حذف"><img src="<?= asset('upload/aparat/svgexport-80.svg') ?>" alt=""></a>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <a href="" style="border-radius: 8px"  class="p-2 btn-success " title="لایک"><img src="<?= asset('upload/aparat/svgexport-46.svg') ?>" alt=""></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <?php endforeach; ?>
+                                            <?php endif; ?>
 
 
                                         </div>
@@ -174,12 +111,11 @@
 
     $(document).ready(function () {
 
-        var video = $("#video")
-
-
-
-
-        console.log("test", video.duration)
+        $(".video-play").on("mouseover", function (event) {
+            this.play();
+        }).on('mouseout', function (event) {
+            this.load();
+        });
         // Video is loaded and can be played
     })
 

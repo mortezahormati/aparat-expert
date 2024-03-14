@@ -42,8 +42,13 @@ $router->post('administrator/users/update/{id}' , 'Admin\UserController@update',
 $router->post('/administrator/users/delete/{id}' , 'Admin\UserController@destroy',['auth','admin']);
 
 
+//administrator-followers
+$router->get('/administrator/followers' , 'Admin\UserController@followers',['auth']);
+
+
 //administrator-video
 $router->get('/administrator/videos','Admin\VideoController@index',['auth' ,'admin']);
+$router->get('/administrator/video/user','Admin\VideoController@userIndex',['auth']);
 //$router->get('/administrator/videos/create','Admin\VideoController@create');
 //$router->get('/administrator/videos/create','Admin\VideoController@store');
 

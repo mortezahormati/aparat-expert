@@ -132,7 +132,7 @@
 
                 <?php if(\Framework\Session::get('user')['role'] === 'user'): ?>
                     <div class="menu-item ">
-                        <a class="menu-link active" href="#">
+                        <a class="menu-link active" href="<?= asset('administrator/video/user') ?>">
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
 											<span class="svg-icon svg-icon-2">
