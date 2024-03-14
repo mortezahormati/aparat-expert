@@ -1,5 +1,7 @@
 <?php loadAdminPartial('head'); ?>
-<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
+<body id="kt_body"
+      class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed"
+      style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
 <!--begin::Main-->
 <!--begin::Root-->
 <div class="d-flex flex-column flex-root">
@@ -18,7 +20,7 @@
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
-                  <?php loadAdminPartial('message'); ?>
+                    <?php loadAdminPartial('message'); ?>
                 </div>
                 <div class="col-md-1"></div>
             </div>
@@ -33,7 +35,7 @@
                                 <div class="card-header justify-content-center">
                                     <!--begin::Card title-->
                                     <div class="card-title">
-                                        <h2>0</h2>
+                                        <h2><?= $user_videos_count ?? '0' ?></h2>
                                     </div>
                                     <!--end::Card title-->
                                 </div>
@@ -131,56 +133,85 @@
                 <div class="col-md-10">
                     <div class="row m-4 ">
                         <div class="col-md-6">
-                                <!--begin::Card-->
-                                <div class="card card-flush h-md-100">
-                                    <!--begin::Card header-->
-                                    <div class="card-header mb-5 justify-content-around ">
-                                        <!--begin::Card title-->
-                                        <div class="card-title justify-content-between" style="width: 98%">
-                                            <h6>ویدیوهای من</h6>
+                            <!--begin::Card-->
+                            <div class="card card-flush h-md-100">
+                                <!--begin::Card header-->
+                                <div class="card-header mb-5 justify-content-around ">
+                                    <!--begin::Card title-->
+                                    <div class="card-title justify-content-between" style="width: 98%">
+                                        <h6>ویدیوهای من</h6>
 
-                                            <a href="#" class="btn btn-sm  btn-outline-dark">
-                                                <span class="text-sm">مشاهده همه</span>
-                                                <img src="<?= asset('upload/icons/duotune/arrows/arr021.svg') ?>" width="14px" alt="">
-                                            </a>
-                                        </div>
-                                        <!--end::Card title-->
+                                        <a href="#" class="btn btn-sm  btn-outline-dark">
+                                            <span class="text-sm">مشاهده همه</span>
+                                            <img src="<?= asset('upload/icons/duotune/arrows/arr021.svg') ?>"
+                                                 width="14px" alt="">
+                                        </a>
                                     </div>
-                                    <!--end::Card header-->
-                                    <!--begin::Card body-->
-                                    <div class="card-body mt-12 pt-3 text-center justify-content-center">
-                                        <img src="<?= asset('upload/aparat/empty-video.png') ?>" alt="">
-                                        <!--end::Permissions-->
-                                    </div>
-
+                                    <!--end::Card title-->
                                 </div>
-                                <!--end::Card-->
+                                <!--end::Card header-->
+                                <!--begin::Card body-->
+                                <div class="card-body mt-12 pt-3 text-center justify-content-center"
+                                     style="overflow-y: scroll">
+                                    <div class="row">
+                                        <?php if (!empty($user_videos)): ?>
+                                            <?php foreach ($user_videos as $user_video): ?>
+                                                <div class="col-md-6">
+                                                    <a href="">
+                                                        <div class="card">
+                                                            <img class="card-img-top" height="150px"
+                                                                 src="<?= $user_video['video_image'] ?>"
+                                                                 alt="Card image cap">
+                                                            <div class="card-body">
+                                                                <p class="card-text"><?= $user_video['title'] ?></p>
+                                                                <p class="card-text">
+                                                                    <small class="text-muted">
+                                                                        <?= Morilog\Jalali\Jalalian::forge($user_video['created_at'])->format('%B %d، %Y') ?>
+                                                                    </small>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <img src="<?= asset('upload/aparat/empty-video.png') ?>" alt="">
+                                        <?php endif; ?>
+                                    </div>
+
+
+                                    <!--end::Permissions-->
+                                </div>
+
+                            </div>
+                            <!--end::Card-->
                         </div>
                         <div class="col-md-6">
-                                <!--begin::Card-->
-                                <div class="card card-flush h-md-100">
-                                    <!--begin::Card header-->
-                                    <div class="card-header mb-5 justify-content-around ">
-                                        <!--begin::Card title-->
-                                        <div class="card-title justify-content-between" style="width: 98%">
-                                            <h6>دیدگاهها</h6>
+                            <!--begin::Card-->
+                            <div class="card card-flush h-md-100">
+                                <!--begin::Card header-->
+                                <div class="card-header mb-5 justify-content-around ">
+                                    <!--begin::Card title-->
+                                    <div class="card-title justify-content-between" style="width: 98%">
+                                        <h6>دیدگاهها</h6>
 
-                                            <a href="#" class="btn btn-sm  btn-outline-dark">
-                                                <span class="text-sm">مشاهده همه</span>
-                                                <img src="<?= asset('upload/icons/duotune/arrows/arr021.svg') ?>" width="14px" alt="">
-                                            </a>
-                                        </div>
-                                        <!--end::Card title-->
+                                        <a href="#" class="btn btn-sm  btn-outline-dark">
+                                            <span class="text-sm">مشاهده همه</span>
+                                            <img src="<?= asset('upload/icons/duotune/arrows/arr021.svg') ?>"
+                                                 width="14px" alt="">
+                                        </a>
                                     </div>
-                                    <!--end::Card header-->
-                                    <!--begin::Card body-->
-                                    <div class="card-body mt-12 pt-3 text-center justify-content-center">
-                                        <img src="<?= asset('upload/aparat/empty-comment.png')?>" alt="">
-                                        <!--end::Permissions-->
-                                    </div>
-
+                                    <!--end::Card title-->
                                 </div>
-                                <!--end::Card-->
+                                <!--end::Card header-->
+                                <!--begin::Card body-->
+                                <div class="card-body mt-12 pt-3 text-center justify-content-center">
+                                    <img src="<?= asset('upload/aparat/empty-comment.png') ?>" alt="">
+                                    <!--end::Permissions-->
+                                </div>
+
+                            </div>
+                            <!--end::Card-->
                         </div>
 
                     </div>
