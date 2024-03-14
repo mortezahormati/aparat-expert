@@ -22,7 +22,7 @@
             </a>
         </div>
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-            <a href="#" class="btn btn-sm btn-primary " style="border-radius:50px">
+            <a href="<?= asset('user/video/create')?>" class="btn btn-sm btn-primary " style="border-radius:50px">
 
                 <span class="font-weight-600 text-sm-left">بارگذاری ویدیو</span>
             </a>

@@ -1,5 +1,7 @@
 <?php
 
+use Morilog\Jalali\Jalalian;
+
 const BASE_URL = 'http://aparat-expert.local/';
 
 /**
@@ -143,6 +145,10 @@ function sanitize(string $dirty):string
     return filter_var(trim($dirty) ,FILTER_SANITIZE_SPECIAL_CHARS );
 }
 
+function auth()
+{
+    return \Framework\Session::has('user') ? \Framework\Session::get('user') : false;
+}
 /**
  *redirect to route function
  * @param string $dirty
@@ -155,6 +161,27 @@ function redirect($value='' , $data=null):void
      header('location:http://aparat-expert.local/'.$value);
 }
 
+/**
+ *convert persian number to english
+ * @param string $string
+ * @return string
+ *
+ */
+function convert($string) {
+    $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+    $arabic = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+
+    $num = range(0, 9);
+    $convertedPersianNums = str_replace($persian, $num, $string);
+
+    return str_replace($arabic, $num, $convertedPersianNums);
+}
+
+//persian_date to gorgian formatter
+
+function toGeorgian($persianDate){
+    return Jalalian::fromFormat('Y-m-d' , convert($persianDate))->toCarbon()->format('Y-m-d');
+}
 
 
 

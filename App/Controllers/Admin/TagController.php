@@ -37,10 +37,11 @@ class TagController
             }
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ///
-                $sql = "insert into tags (name , persian_name) values (:name , :persian_name)";
+                $sql = "insert into tags (name , persian_name,created_at) values (:name , :persian_name , :created_at)";
                 $params = [
                     'name' => $_POST['name'],
                     'persian_name' => $_POST['persian_name'],
+                    'created_at' =>date('Y-m-d'),
                 ];
                 $this->db->query($sql, $params);
 

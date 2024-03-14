@@ -24,7 +24,10 @@ if(isset($_SESSION['youHaveNotPermission'])){
     echo '<div class="alert alert-danger">'.$_SESSION["youHaveNotPermission"].'</div>';
     unset($_SESSION['youHaveNotPermission']);
 }
-
+if(isset($_SESSION['VideoUploadedSuccessfully'])){
+    echo '<div class="alert alert-success">'.$_SESSION["VideoUploadedSuccessfully"].'</div>';
+    unset($_SESSION['VideoUploadedSuccessfully']);
+}
 
 
 //userRegisteredSuccessfully

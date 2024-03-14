@@ -13,6 +13,13 @@
                 <div class="row mt-4 p-4">
                     <div class="container  ">
                         <div class="row bg-light">
+                            <div class="col-md-12">
+                                <?php loadAdminPartial('errors' , ['errors' => $errors ?? []]); ?>
+                            </div>
+                        </div>
+
+                        <div class="row bg-light">
+
 
                             <div class="col-md-7 ml-2 ">
                                 <div class="form-group">
@@ -20,13 +27,13 @@
                                     <label> عنوان ویدیو </label>
 
                                     <input type="text" name="title" class="form-control"
-                                           placeholder="وارد کردن اطلاعات ..." required>
+                                           placeholder="وارد کردن اطلاعات ..." value="<?= $old_variable['title'] ?? '' ?>" required>
                                 </div>
                                 <div class="form-group">
                                     <small class="text-danger">*</small>
                                     <label>متن</label>
                                     <textarea name="description" class="form-control" rows="3"
-                                              placeholder="وارد کردن اطلاعات ..."></textarea>
+                                              placeholder="وارد کردن اطلاعات ..."><?= $old_variable['description'] ?? '' ?></textarea>
                                     <small>
                                         در توضیحات، اطلاعاتی مفید و کافی با جمله‌بندی معنادار مرتبط با ویدیو بنویسید و
                                         از تکرار عنوان و تکرار بیش از حد کلمات کلیدی بپرهیزید.
@@ -65,9 +72,10 @@
                                     <select class="js-example-basic-single-2 form-control select2 select2-hidden-accessible"
                                             name="confirm_comment" style="width: 100%;" tabindex="-1"
                                             aria-hidden="true">
-                                        <option value="1">امکان نظردهی برای همه آزاد باشد</option>
 
-                                        <option value="2">امکان نظردهی برای همه غیر فعال باشد</option>
+                                        <option value="1" <?=  (isset($old_variable)  ? ($old_variable['confirm_comment'] == '1' ? 'selected':'' ): '')?> >امکان نظردهی برای همه آزاد باشد</option>
+
+                                        <option value="2" <?=  (isset($old_variable)  ? ($old_variable['confirm_comment'] == '2' ? 'selected':'' ): '')?>>امکان نظردهی برای همه غیر فعال باشد</option>
                                     </select>
                                     <small> انتخاب دسته‌بندی به آپارات کمک می‌کند تا محتوای شما در کنار محتواهای هم
                                         موضوع قرار گیرد.</small>
@@ -81,7 +89,7 @@
                                 <div class="form-group">
                                     <small class="text-danger">*</small>
                                     <label>تاریخ انتشار</label>
-                                    <input name="confirm_at" class="confirm-time form-control" style="width: 60%"/>
+                                    <input name="confirm_at" class="confirm-time form-control" value="value="<?= $old_variable['confirm_at'] ?? '' ?>"" style="width: 60%"/>
                                 </div>
                                 <hr>
                                 <div class="form-group">
@@ -89,7 +97,7 @@
                                     <label>انتخاب ویدیو</label>
                                     <div class="file-upload">
                                         <label>
-                                            <input type="file" name="video">
+                                            <input type="file" name="video_path">
                                             <img class="form-control" src="<?= asset('upload/static/upload-light.svg') ?>">
                                         </label>
                                     </div>
@@ -101,7 +109,7 @@
                                     <label>انتخاب پوستر ویدیو</label>
                                     <div class="file-upload-poster" style="width: 150px">
                                         <label>
-                                            <input type="file" name="video-poster" style="display: none">
+                                            <input type="file" name="video_image" style="display: none">
                                             <img class="form-control" src="<?= asset('upload/static/upload-light.svg') ?>">
                                         </label>
                                     </div>
@@ -133,8 +141,8 @@
     $(document).ready(function () {
 
         $(".confirm-time").pDatepicker({
-            initialValueType: "gregorian",
-            format: "YYYY/MM/DD",
+            // initialValueType: "gregorian",
+            format: "YYYY-MM-DD",
             onSelect: "month"
         });
         $(".file-upload input[type=file]").change(function(){

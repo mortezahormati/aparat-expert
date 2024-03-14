@@ -13,5 +13,7 @@
             "email": "mori3nt3z@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "morilog/jalali": "3.*"
+    }
 }
