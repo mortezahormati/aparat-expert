@@ -66,7 +66,7 @@
                     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
                         <!--begin::Menu wrapper-->
                         <div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                            <img src="<?= asset('upload/avatars/150-26.jpg')?>" alt="user" />
+                            <img src="<?=!empty(\Framework\Session::get('user')['avatar_image']) ? asset(\Framework\Session::get('user')['avatar_image']) :  asset('upload/avatars/150-26.jpg') ?>" alt="user"/>
                         </div>
                         <!--begin::Menu-->
                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">

@@ -44,7 +44,7 @@
                     <div class="menu-content p-8 justify-content-center">
                         <div class="cursor-pointer symbol symbol-150px symbol-md-150px" data-kt-menu-trigger="click"
                              data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                            <img src="<?= asset('upload/avatars/150-26.jpg') ?>" alt="user"/>
+                            <img src="<?=!empty(\Framework\Session::get('user')['avatar_image']) ? asset(\Framework\Session::get('user')['avatar_image']) :  asset('upload/avatars/150-26.jpg') ?>" alt="user"/>
                         </div>
                     </div>
 
