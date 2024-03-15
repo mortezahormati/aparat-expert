@@ -153,8 +153,9 @@
                                 <!--begin::Card body-->
                                 <div class="card-body mt-12 pt-3 text-center justify-content-center"
                                      style="overflow-y: scroll">
-                                    <div class="row">
+
                                         <?php if (!empty($user_videos)): ?>
+                                    <div class="row">
                                             <?php foreach ($user_videos as $user_video): ?>
                                                 <div class="col-md-6">
                                                     <a href="">
@@ -174,10 +175,12 @@
                                                     </a>
                                                 </div>
                                             <?php endforeach; ?>
+                                    </div>
                                         <?php else: ?>
                                             <img src="<?= asset('upload/aparat/empty-video.png') ?>" alt="">
+
                                         <?php endif; ?>
-                                    </div>
+
 
 
                                     <!--end::Permissions-->
