@@ -64,6 +64,21 @@
                         <span class="menu-title">داشبورد</span>
                     </a>
                 </div>
+                <?php if(\Framework\Session::get('user')['role'] === 'user'): ?>
+                <div class="menu-item mt-8">
+                    <a class="menu-link active" href="<?= asset('administrator/user/setting') ?>">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+											<span class="svg-icon svg-icon-2">
+                                                <img src="<?= asset('upload/aparat/svgexport-71.svg') ?>" alt="">
+
+											</span>
+                                            <!--end::Svg Icon-->
+										</span>
+                        <span class="menu-title">تنظیمات</span>
+                    </a>
+                </div>
+                <?php endif; ?>
                 <?php if(\Framework\Session::get('user')['role'] === 'admin'): ?>
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
