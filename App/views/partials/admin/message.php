@@ -28,9 +28,9 @@ if(isset($_SESSION['VideoUploadedSuccessfully'])){
     echo '<div class="alert alert-success">'.$_SESSION["VideoUploadedSuccessfully"].'</div>';
     unset($_SESSION['VideoUploadedSuccessfully']);
 }
-if(isset($_SESSION['completeYourInfo'])){
-    echo '<div class="alert alert-danger">'.$_SESSION["completeYourInfo"].'</div>';
-    unset($_SESSION['completeYourInfo']);
+if(isset($_SESSION['completeUserInfo'])){
+    echo '<div class="alert alert-danger">'.$_SESSION["completeUserInfo"].'</div>';
+    unset($_SESSION['completeUserInfo']);
 }
 if(isset($_SESSION['userCompleteInfoSuccessfully'])){
     echo '<div class="alert alert-success">'.$_SESSION["userCompleteInfoSuccessfully"].'</div>';

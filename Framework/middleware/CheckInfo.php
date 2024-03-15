@@ -10,14 +10,12 @@ class CheckInfo
      * @param string $role
      * @return void
      */
-    public function handle(string $role):void{
+    public function handle($role):void
+    {
+        if(Session::has('user') && $role==='checkInfo'){
 
-        if(Session::has('user')){
-            $userPhone = Session::get('user')['phone_number'];
-            $userChanelName = Session::get('user')['chanel_name'];
-            if($role==='checkInfo' &&  empty($userPhone) || empty('phone_number`')){
-                Session::set('completeYourInfo' , 'اطلاعات کاربری خود را تکمیل نمایید! تا از امکانات کامل سایت بهرمند شوید. ( شماره همراه و نام کانال ...)');
-
+            if(empty(Session::get('user')['phone_number']) ||  empty(Session::get('user')['chanel_name'])){
+                Session::set('completeUserInfo' ,'اطلاعات کاربری خود را از پنل تنظیمات تکمیل نمایید');
             }
         }
     }
