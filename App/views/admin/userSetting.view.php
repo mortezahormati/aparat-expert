@@ -64,7 +64,7 @@
                                         <div class="col-lg-8">
                                             <!--begin::Image input-->
                                             <div class="image-input image-input-outline" data-kt-image-input="true"
-                                                 style="background-image: url('<?= asset('upload/media/avatars/blank.png') ?> ')">
+                                                 style="background-image: url('<?= asset($user['avatar_image']) ?>')">
                                                 <!--begin::Preview existing avatar-->
                                                 <div class="image-input-wrapper w-200px h-200px"
                                                      style="background-image: url('<?= asset($user['avatar_image']) ?> ')">
@@ -112,7 +112,7 @@
                                         <div class="col-lg-8">
                                             <input type="text" name="nick_name"
                                                    class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                                   placeholder="نام کاربری" value="<?= $user['nick_name'] ?>" >
+                                                   placeholder="نام کاربری" value="<?= $user['nick_name'] ?>" readonly>
                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                         </div>
                                         <!--end::Col-->

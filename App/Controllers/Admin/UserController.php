@@ -210,8 +210,6 @@ class UserController
                 foreach ($newUserUpdateData as $field => $value){
                     $fields[] = $field.'=:'.$field;
                     //convert empty values to null
-
-
                 }
                 $fields = implode(', ' , $fields);
                 $sql = "UPDATE USERS SET {$fields} Where id=:id";

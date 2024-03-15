@@ -4,6 +4,7 @@ namespace Framework;
 
 use App\Controllers\Error\ErrorController;
 use Framework\middleware\Authorize;
+use Framework\middleware\CheckInfo;
 use Framework\middleware\Permission;
 
 class Router
@@ -118,6 +119,7 @@ class Router
                     foreach ($route['middleware'] as $middleware){
                         (new Authorize())->handle($middleware);
                         (new Permission())->handle($middleware);
+                        (new CheckInfo())->handle($middleware);
                     }
                     $controller = 'App\\Controllers\\' . $route['controller'];
                     $controllerMethod = $route['controllerMethod'];
