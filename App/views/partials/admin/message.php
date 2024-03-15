@@ -28,6 +28,10 @@ if(isset($_SESSION['VideoUploadedSuccessfully'])){
     echo '<div class="alert alert-success">'.$_SESSION["VideoUploadedSuccessfully"].'</div>';
     unset($_SESSION['VideoUploadedSuccessfully']);
 }
+if(isset($_SESSION['completeUserInfo'])){
+    echo '<div class="alert alert-danger">'.$_SESSION["completeUserInfo"].'</div>';
+    unset($_SESSION['completeUserInfo']);
+}
 
 
 //userRegisteredSuccessfully

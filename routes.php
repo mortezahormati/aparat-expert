@@ -13,7 +13,7 @@ $router->get('/register' , 'Auth\RegisterController@create' , ['guest']);
 $router->post('/register' , 'Auth\RegisterController@store' , ['guest']);
 ////404
 ////administrator -home
-$router->get('/administrator' , 'Admin\DashboardController@index',['auth']);
+$router->get('/administrator' , 'Admin\DashboardController@index',['auth' , 'checkInfo']);
 //
 //////administrator - category
 $router->get('/administrator/category' , 'Admin\CategoryController@index',['auth' , 'admin']);
