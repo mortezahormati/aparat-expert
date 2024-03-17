@@ -57,7 +57,7 @@
                                 <div class="form-group">
                                     <small class="text-danger">*</small>
                                     <label>برچسب‌های ویدیو</label>
-                                    <small class="text-danger">(اجباری - حداقل سه مورد)</small>
+                                    <small class="text-danger">(اجباری - حداقل دو مورد)</small>
                                     <select class="js-example-basic-multiple form-control select2 " name="tags[]"
                                             multiple="multiple" style="width: 100%">
                                         <?php foreach ($tags as $ta): ?>
@@ -89,7 +89,7 @@
                                 <div class="form-group">
                                     <small class="text-danger">*</small>
                                     <label>تاریخ انتشار</label>
-                                    <input name="confirm_at" class="confirm-time form-control" value="value="<?= $old_variable['confirm_at'] ?? '' ?>"" style="width: 60%"/>
+                                    <input name="confirm_at" class="confirm-time form-control" value="value="<?= $old_variable['confirm_at'] ?? '' ?> style="width: 60%"/>
                                 </div>
                                 <hr>
                                 <div class="form-group">

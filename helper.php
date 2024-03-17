@@ -180,6 +180,7 @@ function convert($string) {
 //persian_date to gorgian formatter
 
 function toGeorgian($persianDate){
+    //1402-10-06
     return Jalalian::fromFormat('Y-m-d' , convert($persianDate))->toCarbon()->format('Y-m-d');
 }
 

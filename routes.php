@@ -57,5 +57,5 @@ $router->get('/administrator/video/user','Admin\VideoController@userIndex',['aut
 
 
 // users
-$router->get('/user/video/create' , 'User\VideoController@create',['auth']);
+$router->get('/user/video/create' , 'User\VideoController@create',['auth' , 'checkCover']);
 $router->post('/user/video/create' , 'User\VideoController@store',['auth']);

@@ -4,6 +4,7 @@ namespace Framework;
 
 use App\Controllers\Error\ErrorController;
 use Framework\middleware\Authorize;
+use Framework\middleware\CheckCover;
 use Framework\middleware\CheckInfo;
 use Framework\middleware\Permission;
 
@@ -120,6 +121,7 @@ class Router
                         (new Authorize())->handle($middleware);
                         (new Permission())->handle($middleware);
                         (new CheckInfo())->handle($middleware);
+                        (new CheckCover())->handle($middleware);
                     }
                     $controller = 'App\\Controllers\\' . $route['controller'];
                     $controllerMethod = $route['controllerMethod'];
