@@ -11,6 +11,7 @@ class Database
      *  constructor database connection
      * @param array $config
      * @throws PDOException
+     * @throws Exception
      */
 
     public function __construct($config)
@@ -30,7 +31,9 @@ class Database
     /**
      *  constructor database connection
      * @param mixed $query
-     * @throws PDOException
+     * @param array $params
+     * @return bool|\PDOStatement
+     * @throws Exception
      */
     public function query($query , $params=[])
     {

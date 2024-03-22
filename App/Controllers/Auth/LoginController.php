@@ -23,6 +23,7 @@ class LoginController
             $email = $_POST['email'];
             $password = $_POST['password'];
             $errors = [];
+
             if (!Validation::email($email)) {
                 $errors['email'] = 'این ایمیل استاندارد نمیباشد';
             }
@@ -56,6 +57,7 @@ class LoginController
             }
             //4- session => user ====>
             Session::set('user', $user);
+//            dd($user);
             //5- redirect => admin_panel
             redirect('administrator');
 

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="<?= asset('fonts/font-awesome/css/font-awesome.css') ?>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!--    <script src="--><?php //= asset('js/jquery.min.js') ?><!--"></script>-->
-    <script src="<?= asset('js/jquery-3.5.1.slim.min.js') ?>"></script>
+    <script src="<?= asset('js/jquery-3.7.1.min.js') ?>"></script>
 
     <script src="<?= asset('js/jquery.nicescroll.min.js') ?>"></script>
     <script src="<?= asset('js/bootstrap.min.js') ?>"></script>

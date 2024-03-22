@@ -149,15 +149,16 @@ function auth()
 {
     return \Framework\Session::has('user') ? \Framework\Session::get('user') : false;
 }
+
 /**
  *redirect to route function
- * @param string $dirty
- * @return string
- *
+ * @param string $value
+ * @param array $data
+ * @return void
  */
-function redirect($value='' , $data=null):void
+function redirect($value='',$data=[]):void
 {
-     extract($data);
+      extract($data) ;
      header('location:http://aparat-expert.local/'.$value);
 }
 
@@ -182,6 +183,19 @@ function convert($string) {
 function toGeorgian($persianDate){
     //1402-10-06
     return Jalalian::fromFormat('Y-m-d' , convert($persianDate))->toCarbon()->format('Y-m-d');
+}
+
+function array_fllaten($array){
+    return array_reduce($array, function($arr, $element) {
+        $arr[] = $element['id'];
+        return $arr;
+    });
+}
+
+function arrayDiff($array1 , $array2){
+   return array_filter($array1, function ($element) use ($array2) {
+        return !in_array($element, $array2);
+    });
 }
 
 

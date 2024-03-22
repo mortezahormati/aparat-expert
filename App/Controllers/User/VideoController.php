@@ -157,6 +157,7 @@ class VideoController
             if (is_null($this->user)) {
                 $errors['user_id'] = 'کاربر بارگذار ویدیو مشخص نیست';
             }
+
             if (!empty($errors)) {
                 //reload view with errors
                 $sql = "select * from category";
@@ -172,11 +173,15 @@ class VideoController
 
             } else {
                 //5- submit
+
                 $newListData['created_at'] = date('Y-m-d');
                 $newListData['confirm_at'] = toGeorgian($_POST['confirm_at']);
                 //add video
+
+//                dd($newListData);
                 $this->insertVideostable($newListData,'video');
                 //add_video_tag
+
                 $this->insertTagVideoTable($_POST['tags'] , 'tag_video');
 
 
@@ -186,5 +191,36 @@ class VideoController
 
         }
 
+    }
+
+    public function show($params)
+    {
+        $sql = "select * from video where id=:id";
+        $sql2 = "select id,persian_name from category";
+        $sql3 = "select id,persian_name from tags";
+        $sql4 = "select tag_id as id from tag_video where video_id=:id";
+        $sql5 = "select id,persian_name from category where id=:category_id";
+        $video =$this->db->query($sql , [
+            'id' => $params['id']
+        ])->fetch();
+        //tags
+        $tags = $this->db->query($sql3)->fetchAll();
+        //categories
+        $categories = $this->db->query($sql2)->fetchAll();
+        //fetch selected tags
+        $selected_tags_id = $this->db->query($sql4 ,[
+            'id' => $params['id']
+        ])->fetchAll();
+        $arr = array_fllaten($selected_tags_id);
+        $selected_tags_ids = implode(',' , $arr);
+        $sql6 = 'SELECT id,persian_name FROM tags WHERE id IN (' . $selected_tags_ids .')';
+        $selected_tags = $this->db->query($sql6)->fetchAll();
+        $noun_selected_tags = arrayDiff($tags , $selected_tags);
+        adminView('videoEdit' ,[
+            'video' => $video ,
+            'categories' => $categories ,
+            'selected_tags' => $selected_tags ,
+            'noun_selected_tags' => $noun_selected_tags ,
+        ]);
     }
 }
