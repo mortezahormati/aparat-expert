@@ -223,4 +223,11 @@ class VideoController
             'noun_selected_tags' => $noun_selected_tags ,
         ]);
     }
+
+    public function update($params)
+    {
+        inspect($_POST);
+        inspect($_FILES);
+        dd($params);
+    }
 }

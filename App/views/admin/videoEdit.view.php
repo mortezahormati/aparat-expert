@@ -9,7 +9,7 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid bg-light p-4">
-            <form class="" action="<?= asset('user/video/create') ?>" method="post" enctype="multipart/form-data">
+            <form class="" action="<?= asset('user/video/edit/'.$video['id']) ?>" method="post" enctype="multipart/form-data">
                 <div class="row mt-4 p-4">
                     <div class="container  ">
                         <div class="row bg-light">
@@ -98,6 +98,17 @@
                                 </div>
                                 <hr>
                                 <div class="form-group">
+
+                                       <?php if(!empty($video['video_path'])): ?>
+                                           <video style="width: 200px"
+                                                   poster="<?= asset($video['video_image']) ?>"
+                                                   class="video-play old-video"
+                                                   src="<?= asset($video['video_path']) ?>" muted>
+                                           </video>
+                                       <?php endif; ?>
+
+                                </div>
+                                <div class="form-group">
                                     <small class="text-danger">*</small>
                                     <label>انتخاب ویدیو</label>
                                     <div class="file-upload">
@@ -106,7 +117,7 @@
                                             <img class="form-control" src="<?= asset('upload/static/upload-light.svg') ?>">
                                         </label>
                                     </div>
-                                    <input type="text" id="filename" class="filename form-control" value="<?= asset($video['video_path']) ?? '' ?>" disabled>
+                                    <input type="text" id="filename" class="filename video-change form-control" value="<?= asset($video['video_path']) ?? '' ?>" >
 
                                 </div>
                                 <div class="form-group">
@@ -142,7 +153,9 @@
 <?php loadPartial('footer'); ?>
 <script>
     // Dropzone has been added as a global variable.
-
+    $('.video-change').change(function(){
+        $(".old-video").hide()
+    });
     $(document).ready(function () {
 
         $(".confirm-time").pDatepicker({
