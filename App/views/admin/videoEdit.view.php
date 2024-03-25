@@ -94,7 +94,7 @@
                                 <div class="form-group">
                                     <small class="text-danger">*</small>
                                     <label>تاریخ انتشار</label>
-                                    <input name="confirm_at" class="confirm-time form-control" value="value="<?= $video['confirm_at'] ?? '' ?> style="width: 60%"/>
+                                    <input name="confirm_at" class="confirm-time form-control" value="<?= $video['confirm_at'] ?? '' ?>" style="width: 60%"/>
                                 </div>
                                 <hr>
                                 <div class="form-group">
@@ -117,7 +117,7 @@
                                             <img class="form-control" src="<?= asset('upload/static/upload-light.svg') ?>">
                                         </label>
                                     </div>
-                                    <input type="text" id="filename" class="filename video-change form-control" value="<?= asset($video['video_path']) ?? '' ?>" >
+                                    <input type="text" id="filename" class="filename video-change form-control" value="<?= asset($video['video_path']) ?? '' ?>" readonly>
 
                                 </div>
                                 <div class="form-group">
@@ -160,6 +160,7 @@
 
         $(".confirm-time").pDatepicker({
             // initialValueType: "gregorian",
+            // value: $(".confirm-time").val(),
             format: "YYYY-MM-DD",
             onSelect: "month"
         });

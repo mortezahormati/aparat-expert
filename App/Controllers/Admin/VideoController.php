@@ -37,7 +37,7 @@ class VideoController
     public function userIndex()
     {
         $user = auth();
-        $sql = "SELECT title,created_at,revision_count,
+        $sql = "SELECT id,title,created_at,revision_count,
        like_count,confirm_at,
        video_path,video_image FROM video where user_id=:user_id";
         $all_videos = $this->db->query($sql,[

@@ -64,6 +64,19 @@ class VideoController
         return null;
     }
 
+    private function updateVideoTable($newListData , $table_name){
+
+
+        foreach ($newListData as $field => $value){
+            $fields[] = $field.'=:'.$field;
+        }
+
+        $fields = implode(', ' , $fields);
+
+        $sql = "UPDATE {$table_name} SET {$fields} Where id=:id";
+        $this->db->query($sql ,$newListData);
+    }
+
     private function insertVideostable($newListData ,$table_name )
     {
         $values = [];
@@ -81,12 +94,31 @@ class VideoController
         $this->db->query($sql3, $newListData);
     }
 
+    private function removingTags($video_id , $table_name){
+        $sql = "Delete from {$table_name} where video_id=:id";
+        $this->db->query($sql , [
+           'id' => $video_id
+        ]);
+    }
     private function insertTagVideoTable($tags ,$table_name)
     {
         if(!empty($_POST['tags'])){
             $video_id = $this->db->conn->lastInsertId();
             $tags = $_POST['tags'];
 
+            foreach ($tags as $tag ){
+                $sql5 = "Insert Into $table_name (tag_id ,video_id) VALUES (:tag_id , :video_id )";
+                $this->db->query($sql5 , [
+                    'tag_id' => $tag,
+                    'video_id' => $video_id
+                ]);
+            }
+        }
+    }
+    private function UpdateTagVideoTable($tags ,$table_name , $video_id)
+    {
+        if(!empty($_POST['tags'])){
+            $tags = $_POST['tags'];
             foreach ($tags as $tag ){
                 $sql5 = "Insert Into $table_name (tag_id ,video_id) VALUES (:tag_id , :video_id )";
                 $this->db->query($sql5 , [
@@ -199,7 +231,6 @@ class VideoController
         $sql2 = "select id,persian_name from category";
         $sql3 = "select id,persian_name from tags";
         $sql4 = "select tag_id as id from tag_video where video_id=:id";
-        $sql5 = "select id,persian_name from category where id=:category_id";
         $video =$this->db->query($sql , [
             'id' => $params['id']
         ])->fetch();
@@ -211,10 +242,14 @@ class VideoController
         $selected_tags_id = $this->db->query($sql4 ,[
             'id' => $params['id']
         ])->fetchAll();
+
+        //[[1,2,3 , [6,7,8]] , 2]  =>>> [1,2,3,6,7,8,2]
         $arr = array_fllaten($selected_tags_id);
+//        dd($arr);
         $selected_tags_ids = implode(',' , $arr);
-        $sql6 = 'SELECT id,persian_name FROM tags WHERE id IN (' . $selected_tags_ids .')';
+        $sql6 = "SELECT id,persian_name FROM tags WHERE id IN (".$selected_tags_ids.")";
         $selected_tags = $this->db->query($sql6)->fetchAll();
+//        dd($selected_tags);
         $noun_selected_tags = arrayDiff($tags , $selected_tags);
         adminView('videoEdit' ,[
             'video' => $video ,
@@ -226,7 +261,88 @@ class VideoController
 
     public function update($params)
     {
-        inspect($_POST);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
+
+
+            $newListData= $this->setListData($this->allowedFields , $_POST);
+//            dd($newListData);
+
+            $errors = [];
+
+
+            //3- uploading files in server
+            if (!empty($_FILES)) {
+                if(!empty($_FILES['video_image']['name'])){
+                    $video_image_path = $this->uploadFilesPost('video_image' , ['jpg' , 'png'],$this->uploadimageDir);
+                    !is_null($video_image_path) ?
+                        $newListData['video_image'] = $video_image_path :
+                        $errors['video_image'] ='این تصویر مناسب پوستر ویدیو نمیباشد .';
+                }
+                if(!empty($_FILES['video_path']['name'])){
+                    $video_path = $this->uploadFilesPost('video_path' , ['mp4' , 'flv'],$this->uploadVideoDir);
+                    !is_null($video_path) ?
+                        $newListData['video_path'] = $video_path :
+                        $errors['video_path'] ='این فایل ویدیو مناسب  نمیباشد .';
+                }
+            }
+
+
+
+            //4- required--- validation
+
+            foreach ($this->requiredFields as $filed) {
+                if (empty($newListData[$filed]) || !Validation::stringSize($newListData[$filed])) {
+                    $errors[$filed] = ucfirst($filed) . ' الزامی میباشد';
+                }
+            }
+
+            //check user_id exists
+            if (is_null($this->user)) {
+                $errors['user_id'] = 'کاربر بارگذار ویدیو مشخص نیست';
+            }
+
+            if (!empty($errors)) {
+
+                //reload view with errors
+                $sql = "select * from category";
+                $sql2 = "select * from tags";
+                $categories = $this->db->query($sql)->fetchAll();
+                $tags = $this->db->query($sql2)->fetchAll();
+                loadView('videosAdd', [
+                    'errors' => $errors,
+                    'old_variable' => $newListData,
+                    'tags' => $tags,
+                    'categories' => $categories,
+                ]);
+
+            } else {
+                //5- submit
+
+                $newListData['updated_at'] = date('Y-m-d');
+                $newListData['confirm_at'] = toGeorgian($_POST['confirm_at']);
+                $newListData['id'] = ($params['id']);
+                //update video
+
+                $this->updateVideoTable($newListData,'video');
+
+                //remove video_tag
+
+                $this->removingTags($newListData['id'] , 'tag_video');
+                //update_video_tag
+
+                $this->UpdateTagVideoTable($_POST['tags'] , 'tag_video' , $newListData['id']);
+                Session::set('VideoUpdatedSuccessfully' , 'ویدیوی شما با موفقیت به روزرسانی  شد.');
+                redirect("administrator");
+            }
+
+        }
+        //1- allowed field
+        //2- validation
+        // 3-submit video on video table
+
+
+        //4- video_tag add new tags or remove
         inspect($_FILES);
         dd($params);
     }
