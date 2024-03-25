@@ -4,6 +4,8 @@
 
 //home
 $router->get('/' , 'HomeController@index');
+//channel-profile
+$router->get('/channel' , 'HomeController@channel');
 //login
 $router->get('/login' , 'Auth\LoginController@create',['guest']);
 $router->post('/login' , 'Auth\LoginController@login' , ['guest']);
@@ -60,4 +62,5 @@ $router->get('/administrator/video/user','Admin\VideoController@userIndex',['aut
 $router->get('/user/video/create' , 'User\VideoController@create',['auth' , 'checkCover']);
 $router->get('/user/video/edit/{id}' , 'User\VideoController@show',['auth' , 'checkCover']);
 $router->post('/user/video/edit/{id}' , 'User\VideoController@update',['auth' , 'checkCover']);
+$router->post('/user/video/delete' , 'User\VideoController@destroy',['auth' , 'checkCover']);
 $router->post('/user/video/create' , 'User\VideoController@store',['auth']);

@@ -70,7 +70,7 @@
                                                             <a href="<?= asset('user/video/edit/'.$video['id']) ?>"  style="border-radius: 8px" class=" p-2  btn-primary text-white" title="ویرایش" ><img src="<?= asset('upload/aparat/svgexport-90.svg') ?>" alt=""></a>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <a href="" style="border-radius: 8px"  class="p-2 btn-danger " title="حذف"><img src="<?= asset('upload/aparat/svgexport-80.svg') ?>" alt=""></a>
+                                                            <a  data-id='<?= $video['id'] ?>' href="" style="border-radius: 8px"  class="delete-video p-2 btn-danger " title="حذف"><img src="<?= asset('upload/aparat/svgexport-80.svg') ?>" alt=""></a>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <a href="" style="border-radius: 8px"  class="p-2 btn-success " title="لایک"><img src="<?= asset('upload/aparat/svgexport-46.svg') ?>" alt=""></a>
@@ -108,6 +108,50 @@
 
 <?php loadAdminPartial('footer'); ?>
 <script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.delete-video').click(function (e) {
+            e.preventDefault()
+
+            var deleteid = $(this).data('id');
+
+            Swal.fire({
+                text: "مطمعن از حذف این ویدیو هستید ؟",
+                icon: "error",
+                showCancelButton: true,
+                buttonsStyling: false,
+                confirmButtonText: "بله حذف شود",
+                cancelButtonText: "خیر",
+                customClass: {
+                    confirmButton: "btn btn-danger",
+                    cancelButton: "btn btn-primary"
+                }
+            }).then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        url: 'http://aparat-expert.local/user/video/delete',
+                        type: 'POST',
+                        data: {id: deleteid},
+                        success: function (response) {
+                            location.reload()
+                        }
+                    });
+
+
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire({
+                        text: "درخواست حذف کنسل شد",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "متوجه شدم!",
+                        customClass: {
+                            confirmButton: "btn btn-info",
+                        }
+                    });
+                }
+            });
+        })
+    });
 
     $(document).ready(function () {
 

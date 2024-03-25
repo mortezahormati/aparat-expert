@@ -15,4 +15,9 @@ class HomeController
     {
         loadView('home');
     }
+
+    public function channel()
+    {
+        loadView('channel');
+    }
 }

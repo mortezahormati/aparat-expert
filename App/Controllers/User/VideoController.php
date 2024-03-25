@@ -346,4 +346,17 @@ class VideoController
         inspect($_FILES);
         dd($params);
     }
+
+
+    public function destroy()
+    {
+        if (strtolower($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'xmlhttprequest' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            $sql = "Delete from video where id=:id";
+
+            $this->db->query($sql, [
+                'id' => $_POST['id'],
+            ]);
+            echo json_encode('deleted is success !!!');
+        }
+    }
 }
