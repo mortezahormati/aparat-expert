@@ -2,6 +2,7 @@
 
 namespace App\Controllers\User;
 
+use Carbon\Carbon;
 use Framework\Database;
 use Framework\Session;
 use Framework\Validation;
@@ -206,7 +207,7 @@ class VideoController
             } else {
                 //5- submit
 
-                $newListData['created_at'] = date('Y-m-d');
+                $newListData['created_at'] = Carbon::now();
                 $newListData['confirm_at'] = toGeorgian($_POST['confirm_at']);
                 //add video
 
@@ -343,8 +344,7 @@ class VideoController
 
 
         //4- video_tag add new tags or remove
-        inspect($_FILES);
-        dd($params);
+
     }
 
 

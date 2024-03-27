@@ -2,6 +2,8 @@
 
 use Morilog\Jalali\Jalalian;
 
+
+
 const BASE_URL = 'http://aparat-expert.local/';
 
 /**
@@ -185,6 +187,10 @@ function toGeorgian($persianDate){
     return Jalalian::fromFormat('Y-m-d' , convert($persianDate))->toCarbon()->format('Y-m-d');
 }
 
+function jalaliTimeAgo($created_at){
+    return Jalalian::fromDateTime($created_at)->ago();
+}
+
 function array_fllaten($array){
     return array_reduce($array, function($arr, $element) {
         $arr[] = $element['id'];
@@ -197,6 +203,8 @@ function arrayDiff($array1 , $array2){
         return !in_array($element, $array2);
     });
 }
+
+
 
 
 

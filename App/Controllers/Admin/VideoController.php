@@ -22,12 +22,6 @@ class VideoController
         $sql2 = "SELECT id,title,created_at,revision_count,like_count,confirm_at,video_path,video_image FROM video";
         $all_videos = $this->db->query($sql2)->fetchAll();
 
-//        $sql = "select title,description,user_id,category_id,revision_count,like_count, from video";
-//        $videos = $this->db->query($sql)->fetchAll() ?? null;
-//        adminView('videos', [
-//            'videos' => $videos ?? '',
-//        ]);
-
 
         adminView('videos' , [
             'all_videos' => $all_videos
