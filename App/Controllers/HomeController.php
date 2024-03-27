@@ -32,7 +32,28 @@ class HomeController
 
     public function channel($params)
     {
-        dd($params);
-        loadView('channel');
+
+        $sql = "select * from users where chanel_name=:channel_name";
+        $user = $this->db->query($sql,[
+            'channel_name' => $params['channel_name']
+        ])->fetch();
+        $videos=[];
+        if($user){
+            $sql = "select * from video where user_id=:user_id order by created_at";
+            $sql2 = "select * from video where user_id=:user_id order by id desc limit 1 ";
+            $videos = $this->db->query($sql,[
+                'user_id' => $user['id']
+            ])->fetchAll();
+            $best_video = $this->db->query($sql2 , [
+                'user_id' => $user['id']
+            ])->fetch();
+        }
+
+        dd($best_video);
+
+        loadView('channel' , [
+            'user' => $user ,
+            'videos' => $videos
+        ]);
     }
 }
