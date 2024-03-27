@@ -40,7 +40,7 @@
                             <!--begin::Form-->
                             <!--begin::Card body-->
                             <div class="card-body border-top p-9">
-                                <form id="kt_account_profile_details_form" method="post" action="<?= asset('administrator/users/update/'.$user['id']) ?>"
+                                <form id="kt_account_profile_details_form" method="post" action="<?= asset('administrator/users/'.$user['id']) ?>"
                                       class="form fv-plugins-bootstrap5 fv-plugins-framework" enctype="multipart/form-data">
 
                                     <?php if(!empty($errors)): ?>
@@ -262,7 +262,7 @@
                                         <div class="col-lg-8 fv-row">
                                             <input type="text" name="chanel_name"
                                                    class="form-control form-control-lg form-control-solid"
-                                                   placeholder="" value="<?= $user['chanel_name'] ?? '' ?>" >
+                                                   placeholder="" value="<?= str_replace('-' ,' ',$user['chanel_name']) ?? '' ?>" >
                                         </div>
                                         <!--end::Col-->
                                     </div>

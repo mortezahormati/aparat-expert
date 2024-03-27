@@ -52,6 +52,14 @@ class UserController
         }
         return null;
     }
+    protected function ValidateChannelNameUnique($chanel_name){
+        $sql ='select chanel_name from users where chanel_name=:chanel_name';
+        $p = str_replace(' ','-',$chanel_name);
+
+        return  $this->db->query($sql , [
+            'chanel_name' => $p
+        ])->fetch();
+    }
 
 
     public function update($params)
@@ -96,9 +104,14 @@ class UserController
             if(isset($newUserInfoData['channel_cover_image']) && !Validation::stringSize($newUserInfoData['channel_cover_image']  , 4 )) {
                 $errors['channel_cover_image'] = 'لطفا برای کانال خود کاور ایجاد کنید';
             }
-            if(!Validation::stringSize($newUserInfoData['chanel_name'] ?? '' , 3 ) || !Validation::numeric($newUserInfoData['phone_number'])) {
-                $errors['chanel_name'] = 'لطفا برای کانال خود نامی انتخاب کنید';
+            if(!Validation::stringSize($newUserInfoData['chanel_name'] ?? '' , 3 ) || !Validation::englishAlphabet($newUserInfoData['chanel_name'])) {
+                $errors['chanel_name'] = 'لطفا برای کانال خود نامی لاتین انتخاب کنید';
             }
+            if(!empty($this->ValidateChannelNameUnique($newUserInfoData['chanel_name']))){
+
+                $errors['chanel_name_exists'] = 'این نام برای کانال دیگری استفاده شده است .';
+            }
+
             if(!empty($errors)) {
                 adminView('userSetting', [
                     'errors' => $errors,
@@ -110,6 +123,7 @@ class UserController
                 $newUserInfoData['updated_at'] = date('Y-m-d');
                 $newUserInfoData['id'] = $this->user['id'];
                 $newUserInfoData['password'] = $this->user['password'];
+                $newUserInfoData['chanel_name'] = str_replace(' ','-' ,$newUserInfoData['chanel_name']);
 
                 foreach ($newUserInfoData as $field => $value){
                     $fields[] = $field.'=:'.$field;

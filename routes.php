@@ -40,7 +40,7 @@ $router->get('/administrator/users' , 'Admin\UserController@index' ,['auth' , 'a
 $router->get('/administrator/users/create' , 'Admin\UserController@create',['auth','admin']);
 $router->post('/administrator/users/create' , 'Admin\UserController@store',['auth','admin']);
 $router->get('/administrator/users/{id}' , 'Admin\UserController@show',['auth','admin']);
-$router->post('administrator/users/update/{id}' , 'Admin\UserController@update',['auth','admin']);
+$router->post('administrator/users/{id}' , 'Admin\UserController@update',['auth','admin']);
 $router->post('/administrator/users/delete/{id}' , 'Admin\UserController@destroy',['auth','admin']);
 
 //user-setting

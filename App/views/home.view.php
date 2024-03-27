@@ -66,9 +66,11 @@
                                                 <?= $video['title']  ?>
                                             </p>
                                             <small>
-                                                <img src="<?= asset($video['avatar_image'])?>" width="20px" class="rounded-circle" alt="Cinque Terre">
+                                                <a href="<?= asset('channel/').trim($video['chanel_name']) ?>" class="text-dark" style="text-decoration: none">
+                                                    <img src="<?= asset($video['avatar_image'])?>" width="20px" class="rounded-circle" alt="Cinque Terre">
 
-                                                <?=  $video['chanel_name'] ?>
+                                                    <?=  str_replace('-',' ', $video['chanel_name']) ?>
+                                                </a>
                                             </small>
 
                                             <br>

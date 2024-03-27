@@ -92,6 +92,16 @@ class Validation
         return checkdate($date['month'] , $date['day'] , $date['year']);
     }
 
+    /**
+     * english alphabet character accepted
+     * @param string $value
+     * @return bool
+     */
+    public static function englishAlphabet(string $value):bool
+    {
+        return !preg_match('/[^A-Za-z0-9 ]/' ,$value );
+    }
+
 
 
 }

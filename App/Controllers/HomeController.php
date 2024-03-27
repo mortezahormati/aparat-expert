@@ -35,8 +35,9 @@ class HomeController
         ]);
     }
 
-    public function channel()
+    public function channel($params)
     {
+        dd($params);
         loadView('channel');
     }
 }

@@ -57,6 +57,7 @@ class UserController
     public function show($params)
     {
         $user = $this->getUser($params);
+
         adminView('user', [
             'user' => $user
         ]);
@@ -80,6 +81,15 @@ class UserController
             redirect("administrator/users");
             exit();
         }
+    }
+    protected function ValidateChannelNameUnique($chanel_name){
+        $sql ='select chanel_name from users where chanel_name=:chanel_name';
+        $p = str_replace(' ','-',$chanel_name);
+
+        return  $this->db->query($sql , [
+            'chanel_name' => $p
+        ])->fetch();
+
     }
 
 
@@ -117,6 +127,14 @@ class UserController
                     $errors[$filed] = ucfirst($filed). ' الزامی میباشد';
                 }
             }
+            if(!Validation::englishAlphabet($newListData['chanel_name'])){
+                $errors['chanel_name'] = "نام کانال شما باید به صورت حروف لاتین باشد.";
+            }
+            if($this->ValidateChannelNameUnique($newListData['chanel_name'])){
+
+                $errors['chanel_name'] = 'این نام برای کانال دیگری استفاده شده است .';
+            }
+
             if(!empty($errors)){
                 //reload view with errors
                 adminView('usersAdd' , [
@@ -129,6 +147,7 @@ class UserController
                 $newListData['created_at'] = date('Y-m-d');
                 $newListData['password'] =  password_hash($_POST['password'], PASSWORD_DEFAULT);
                 $newListData['role'] = $newListData['role']=== "on" ? 'admin' : 'user';
+                $newListData['chanel_name'] = str_replace(' ','-' ,$newListData['chanel_name']);
                 //add user
                 $values = [];
                 foreach ($newListData as $field => $value){
@@ -191,15 +210,22 @@ class UserController
                     $errors[$filed] = ucfirst($filed). ' الزامی میباشد';
                 }
             }
+            if($this->ValidateChannelNameUnique($newUserUpdateData['chanel_name'])){
+                $errors['chanel_name'] = 'این نام برای کانال دیگری استفاده شده است .';
+            }
+
+
             if(!empty($errors)){
                 //reload view with errors
 
-                adminView('user' , [
+
+                 adminView('user', [
                     'errors' => $errors,
                     'user' => $newUserUpdateData
                 ]);
 
             }else {
+
 
                 //5- submit
                 $newUserUpdateData['updated_at'] = date('Y-m-d');
