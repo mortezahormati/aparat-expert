@@ -12,33 +12,25 @@ class UserController
 
     protected $db;
 
-
     public function __construct()
     {
         $config = require basePath('config/db.php');
         $this->db = new Database($config);
     }
-
     public function index()
     {
-
         $sql = "select id,name,family,created_at,role,nick_name,email from users";
         $users = $this->db->query($sql)->fetchAll();
         adminView('users', [
             'users' => $users,
         ]);
     }
-
     public function create()
     {
-
         adminView('usersAdd');
-
     }
-
     private function uploadingFiles($image, $dir)
     {
-//        $upload = 'users-image'.DIRECTORY_SEPARATOR;
         if (!is_dir($dir)) {
             mkdir($dir);
         }
@@ -46,7 +38,6 @@ class UserController
         move_uploaded_file($image['tmp_name'], $dir . $imageName);
         return $imageName;
     }
-
     protected function getUser($params){
         $sql = "select * from users where id=:id";
         $p = [
@@ -57,14 +48,10 @@ class UserController
     public function show($params)
     {
         $user = $this->getUser($params);
-
         adminView('user', [
             'user' => $user
         ]);
     }
-
-
-
     public function destroy($params)
     {
         if( $_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST) && isset($_POST['_method']) && !empty(isset($_POST['_method']))){
@@ -85,18 +72,13 @@ class UserController
     protected function ValidateChannelNameUnique($chanel_name){
         $sql ='select chanel_name from users where chanel_name=:chanel_name';
         $p = str_replace(' ','-',$chanel_name);
-
         return  $this->db->query($sql , [
             'chanel_name' => $p
         ])->fetch();
-
     }
-
-
     public function store()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
-
             //1- allowed-fields
             $allowedFields = [
                 'nick_name', 'name', 'family', 'email', 'phone_number', 'chanel_name', 'password',
@@ -134,14 +116,12 @@ class UserController
 
                 $errors['chanel_name'] = 'این نام برای کانال دیگری استفاده شده است .';
             }
-
             if(!empty($errors)){
                 //reload view with errors
                 adminView('usersAdd' , [
                     'errors' => $errors,
                     'old_variable' => $newListData
                 ]);
-
             }else{
                 //5- submit
                 $newListData['created_at'] = date('Y-m-d');
@@ -181,7 +161,6 @@ class UserController
                 'avatar_image', 'channel_cover_image', 'role'
             ];
             $newUserUpdateData = array_intersect_key($_POST,array_flip($allowedUpdateFields));
-
             //2- sanitize-form
             $newUserUpdateData = array_map('sanitize' , $newUserUpdateData);
             //3- uploading files in server
@@ -219,10 +198,7 @@ class UserController
                     'errors' => $errors,
                     'user' => $newUserUpdateData
                 ]);
-
-            }else {
-
-
+            }else{
                 //5- submit
                 $newUserUpdateData['updated_at'] = date('Y-m-d');
                 $newUserUpdateData['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
@@ -239,8 +215,6 @@ class UserController
                 Session::set('userUpdatedSuccessfully' , 'اطلاعات کاربر با موفقیت به روز رسانی شد.') ;
                 redirect("administrator/users");
                 exit();
-
-
             }
         }
 

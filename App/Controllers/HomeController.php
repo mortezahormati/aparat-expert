@@ -11,14 +11,11 @@ class HomeController
         $config = require basePath('config/db.php');
         $this->db = new Database($config);
     }
-
     public function index()
     {
         $sql = "select id,persian_name from category";
-
         $categories = $this->db->query($sql)->fetchAll();
         $videos = [];
-
         foreach ($categories as $category){
             $sql = "select title,description,user_id,
                     category_id, confirm_comment ,video_path,
@@ -28,8 +25,6 @@ class HomeController
                 'category_id' => $category['id']
             ])->fetchAll();
         }
-
-
         loadView('home' ,[
             'videos' => $videos
         ]);
