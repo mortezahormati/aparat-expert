@@ -204,21 +204,17 @@ class UserController
             //4- required--- validation
             $requiredUpdateFields = ['nick_name', 'name', 'family', 'email', 'phone_number', 'chanel_name'];
             $errors = [];
-//            dd($_FILES);
             foreach ($requiredUpdateFields as $filed){
                 if(empty($newUserUpdateData[$filed]) || !Validation::stringSize($newUserUpdateData[$filed])){
                     $errors[$filed] = ucfirst($filed). ' الزامی میباشد';
                 }
             }
+            //5- not exists ---- chanel_name
             if($this->ValidateChannelNameUnique($newUserUpdateData['chanel_name'])){
                 $errors['chanel_name'] = 'این نام برای کانال دیگری استفاده شده است .';
             }
-
-
             if(!empty($errors)){
                 //reload view with errors
-
-
                  adminView('user', [
                     'errors' => $errors,
                     'user' => $newUserUpdateData
