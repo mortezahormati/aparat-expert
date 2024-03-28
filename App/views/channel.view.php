@@ -21,21 +21,21 @@
                     <div class="box box-widget widget-user">
                         <!-- Add the bg color to the header using any of the bg-* classes -->
                         <div class="widget-user-header"
-                             style="background: url('/upload/banner-default.png') center center;">
+                             style="background: url('<?= asset($user['channel_cover_image'])  ?>') center center;">
                         </div>
                         <div class="widget-user-image">
                             <img class="img-circle"
-                                 src="/users-image/65ed6a06c502c--Fig-1_-Relational-database-management-system.jpg"
+                                 src="<?= asset($user['avatar_image'])?>"
                                  alt="User Avatar">
                         </div>
                         <div class="widget-social-link">
-                            <a href="https://www.aparat.com/music" style="text-decoration: none !important;"
+                            <a href="" style="text-decoration: none !important;"
                                class="text-center text-info text-decoration-none" aria-label="left"
                                data-list-more-link="true" data-size="small">
                                 <div class="content">
-                                    <a href="" class=""><i class="fa fa-telegram"></i></a>
-                                    <a href="" class=""><i class="fa fa-facebook"></i></a>
-                                    <a href="" class=""><i class="fa fa-earth"></i></a>
+                                    <a href="<?= 'https://t.me/'.$user['telegram_address'] ?>" class=""><i class="fa fa-telegram"></i></a>
+                                    <a href="<?= $user['facebook_address'] ?>" class=""><i class="fa fa-facebook"></i></a>
+                                    <a href="<?= $user['web_url'] ?>" class=""><i class="fa fa-rss"></i></a>
 <!--                                    <a href="" class=""><i class="fa fa-"></i></a>-->
 
                                 </div>
@@ -45,10 +45,10 @@
                             <div class="row">
                                 <div class="col-sm-8 text-center border-right">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 mr-5">
                                             <div class="description-block">
-                                               <h5 class="mt-2">
-                                                   نام کانال
+                                               <h5 class="mt-2 mr-5" style="font-weight: 800">
+                                                   <?= $user['chanel_name'] ?>
                                                </h5>
                                             </div>
                                         </div>
@@ -87,11 +87,11 @@
             </div>
 
             <div class="row" style="margin-top: 5%">
-                <div class="container  ">
+                <div class="col-md-12  ">
 
                     <div class="row  ">
                         <div class="col-md-12 ">
-                            <div class="row justify-content-around  ">
+                            <div class="">
                                 <div class="nav-tabs-custom">
                                     <ul class="nav nav-tabs mb-5" style="border-bottom:none !important; ">
                                         <li class="active"><a href="#home" class="btn btn-secondary p-2" style="width: 100px"
@@ -114,16 +114,20 @@
                                             <div class="row">
                                                 <div class="col-md-12 mt-3 mb-5">
                                                     <div class="row">
-                                                        <video
-                                                                poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
+                                                        <video width="20%"
+                                                                poster="<?= asset($last_video['video_image'])?>"
                                                                 class="video-play"
-                                                                src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
+                                                               muted
+                                                                src="<?= asset($last_video['video_path'])?>">
                                                         </video>
-                                                        <div class="col-md-7 mt-2">
-                                                            <h5 class="bold">دوره آموزشی ناک اوت | قسمت دوم</h5>
-                                                            <p class="text-muted text-sm">1.8 هزار بازدید . 2 روز پیش  </p>
+                                                        <div class="col-md-7 mt-5">
+                                                            <h5 class="bold"><?= $last_video['title']?></h5>
+
+                                                            <p class="text-muted text-sm">
+                                                                <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($last_video['created_at']) ?> </small>
+                                                            </p>
                                                             <p  class="text-muted text-sm">
-                                                                ناک اوت یا ضربه فنی (به انگلیسی: knockout یا KO) یک معیار پیروزی در مسابقات ورزشی مبارزه‌ای نظیر بوکس، جودو، کیک‌بوکسینگ، موای تای، هنرهای رزمی ترکیبی، تکواندو، ووشو ساندا، کیوکوشین و دیگر سبک‌های آزاد کاراته و غیره است. ضربه فنی کامل هنگامی است که حریف توان ادامه مبارزه را نداشته اصطلاح ناک اوت اغلب به از دست دادن ناگهانی هوشیاری در اثر یک ضربه فیزیکی گفته می‌شود. ضربه‌های قدرتی پی‌درپی به سر
+                                                                <?= $last_video['description']?>
                                                             </p>
                                                         </div>
 
@@ -137,166 +141,47 @@
                                                     </h5>
                                                 </div>
                                             </div>
-                                            <div class="row justify-content-around  ">
+                                            <div class="row justify-content-right  ">
 
-                                                <div class="card" style="border: none;width: 18%;">
+                                                <?php foreach ($old_videos as $video): ?>
+                                                <div class="card mr-3" style="border: none;width: 19%;">
                                                     <video
-                                                            poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
+                                                            poster="<?= asset($video['video_image'])?>"
                                                             class="video-play"
-                                                            src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
+                                                            muted
+                                                            src="<?= asset($video['video_path'])?>">
                                                     </video>
                                                     <div class="card-body">
-                                                        <p class="card-text">عنوان ویدیو</p>
+                                                        <p class="card-text"><?= $video['title']?></p>
 
                                                         <p class="card-text">
-                                                            <small> 3000  بازدید . </small>
-                                                            <small>دو هفته پیش</small>
+                                                            <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($last_video['created_at']) ?> </small>
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <div class="card" style="border: none;width: 18%;">
-                                                    <video
-                                                            poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
-                                                            class="video-play"
-                                                            src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                                    </video>
-                                                    <div class="card-body">
-                                                        <p class="card-text">عنوان ویدیو</p>
-
-                                                        <p class="card-text">
-                                                            <small> 3000  بازدید . </small>
-                                                            <small>دو هفته پیش</small>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="card" style="border: none;width: 18%;">
-                                                    <video
-                                                            poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
-                                                            class="video-play"
-                                                            src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                                    </video>
-                                                    <div class="card-body">
-                                                        <p class="card-text">عنوان ویدیو</p>
-
-                                                        <p class="card-text">
-                                                            <small> 3000  بازدید . </small>
-                                                            <small>دو هفته پیش</small>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="card" style="border: none;width: 18%;">
-                                                    <video
-                                                            poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
-                                                            class="video-play"
-                                                            src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                                    </video>
-                                                    <div class="card-body">
-                                                        <p class="card-text">عنوان ویدیو</p>
-
-                                                        <p class="card-text">
-                                                            <small> 3000  بازدید . </small>
-                                                            <small>دو هفته پیش</small>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="card" style="border: none;width: 18%;">
-                                                    <video
-                                                            poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
-                                                            class="video-play"
-                                                            src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                                    </video>
-                                                    <div class="card-body">
-                                                        <p class="card-text">عنوان ویدیو</p>
-
-                                                        <p class="card-text">
-                                                            <small> 3000  بازدید . </small>
-                                                            <small>دو هفته پیش</small>
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-
-
+                                                <?php endforeach; ?>
                                             </div>
                                         </div>
                                         <!-- /.tab-pane -->
                                         <div class="tab-pane" id="all_video">
-                                            <div class="row justify-content-around  ">
-                                                <div class="card" style="border: none;width: 18%;">
-                                                    <video
-                                                            poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
-                                                            class="video-play"
-                                                            src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                                    </video>
-                                                    <div class="card-body">
-                                                        <p class="card-text">عنوان ویدیو</p>
+                                            <div class="row justify-content-right  ">
+                                                <?php foreach ($videos as $video): ?>
+                                                    <div class="card mr-3" style="border: none;width: 19%;">
+                                                        <video
+                                                                poster="<?= asset($video['video_image'])?>"
+                                                                class="video-play"
+                                                                muted
+                                                                src="<?= asset($video['video_path'])?>">
+                                                        </video>
+                                                        <div class="card-body">
+                                                            <p class="card-text"><?= $video['title']?></p>
 
-                                                        <p class="card-text">
-                                                            <small> 3000  بازدید . </small>
-                                                            <small>دو هفته پیش</small>
-                                                        </p>
+                                                            <p class="card-text">
+                                                                <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($last_video['created_at']) ?> </small>
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="card" style="border: none;width: 18%;">
-                                                    <video
-                                                            poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
-                                                            class="video-play"
-                                                            src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                                    </video>
-                                                    <div class="card-body">
-                                                        <p class="card-text">عنوان ویدیو</p>
-
-                                                        <p class="card-text">
-                                                            <small> 3000  بازدید . </small>
-                                                            <small>دو هفته پیش</small>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="card" style="border: none;width: 18%;">
-                                                    <video
-                                                            poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
-                                                            class="video-play"
-                                                            src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                                    </video>
-                                                    <div class="card-body">
-                                                        <p class="card-text">عنوان ویدیو</p>
-
-                                                        <p class="card-text">
-                                                            <small> 3000  بازدید . </small>
-                                                            <small>دو هفته پیش</small>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="card" style="border: none;width: 18%;">
-                                                    <video
-                                                            poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
-                                                            class="video-play"
-                                                            src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                                    </video>
-                                                    <div class="card-body">
-                                                        <p class="card-text">عنوان ویدیو</p>
-
-                                                        <p class="card-text">
-                                                            <small> 3000  بازدید . </small>
-                                                            <small>دو هفته پیش</small>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="card" style="border: none;width: 18%;">
-                                                    <video
-                                                            poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
-                                                            class="video-play"
-                                                            src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                                    </video>
-                                                    <div class="card-body">
-                                                        <p class="card-text">عنوان ویدیو</p>
-
-                                                        <p class="card-text">
-                                                            <small> 3000  بازدید . </small>
-                                                            <small>دو هفته پیش</small>
-                                                        </p>
-                                                    </div>
-                                                </div>
+                                                <?php endforeach; ?>
 
                                             </div>
                                         </div>

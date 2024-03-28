@@ -3,6 +3,8 @@
 namespace App\Controllers;
 use Carbon\Carbon;
 use Framework\Database;
+use Framework\Session;
+
 class HomeController
 {
     protected $db;
@@ -39,21 +41,24 @@ class HomeController
         ])->fetch();
         $videos=[];
         if($user){
-            $sql = "select * from video where user_id=:user_id order by created_at";
-            $sql2 = "select * from video where user_id=:user_id order by id desc limit 1 ";
+            $sql = "select * from video where user_id=:user_id order by  created_at desc";
             $videos = $this->db->query($sql,[
                 'user_id' => $user['id']
             ])->fetchAll();
-            $best_video = $this->db->query($sql2 , [
-                'user_id' => $user['id']
-            ])->fetch();
+
+            $last_video = (array_slice($videos,'0',1)[0]);
+
+
+            $old_videos = array_slice($videos,1,count($videos));
+
+            loadView('channel' , [
+                'user' => $user ,
+                'videos' => $videos,
+                'last_video' =>$last_video,
+                'old_videos' =>$old_videos
+            ]);
+        }else{
+            redirect('404');
         }
-
-        dd($best_video);
-
-        loadView('channel' , [
-            'user' => $user ,
-            'videos' => $videos
-        ]);
     }
 }

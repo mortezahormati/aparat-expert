@@ -6,6 +6,7 @@
 $router->get('/' , 'HomeController@index');
 //channel-profile
 $router->get('/channel/{channel_name}' , 'HomeController@channel');
+//$router->get('/channel/{channel_name}' , 'HomeController@channel');
 //login
 $router->get('/login' , 'Auth\LoginController@create',['guest']);
 $router->post('/login' , 'Auth\LoginController@login' , ['guest']);
