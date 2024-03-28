@@ -29,7 +29,10 @@
                     <div class="container-fluid  ">
                         <div class="row  ">
                             <?php foreach($videos as $key => $values): ?>
+
                             <div class="col-md-12 mb-4">
+                                <?php foreach ($categories as $category): ?>
+                                <?php if($category['persian_name'] === $key): ?>
                                 <div class="row mb-3">
                                     <div class="col-md-2 ">
                                         <h6 style="font-size: 16px;font-weight:800">
@@ -38,7 +41,7 @@
                                     </div>
                                     <div class="col-md-8"></div>
                                     <div class="col-md-2">
-                                        <a href="#" style="text-decoration: none !important;" class="text-center text-danger text-decoration-none" aria-label="left" data-list-more-link="true" data-size="small">
+                                        <a href="<?= asset('category/'.$category['id']) ?>" style="text-decoration: none !important;" class="text-center text-danger text-decoration-none" aria-label="left" data-list-more-link="true" data-size="small">
                                             <div class="content">
                                                 <span class="text" style="font-size: 12px;font-weight: 800"> مشاهده همه </span>
                                                 <i class="fa fa-arrow-left"></i>
@@ -47,6 +50,9 @@
                                     </div>
 
                                 </div>
+                                <?php endif; ?>
+                                <?php endforeach; ?>
+
 
                                 <div class="row justify-content-right  ">
                                     <?php foreach ($values as $video): ?>

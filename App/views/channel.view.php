@@ -155,7 +155,7 @@
                                                         <p class="card-text"><?= $video['title']?></p>
 
                                                         <p class="card-text">
-                                                            <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($last_video['created_at']) ?> </small>
+                                                            <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -177,7 +177,7 @@
                                                             <p class="card-text"><?= $video['title']?></p>
 
                                                             <p class="card-text">
-                                                                <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($last_video['created_at']) ?> </small>
+                                                                <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
                                                             </p>
                                                         </div>
                                                     </div>

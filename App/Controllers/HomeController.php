@@ -28,7 +28,8 @@ class HomeController
             ])->fetchAll();
         }
         loadView('home' ,[
-            'videos' => $videos
+            'videos' => $videos,
+            'categories' => $categories
         ]);
     }
 
@@ -60,5 +61,28 @@ class HomeController
         }else{
             redirect('404');
         }
+    }
+
+    public function categoryVideos($params)
+    {
+        $sql = "select * from video where category_id=:category_id ";
+        $sql2 = "select * from category where id=:id ";
+        $sql3 ="select * from category";
+        $videos = $this->db->query($sql , [
+           'category_id' => $params['id']
+        ])->fetchAll();
+        $selected_category = $this->db->query($sql2 , [
+            'id' => $params['id']
+        ])->fetch();
+
+        $selected_category['avatar_image'] = 'category/avatar/'.$selected_category['name'].'.png';
+        $selected_category['cover_image'] = 'category/cover/'.$selected_category['name'].'.png';
+        loadView('category' ,[
+            'videos' => $videos,
+            'selected_category' => $selected_category
+        ]);
+
+
+
     }
 }
