@@ -28,7 +28,8 @@ class HomeController
             ])->fetchAll();
         }
         loadView('home' ,[
-            'videos' => $videos
+            'videos' => $videos ,
+            'categories' => $categories
         ]);
     }
 
@@ -60,5 +61,11 @@ class HomeController
         }else{
             redirect('404');
         }
+    }
+
+
+    public function category($params)
+    {
+        dd($params);
     }
 }
