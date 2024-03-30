@@ -52,13 +52,15 @@
                                                </h5>
                                             </div>
                                         </div>
+                                        <?php if(auth() && $user['id'] !== auth()['id']): ?>
                                         <div class="col-md-3">
                                             <div class="description-block">
 
-                                                <a class="btn btn-danger p-2 text-white" style="width: 100px">  <i class="fa fa-plus "></i>
+                                                <a class="btn btn-danger p-2 text-white follow-btn" data-follower-id="<?= $user['id'] ?>" style="width: 100px">  <i class="fa fa-plus "></i>
                                                     دنبال کردن</a>
                                             </div>
                                         </div>
+                                        <?php endif; ?>
                                     </div>
                                     <!-- /.description-block -->
                                 </div>
@@ -224,18 +226,50 @@
 
 <!--footer-->
 <?php loadPartial('footer'); ?>
-<!--<div class="card" style="width: 18%;">-->
-<!--    <video-->
-<!--            poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"-->
-<!--            class="video-play"-->
-<!--            src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">-->
-<!--    </video>-->
-<!--    <div class="card-body">-->
-<!--        <p class="card-text">Some quick example text to build on the card title and-->
-<!--            make-->
-<!--            up the bulk of the card's content.</p>-->
-<!--    </div>-->
-<!--</div>-->
+<script>
+    $(document).ready(function () {
+        $('.follow-btn').on('click',function (e) {
+            e.preventDefault();
+            var data = $('.follow-btn').data('follower-id');
+            $.ajax({
+                url: 'http://aparat-expert.local/channel/follows',
+                type: 'POST',
+                dataType: 'json',
+                data: { id:data },
+                success: function(data){
+                    if(data.process ==='existed'){
+                        Swal.fire({
+                            text: "قبلا اضافه شده به فالوورهات",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-info",
+                            }
+                        });
+                    }
+
+                    if(data.process === 'true'){
+                        Swal.fire({
+                            text: "با موفقیت به فالوورها اضافه شد.",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-info",
+                            }
+                        }).then(function (result){
+                            if (result.value){
+                                location.reload()
+                            }
+                        });
+
+                    }
+                }
+            });
+        })
+    })
+</script>
 
 
 

@@ -8,6 +8,8 @@ $router->get('/' , 'HomeController@index');
 $router->get('/channel/{channel_name}' , 'HomeController@channel');
 $router->get('/category/{id}' , 'HomeController@categoryVideos');
 
+
+
 //login
 $router->get('/login' , 'Auth\LoginController@create',['guest']);
 $router->post('/login' , 'Auth\LoginController@login' , ['guest']);
@@ -48,7 +50,8 @@ $router->post('/administrator/users/delete/{id}' , 'Admin\UserController@destroy
 //user-setting
 $router->get('/administrator/user/setting' , 'User\UserController@show' , ['auth']);
 $router->post('/administrator/user/setting/{id}' , 'User\UserController@update' , ['auth']);
-
+//followes
+$router->post('/channel/follows' , 'User\UserController@follows', ['auth']);
 //administrator-followers
 $router->get('/administrator/followers' , 'Admin\UserController@followers',['auth']);
 

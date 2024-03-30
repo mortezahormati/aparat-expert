@@ -198,6 +198,9 @@ function array_fllaten($array){
     });
 }
 
+
+
+
 function arrayDiff($array1 , $array2){
    return array_filter($array1, function ($element) use ($array2) {
         return !in_array($element, $array2);
