@@ -4,6 +4,8 @@
 
 //home
 $router->get('/' , 'HomeController@index');
+$router->get('/video/{id}' , 'HomeController@singleVideo');
+
 //channel-profile
 $router->get('/channel/{channel_name}' , 'HomeController@channel');
 $router->get('/category/{id}' , 'HomeController@categoryVideos');

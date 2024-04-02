@@ -61,9 +61,8 @@
                                         <video
                                                 data-id="<?= $video['id'] ?>"
                                                 poster="<?= asset($video['video_image'])  ?>"
-                                                class="video-play"
+                                                class="video-play go-video"
                                                 src="<?= asset($video['video_path'])  ?>"
-
                                                 muted>
                                         </video>
 
@@ -103,4 +102,14 @@
 
     <!--footer-->
 <?php loadPartial('footer'); ?>
+
+<script>
+    $(document).on('click','.go-video' ,function (e) {
+        var clicked_id = $(this).data('id')
+        window.location = "http://aparat-expert.local/video/"+clicked_id;
+    })
+
+
+
+</script>
 

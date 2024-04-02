@@ -115,4 +115,34 @@ class HomeController
 
 
     }
+
+
+    public function singleVideo($params)
+    {
+        $sql = "select * from video where id=:id";
+        $video = $this->db->query($sql , [
+           'id' => $params['id']
+        ])->fetch();
+        if($video){
+            $sql = "select * from video where category_id=:category_id and id!=:id";
+            $similar_videos = $this->db->query($sql , [
+               'category_id' => $video['category_id'] ,
+               'id' => $video['id']
+            ])->fetchAll();
+
+            //get tags
+            $sql2 = "select * from tag_video where video_id=:video_id ";
+            $tags_id = $this->db->query($sql2 , [
+                'video_id' => $video['id'] ,
+            ])->fetchAll();
+            dd($tags_id);
+            loadView('single-page' , [
+                'video' => $video ,
+                'similar_videos' => $similar_videos
+            ]);
+        }else{
+           redirect('404');
+        }
+
+    }
 }

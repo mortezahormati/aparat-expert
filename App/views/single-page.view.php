@@ -226,40 +226,26 @@
                                 </div>
                                 <div class="row mx-auto justify-content-between bg-black "
                                      style="background-color: #6c757d0f!important;padding: 5px">
-                                    <div class="col-md-5  mt-3  ">
-                                        <video
-                                                poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
-                                                class="video-play"
-                                                style="max-width: 145px"
-                                                src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                        </video>
-                                    </div>
-                                    <div class="col-md-7  mt-3  ">
-                                        <p>
-                                            ویدیوی بررسی گوشی گلکسی s24
-                                            <br>
-
-                                            <small class="text-muted">3 ماه پیش</small>
-                                            <small class="text-muted">نام کانال ویدیو </small>
-                                        </p>
-                                    </div>
+                                   <?php foreach ($similar_videos as $l): ?>
                                     <div class="col-md-5">
                                         <video
-                                                poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
+                                                poster="<?= asset($l['video_image']) ?>"
                                                 class="video-play"
                                                 style="max-width: 145px"
-                                                src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
+                                                src="<?= asset($l['video_path']) ?>">
                                         </video>
                                     </div>
                                     <div class="col-md-7">
                                         <p>
-                                            ویدیوی بررسی گوشی گلکسی s24
+                                            <?= $l['title'] ?>
                                             <br>
+                                            <small class="text-muted"> <?= jalaliTimeAgo($l['created_at']) ?> </small>
 
-                                            <small class="text-muted">3 ماه پیش</small>
-                                            <small class="text-muted">نام کانال ویدیو </small>
+
+                                            <small class="text-muted"></small>
                                         </p>
                                     </div>
+                                    <?php endforeach; ?>
 
                                 </div>
                             </div>
