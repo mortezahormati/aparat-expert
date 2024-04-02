@@ -60,6 +60,45 @@ class UserController
             'chanel_name' => $p
         ])->fetch();
     }
+    protected function reduceByFollowersID($array){
+        return array_reduce($array, function($arr, $element) {
+            $arr[] = $element['follower_id'];
+            return $arr;
+        });
+    }
+
+    public function follows()
+    {
+        if (strtolower($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'xmlhttprequest' && $_SERVER['REQUEST_METHOD'] === 'POST'){
+           $follower_id = $_POST['id'];
+           $user_id = $this->getUser()['id'];
+            $sql2 = "select * from followers where user_id=:user_id";
+            $user_followers =$this->db->query($sql2 , [
+                'user_id' => $user_id
+            ])->fetchAll();
+            $user_followers_id = $this->reduceByFollowersID($user_followers);
+            if(in_array($follower_id,$user_followers_id)){
+                $data = ['process' => 'existed'];
+                echo json_encode($data);
+                return;
+            }
+           if($user_id){
+               $sql = "insert into followers (user_id,follower_id) values (:user_id, :follower_id)";
+               $this->db->query($sql,[
+                  'user_id' => $user_id,
+                  'follower_id' => $follower_id,
+               ]);
+               $data = ['process' => 'true'];
+               echo json_encode($data);
+               return;
+           }
+           else{
+               $data = ['process' => false];
+               echo json_encode($data);
+               return false;
+           }
+        }
+    }
 
 
     public function update($params)

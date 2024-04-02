@@ -75,12 +75,17 @@ class HomeController
             'id' => $params['id']
         ])->fetch();
 
-        $selected_category['avatar_image'] = 'category/avatar/'.$selected_category['name'].'.png';
-        $selected_category['cover_image'] = 'category/cover/'.$selected_category['name'].'.png';
-        loadView('category' ,[
-            'videos' => $videos,
-            'selected_category' => $selected_category
-        ]);
+        if($selected_category){
+            $selected_category['avatar_image'] = 'category/avatar/'.$selected_category['name'].'.png';
+            $selected_category['cover_image'] = 'category/cover/'.$selected_category['name'].'.png';
+            loadView('category' ,[
+                'videos' => $videos,
+                'selected_category' => $selected_category
+            ]);
+        }else{
+            redirect('404');
+        }
+
 
 
 

@@ -52,6 +52,7 @@
                                                </h5>
                                             </div>
                                         </div>
+                                        <?php if(auth() && $user['id'] !== auth()['id']): ?>
                                         <div class="col-md-3">
                                             <div class="description-block">
 
@@ -59,6 +60,7 @@
                                                     دنبال کردن</a>
                                             </div>
                                         </div>
+                                        <?php endif; ?>
                                     </div>
                                     <!-- /.description-block -->
                                 </div>
