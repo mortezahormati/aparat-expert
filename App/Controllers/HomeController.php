@@ -33,6 +33,13 @@ class HomeController
         ]);
     }
 
+    protected function reduceByFollowersID($array){
+        return array_reduce($array, function($arr, $element) {
+            $arr[] = $element['follower_id'];
+            return $arr;
+        });
+    }
+
     public function channel($params)
     {
 
@@ -52,11 +59,25 @@ class HomeController
 
             $old_videos = array_slice($videos,1,count($videos));
 
+
+            if(auth()){
+                $user_auth = auth();
+                $sql = "select follower_id from followers where user_id=:user_id";
+                $folowers = $this->db->query($sql , [
+                    'user_id' => $user_auth['id']
+                ])->fetchAll();
+                if($folowers){
+                    $followers_id = $this->reduceByFollowersID($folowers);
+                }
+            }
+
+//            dd(Session::get('user'));
             loadView('channel' , [
                 'user' => $user ,
                 'videos' => $videos,
                 'last_video' =>$last_video,
-                'old_videos' =>$old_videos
+                'old_videos' =>$old_videos,
+                'followers_id' => $followers_id ?? null
             ]);
         }else{
             redirect('404');

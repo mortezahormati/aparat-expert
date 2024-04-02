@@ -16,6 +16,8 @@ class LoginController
         $this->db = new Database($config);
     }
 
+
+
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
@@ -43,6 +45,7 @@ class LoginController
             }
             //2- email exists
             $user = $this->userExists($email);
+
             //3- check password
             if (!password_verify($password, $user['password'])) {
                 $oldLoginData = array(

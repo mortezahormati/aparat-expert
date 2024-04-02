@@ -52,12 +52,21 @@
                                                </h5>
                                             </div>
                                         </div>
-                                        <?php if(auth() && $user['id'] !== auth()['id']): ?>
+                                        <?php if(auth() && $user['id'] !== auth()['id'] && !is_null($followers_id) && !in_array($user['id'] ,$followers_id)): ?>
                                         <div class="col-md-3">
                                             <div class="description-block">
 
-                                                <a class="btn btn-danger p-2 text-white" style="width: 100px">  <i class="fa fa-plus "></i>
+                                                <a class="btn btn-danger p-2 text-white btn-add-followers" data-follower-id="<?= $user['id'] ?>" style="width: 100px">  <i class="fa fa-plus "></i>
                                                     دنبال کردن</a>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
+                                        <?php if(auth() && $user['id'] !== auth()['id'] && !is_null($followers_id) && in_array($user['id'] ,$followers_id)): ?>
+                                        <div class="col-md-3">
+                                            <div class="description-block">
+
+                                                <a class="btn btn-outline-danger p-2 btn-remove-followers" data-follower-id="<?= $user['id'] ?>" style="width: 100px">  <i class="fa fa-minus "></i>
+                                                    دنبال نکردن</a>
                                             </div>
                                         </div>
                                         <?php endif; ?>
@@ -226,18 +235,103 @@
 
 <!--footer-->
 <?php loadPartial('footer'); ?>
-<!--<div class="card" style="width: 18%;">-->
-<!--    <video-->
-<!--            poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"-->
-<!--            class="video-play"-->
-<!--            src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">-->
-<!--    </video>-->
-<!--    <div class="card-body">-->
-<!--        <p class="card-text">Some quick example text to build on the card title and-->
-<!--            make-->
-<!--            up the bulk of the card's content.</p>-->
-<!--    </div>-->
-<!--</div>-->
+
+<script>
+    $(document).ready(function () {
+        $('.btn-add-followers').on('click' , function (e) {
+            e.preventDefault();
+            var follower_id = $('.btn-add-followers').data('follower-id');
+            $.ajax({
+                url: 'http://aparat-expert.local/channel/follows',
+                type: 'POST',
+                dataType: "json",
+                data: { id:follower_id },
+                success: function(response){
+                    console.log(response);
+                    if(response.process ==="true"){
+                        Swal.fire({
+                            text: "درخواست شما با موفقیت انجام شد",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-info",
+                            }
+                        }).then((result) => {
+
+                              location.reload()
+
+                        });
+                    }
+                    if(response.process ==="existed"){
+                        Swal.fire({
+                            text: "این کانال قبلا توسط شما دنبال شده است",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-info",
+                            }
+                        });
+                    }
+                    if(response.process ===false) {
+                        Swal.fire({
+                            text: "مشکلی پیش آمده است مجددا امتحان کنید.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-info",
+                            }
+                        });
+                    }
+                }
+            });
+
+        })
+        $('.btn-remove-followers').on('click' , function (e) {
+            e.preventDefault();
+            var follower_id = $('.btn-remove-followers').data('follower-id');
+            $.ajax({
+                url: 'http://aparat-expert.local/channel/unfollows',
+                type: 'POST',
+                dataType: "json",
+                data: { id:follower_id },
+                success: function(response){
+
+                    if(response.data ==="true"){
+                        Swal.fire({
+                            text: "شما کانال مورد نظر را آنفالوو کردید.!",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-primary",
+                            }
+                        }).then((result) => {
+
+                            location.reload()
+
+                        });
+                    }else{
+                            Swal.fire({
+                                text: "مشکلی پیش آمده است مجددا امتحان کنید.",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "متوجه شدم!",
+                                customClass: {
+                                    confirmButton: "btn btn-info",
+                                }
+                            });
+                    }
+
+                }
+            });
+
+        })
+
+    })
+</script>
 
 
 

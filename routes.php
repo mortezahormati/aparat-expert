@@ -52,6 +52,7 @@ $router->get('/administrator/user/setting' , 'User\UserController@show' , ['auth
 $router->post('/administrator/user/setting/{id}' , 'User\UserController@update' , ['auth']);
 //followes
 $router->post('/channel/follows' , 'User\UserController@follows', ['auth']);
+$router->post('/channel/unfollows' , 'User\UserController@unfollows', ['auth']);
 //administrator-followers
 $router->get('/administrator/followers' , 'Admin\UserController@followers',['auth']);
 
