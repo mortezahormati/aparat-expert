@@ -81,16 +81,14 @@ class UserController
             $user_followers = $this->db->query($sql2, [
                 'user_id' => $user_id
             ])->fetchAll();
-            if ($user_followers) {
+            if (count($user_followers) >0) {
                 $user_followers_id = $this->reduceByFollowersID($user_followers);
-            }
+                if (in_array($follower_id, $user_followers_id)) {
 
-
-            if (in_array($follower_id, $user_followers_id)) {
-
-                $data = ['process' => 'existed'];
-                echo json_encode($data);
-                return;
+                    $data = ['process' => 'existed'];
+                    echo json_encode($data);
+                    return;
+                }
             }
 
             if ($user_id) {
@@ -106,7 +104,7 @@ class UserController
             } else {
                 $data = ['process' => false];
                 echo json_encode($data);
-                return false;
+                return ;
             }
         }
     }

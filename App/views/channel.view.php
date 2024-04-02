@@ -52,7 +52,7 @@
                                                </h5>
                                             </div>
                                         </div>
-                                        <?php if(auth() && $user['id'] !== auth()['id'] && !is_null($followers_id) && !in_array($user['id'] ,$followers_id)): ?>
+                                        <?php if(auth() && $user['id'] !== auth()['id']  &&  !in_array($user['id'] ,$followers_id ?? [])): ?>
                                         <div class="col-md-3">
                                             <div class="description-block">
 
@@ -61,7 +61,7 @@
                                             </div>
                                         </div>
                                         <?php endif; ?>
-                                        <?php if(auth() && $user['id'] !== auth()['id'] && !is_null($followers_id) && in_array($user['id'] ,$followers_id)): ?>
+                                        <?php if(auth() && $user['id'] !== auth()['id']  && in_array($user['id'] ,$followers_id ?? [])): ?>
                                         <div class="col-md-3">
                                             <div class="description-block">
 
@@ -77,7 +77,7 @@
                                 <div class="col-sm-4 text-center">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <h5 class="description-header">112.5 هزار</h5>
+                                            <h5 class="description-header"><?= $followers_count ?></h5>
                                             <small class="text-muted">دنبال کننده</small>
                                         </div>
                                         <div class="col-md-6">
@@ -247,7 +247,6 @@
                 dataType: "json",
                 data: { id:follower_id },
                 success: function(response){
-                    console.log(response);
                     if(response.process ==="true"){
                         Swal.fire({
                             text: "درخواست شما با موفقیت انجام شد",
@@ -258,9 +257,7 @@
                                 confirmButton: "btn btn-info",
                             }
                         }).then((result) => {
-
                               location.reload()
-
                         });
                     }
                     if(response.process ==="existed"){

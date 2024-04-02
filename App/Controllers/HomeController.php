@@ -40,9 +40,16 @@ class HomeController
         });
     }
 
+    protected function countFollows($user){
+        $sql = "SELECT COUNT(id) as follows_count FROM followers WHERE follower_id = :user_id ";
+
+        return $this->db->query($sql , [
+           'user_id' => $user['id']
+        ])->fetch();
+    }
+
     public function channel($params)
     {
-
         $sql = "select * from users where chanel_name=:channel_name";
         $user = $this->db->query($sql,[
             'channel_name' => $params['channel_name']
@@ -50,16 +57,14 @@ class HomeController
         $videos=[];
         if($user){
             $sql = "select * from video where user_id=:user_id order by  created_at desc";
+
+            $followers_count =  $this->countFollows($user);
+
             $videos = $this->db->query($sql,[
                 'user_id' => $user['id']
             ])->fetchAll();
-
             $last_video = (array_slice($videos,'0',1)[0]);
-
-
             $old_videos = array_slice($videos,1,count($videos));
-
-
             if(auth()){
                 $user_auth = auth();
                 $sql = "select follower_id from followers where user_id=:user_id";
@@ -70,14 +75,13 @@ class HomeController
                     $followers_id = $this->reduceByFollowersID($folowers);
                 }
             }
-
-//            dd(Session::get('user'));
             loadView('channel' , [
                 'user' => $user ,
                 'videos' => $videos,
                 'last_video' =>$last_video,
                 'old_videos' =>$old_videos,
-                'followers_id' => $followers_id ?? null
+                'followers_id' => $followers_id ?? null,
+                'followers_count' =>$followers_count['follows_count'] ?? '0'
             ]);
         }else{
             redirect('404');
