@@ -126,8 +126,9 @@
                                                 <div class="col-md-12 mt-3 mb-5">
                                                     <div class="row">
                                                         <video width="20%"
+                                                               data-id="<?= $last_video['id']?>"
                                                                 poster="<?= asset($last_video['video_image'])?>"
-                                                                class="video-play"
+                                                                class="video-play video-link"
                                                                muted
                                                                 src="<?= asset($last_video['video_path'])?>">
                                                         </video>
@@ -157,8 +158,9 @@
                                                 <?php foreach ($old_videos as $video): ?>
                                                 <div class="card mr-3" style="border: none;width: 19%;">
                                                     <video
+                                                            data-id="<?= $video['id']?>"
                                                             poster="<?= asset($video['video_image'])?>"
-                                                            class="video-play"
+                                                            class="video-play video-link"
                                                             muted
                                                             src="<?= asset($video['video_path'])?>">
                                                     </video>
@@ -179,8 +181,9 @@
                                                 <?php foreach ($videos as $video): ?>
                                                     <div class="card mr-3" style="border: none;width: 19%;">
                                                         <video
+                                                                data-id="<?= $video['id']?>"
                                                                 poster="<?= asset($video['video_image'])?>"
-                                                                class="video-play"
+                                                                class="video-play video-link"
                                                                 muted
                                                                 src="<?= asset($video['video_path'])?>">
                                                         </video>
@@ -188,7 +191,7 @@
                                                             <p class="card-text"><?= $video['title']?></p>
 
                                                             <p class="card-text">
-                                                                <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
+                                                                <small><?= $video['revision_count'] ?? '0' ?> بازدید .</small> <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -237,6 +240,10 @@
 <?php loadPartial('footer'); ?>
 
 <script>
+    $(document).on('click' , '.video-link', function (e) {
+        var clicked_id = $(this).data('id')
+        window.location = "http://aparat-expert.local/video/"+clicked_id;
+    })
     $(document).ready(function () {
         $('.btn-add-followers').on('click' , function (e) {
             e.preventDefault();

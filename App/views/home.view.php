@@ -8,8 +8,10 @@
 
     <!--end nav bar-->
     <div id="wrapper" class="toggled">
+
         <!-- Sidebar -->
-        <?php loadPartial('sidebar'); ?>
+        <?php
+        loadPartial('sidebar'); ?>
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
@@ -80,7 +82,7 @@
 
                                             <br>
                                             <span>
-                                                <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
+                                                <small> <?= $video['revision_count'] ?? '0' ?> بازدید .</small> <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
                                             </span>
                                         </div>
                                     </div>

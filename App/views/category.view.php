@@ -71,7 +71,7 @@
                                     <p class="card-text"><?= $video['title'] ?></p>
 
                                     <p class="card-text">
-                                        <small>45 بازدید .</small>
+                                        <small><?= $video['revision_count'] ?? '0' ?> بازدید .</small>
                                         <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
                                     </p>
                                 </div>

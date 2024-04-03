@@ -1,64 +1,36 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav mt-5">
         <li class="sidebar-brand ">
-            <a href="#">
+            <a href="<?= asset('') ?>">
                 <i class="fa fa-home ml-2 icon-sidebar-ho"></i>
                 <span>صفحه نخست </span>
             </a>
         </li>
-        <li class="sidebar-brand">
-            <a href="#">
-                <i class="fa fa-video-camera ml-2 icon-sidebar-ho"></i>
-                <span>لیست پخش زنده </span>
-            </a>
-        </li>
-        <li class="sidebar-brand ">
-            <a href="#">
-                <i class="fa fa-clock-o ml-2 icon-sidebar-ho"></i>
-                <span>سابقه تماشا </span>
-            </a>
-        </li>
+
+
         <hr>
         <h6 class="mr-2 font-weight-bold text-danger">بخش های دیگر</h6>
+        <?php if(\Framework\Session::has('categories') && count(\Framework\Session::get('categories')) > 0): ?>
+
+        <?php foreach(\Framework\Session::get('categories') as $cat): ?>
         <li class="sidebar-brand ">
-            <a href="#">
-                <i class="fa fa-gamepad ml-2 icon-sidebar-ho"></i>
-                <span>آپارات گیم </span>
+            <a href="<?= asset('category/'.$cat['id']) ?>">
+                <i class="fa fa-video-camera ml-2 icon-sidebar-ho"></i>
+                <span><?= $cat['persian_name'] ?></span>
             </a>
         </li>
-        <li class="sidebar-brand ">
-            <a href="#">
-                <i class="fa fa-soccer-ball-o ml-2 icon-sidebar-ho"></i>
-                <span>آپارات اسپرت </span>
-            </a>
-        </li>
-        <li class="sidebar-brand ">
-            <a href="#">
-                <i class="fa fa-music ml-2 icon-sidebar-ho"></i>
-                <span>آپارات موزیک </span>
-            </a>
-        </li>
+
+        <?php endforeach; ?>
+        <?php endif; ?>
         <hr>
         <p class="text-right mr-3 font-weight-light" style="font-size: 12px!important;">برای دنبال کردن کانال ها،
             مشاهده ویدیوهای پیشنهادی مطابق با سلیقه شما و تجربه کاربری بهتر وارد شوید.
         </p>
-        <a class="btn btn-sm btn-outline-info mr-3 text-info" style="border-radius: 50px">
+        <a href="<?= asset('login') ?>" class="btn btn-sm btn-outline-info mr-3 text-info" style="border-radius: 50px">
             <i class="fa fa-user"></i>
             <span> ورود به آپارات</span>
         </a>
         <hr>
-        <li class="sidebar-brand ">
-            <a href="#">
-                <i class="fa fa-sun-o ml-2 icon-sidebar-ho"></i>
-                <span>حالت شب </span>
-            </a>
-        </li>
-        <li class="sidebar-brand ">
-            <a href="#">
-                <i class="fa fa-2x fa-mobile-phone ml-2 icon-sidebar-ho"></i>
-                <span>آپارات در موبایل </span>
-            </a>
-        </li>
         <hr>
         <li class="sidebar-brand ">
             <a href="#">

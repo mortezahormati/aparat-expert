@@ -5,6 +5,9 @@
 //home
 $router->get('/' , 'HomeController@index');
 $router->get('/video/{id}' , 'HomeController@singleVideo');
+//$router->post('/video/revision' , 'HomeController@revision');
+$router->post('/video/likes' , 'HomeController@likes');
+$router->post('/video/unlikes' , 'HomeController@unlikes');
 
 //channel-profile
 $router->get('/channel/{channel_name}' , 'HomeController@channel');
