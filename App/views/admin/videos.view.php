@@ -67,13 +67,14 @@
                                                 <div class="card-footer">
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <a href="<?= asset('user/video/edit/'.$video['id']) ?>"  style="border-radius: 8px" class=" p-2  btn-primary text-white" title="ویرایش" ><img src="<?= asset('upload/aparat/svgexport-90.svg') ?>" alt=""></a>
-                                                        </div>
-                                                        <div class="col-md-4">
                                                             <a  data-id='<?= $video['id'] ?>' href="" style="border-radius: 8px"  class="delete-video p-2 btn-danger " title="حذف"><img src="<?= asset('upload/aparat/svgexport-80.svg') ?>" alt=""></a>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <a href="" style="border-radius: 8px"  class="p-2 btn-success " title="لایک"><img src="<?= asset('upload/aparat/svgexport-46.svg') ?>" alt=""></a>
+                                                            <a href="<?= asset('user/video/edit/'.$video['id']) ?>"  style="border-radius: 8px" class=" p-2  btn-primary text-white" title="ویرایش" ><img src="<?= asset('upload/aparat/svgexport-90.svg') ?>" alt=""></a>
+                                                        </div>
+
+                                                        <div class="col-md-4">
+                                                            <a href="" style="border-radius: 8px"  class="p-1 text-dark " title="لایک"><?= $video['like_count'] ?? '0' ?><img src="<?= asset('upload/aparat/svgexport-180.svg') ?>" alt=""></a>
                                                         </div>
                                                     </div>
                                                 </div>

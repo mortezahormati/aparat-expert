@@ -62,8 +62,9 @@
                         <?php foreach ($videos as $video): ?>
                             <div class="card mr-3" style="border: none;width: 19%;">
                                 <video
+                                        data-id="<?= $video['id']?>"
                                         poster="<?= asset($video['video_image']) ?>"
-                                        class="video-play"
+                                        class="video-play video-link"
                                         muted
                                         src="<?= asset($video['video_path']) ?>">
                                 </video>
@@ -92,6 +93,12 @@
 
 <!--footer-->
 <?php loadPartial('footer'); ?>
+<script>
+    $(document).on('click' , '.video-link', function (e) {
+        var clicked_id = $(this).data('id')
+        window.location = "http://aparat-expert.local/video/"+clicked_id;
+    })
+</script>
 <!--<div class="card" style="width: 18%;">-->
 <!--    <video-->
 <!--            poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"-->

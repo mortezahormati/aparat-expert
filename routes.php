@@ -52,6 +52,11 @@ $router->get('/administrator/users/{id}' , 'Admin\UserController@show',['auth','
 $router->post('administrator/users/{id}' , 'Admin\UserController@update',['auth','admin']);
 $router->post('/administrator/users/delete/{id}' , 'Admin\UserController@destroy',['auth','admin']);
 
+///administrator-followers
+$router->get('/administrator/followers' , 'Admin\FollowerController@index' ,['auth'] );
+
+
+
 //user-setting
 $router->get('/administrator/user/setting' , 'User\UserController@show' , ['auth']);
 $router->post('/administrator/user/setting/{id}' , 'User\UserController@update' , ['auth']);

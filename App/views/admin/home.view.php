@@ -28,7 +28,7 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
                     <div class="row m-4 ">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <!--begin::Card-->
                             <div class="card card-flush">
                                 <!--begin::Card header-->
@@ -52,14 +52,14 @@
                             </div>
                             <!--end::Card-->
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <!--begin::Card-->
                             <div class="card card-flush">
                                 <!--begin::Card header-->
                                 <div class="card-header justify-content-center">
                                     <!--begin::Card title-->
                                     <div class="card-title">
-                                        <h2>0</h2>
+                                        <h2><?= $user_followers_count ?? '0' ?></h2>
                                     </div>
                                     <!--end::Card title-->
                                 </div>
@@ -76,14 +76,14 @@
                             </div>
                             <!--end::Card-->
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <!--begin::Card-->
                             <div class="card card-flush">
                                 <!--begin::Card header-->
                                 <div class="card-header justify-content-center">
                                     <!--begin::Card title-->
                                     <div class="card-title">
-                                        <h2>0</h2>
+                                        <h2><?= $user_revision_count ?? '0' ?></h2>
                                     </div>
                                     <!--end::Card title-->
                                 </div>
@@ -100,30 +100,7 @@
                             </div>
                             <!--end::Card-->
                         </div>
-                        <div class="col-md-3">
-                            <!--begin::Card-->
-                            <div class="card card-flush">
-                                <!--begin::Card header-->
-                                <div class="card-header justify-content-center">
-                                    <!--begin::Card title-->
-                                    <div class="card-title">
-                                        <h2>0</h2>
-                                    </div>
-                                    <!--end::Card title-->
-                                </div>
-                                <!--end::Card header-->
-                                <!--begin::Card body-->
-                                <div class="card-body justify-content-center text-center pt-1">
-                                    <!--begin::Users-->
-                                    <img src="<?= asset('upload/aparat/svgexport-19.svg') ?>" width="24px" alt="">
-                                    <span>بازدید امروز</span>
-                                    <!--end::Permissions-->
-                                </div>
 
-                                <!--end::Card footer-->
-                            </div>
-                            <!--end::Card-->
-                        </div>
                     </div>
                 </div>
                 <div class="col-md-1"></div>

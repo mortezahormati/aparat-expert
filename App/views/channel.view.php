@@ -81,7 +81,7 @@
                                             <small class="text-muted">دنبال کننده</small>
                                         </div>
                                         <div class="col-md-6">
-                                            <h5 class="description-header">61.8 میلیون</h5>
+                                            <h5 class="description-header"><?= $channel_revision_count['revision_all'] ?? '0'; ?></h5>
                                             <small class="text-sm text-muted">بازدید</small>
                                         </div>
                                     </div>
@@ -136,7 +136,7 @@
                                                             <h5 class="bold"><?= $last_video['title']?></h5>
 
                                                             <p class="text-muted text-sm">
-                                                                <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($last_video['created_at']) ?> </small>
+                                                                <small><?= $last_video['revision_count'] ?? '0' ?>  بازدید .</small> <small> <?= jalaliTimeAgo($last_video['created_at']) ?> </small>
                                                             </p>
                                                             <p  class="text-muted text-sm">
                                                                 <?= $last_video['description']?>
@@ -168,7 +168,10 @@
                                                         <p class="card-text"><?= $video['title']?></p>
 
                                                         <p class="card-text">
-                                                            <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
+                                                            <small>
+                                                                <?= $video['revision_count'] ?? '0' ?>  بازدید .
+                                                            </small>
+                                                            <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -203,20 +206,8 @@
                                         <div class="tab-pane" id="about_channel">
                                             <b>تیتر</b>
 
-                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-                                                طراحان گرافیک است.
-                                                چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و
-                                                برای شرایط فعلی تکنولوژی مورد
-                                                نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
-                                                زیادی در شصت و سه درصد گذشته،
-                                                حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها
-                                                شناخت بیشتری را برای طراحان
-                                                رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
-                                                در این صورت می توان امید
-                                                داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان
-                                                رسد وزمان مورد نیاز شامل
-                                                حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی
-                                                اساسا مورد استفاده قرار گیرد.
+                                            <p>
+                                                <?= $user['channel_description'] ?>
                                             </p>
                                         </div>
                                         <!-- /.tab-pane -->

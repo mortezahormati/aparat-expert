@@ -65,6 +65,10 @@ class HomeController
         $videos=[];
         if($user){
             $sql = "select * from video where user_id=:user_id order by  created_at desc";
+            $sql3= "SELECT SUM(revision_count) as revision_all FROM video WHERE user_id= :user_id";
+            $channel_revision_count = $this->db->query($sql3 , [
+                'user_id' => $user['id']
+            ])->fetch();
 
             $followers_count =  $this->countFollows($user);
 
@@ -89,7 +93,8 @@ class HomeController
                 'last_video' =>$last_video,
                 'old_videos' =>$old_videos,
                 'followers_id' => $followers_id ?? null,
-                'followers_count' =>$followers_count['follows_count'] ?? '0'
+                'followers_count' =>$followers_count['follows_count'] ?? '0',
+                'channel_revision_count' =>$channel_revision_count['revision_all'] ?? '0'
             ]);
         }else{
             redirect('404');
