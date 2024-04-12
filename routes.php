@@ -5,6 +5,7 @@
 //home
 $router->get('/' , 'HomeController@index');
 $router->get('/video/{id}' , 'HomeController@singleVideo');
+$router->get('/most-revision-videos' , 'HomeController@mostRevision');
 //$router->post('/video/revision' , 'HomeController@revision');
 $router->post('/video/likes' , 'HomeController@likes');
 $router->post('/video/unlikes' , 'HomeController@unlikes');
@@ -13,7 +14,12 @@ $router->post('/video/unlikes' , 'HomeController@unlikes');
 $router->get('/channel/{channel_name}' , 'HomeController@channel');
 $router->get('/category/{id}' , 'HomeController@categoryVideos');
 
-
+//send-comments
+$router->post('/comment/submit' , 'Admin\CommentController@store');
+//admin-channel-comments
+$router->get('/administrator/comments/{video_id}' , 'Admin\CommentController@index',['auth']);
+$router->post('/administrator/comments/confirm' , 'Admin\CommentController@confirm',['auth']);
+$router->post('/administrator/comments/remove' , 'Admin\CommentController@remove',['auth']);
 
 //login
 $router->get('/login' , 'Auth\LoginController@create',['guest']);
@@ -63,6 +69,7 @@ $router->post('/administrator/user/setting/{id}' , 'User\UserController@update' 
 //followes
 $router->post('/channel/follows' , 'User\UserController@follows', ['auth']);
 $router->post('/channel/unfollows' , 'User\UserController@unfollows', ['auth']);
+$router->post('/channel/unfollow-me' , 'User\UserController@unfollowMe', ['auth']);
 //administrator-followers
 $router->get('/administrator/followers' , 'Admin\UserController@followers',['auth']);
 

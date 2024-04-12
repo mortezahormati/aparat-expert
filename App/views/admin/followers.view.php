@@ -225,7 +225,7 @@
                                                         </div>
                                                         <!--end::Info-->
                                                         <!--begin::Follow-->
-                                                        <a href="#" class="btn unfollow btn-sm btn-light-danger"
+                                                        <a  class="btn unfollow btn-sm btn-light-danger"
                                                            data-id="<?= $fi['id'] ?>">
                                                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr012.svg-->
                                                             <span class="svg-icon svg-icon-3">
@@ -249,3 +249,89 @@
         </div>
     </div>
 </div>
+<?php loadAdminPartial('footer'); ?>
+
+<script>
+    $(document).ready(function () {
+        $('.unfollow').on('click' , function (e) {
+            e.preventDefault();
+            var follower_id = $('.unfollow').data('id');
+            $.ajax({
+                url: 'http://aparat-expert.local/channel/unfollows',
+                type: 'POST',
+                dataType: "json",
+                data: { id:follower_id },
+                success: function(response){
+
+                    if(response.data ==="true"){
+                        Swal.fire({
+                            text: "شما کانال مورد نظر را آنفالوو کردید.!",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-primary",
+                            }
+                        }).then((result) => {
+
+                            location.reload()
+
+                        });
+                    }else{
+                        Swal.fire({
+                            text: "مشکلی پیش آمده است مجددا امتحان کنید.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-info",
+                            }
+                        });
+                    }
+
+                }
+            });
+
+        })
+        $('.unfollow-me').on('click' , function (e) {
+            e.preventDefault();
+            var follower_id = $('.unfollow-me').data('id');
+            $.ajax({
+                url: 'http://aparat-expert.local/channel/unfollow-me',
+                type: 'POST',
+                dataType: "json",
+                data: { id:follower_id },
+                success: function(response){
+                    if(response.data ==="true"){
+                        Swal.fire({
+                            text: "شما فرد مورد نظر را از  لیست دنبال کنندگانتان خارج کردید.!",
+                            icon: "warning",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-primary",
+                            }
+                        }).then((result) => {
+
+                            location.reload()
+
+                        });
+                    }else{
+                        Swal.fire({
+                            text: "مشکلی پیش آمده است مجددا امتحان کنید.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-info",
+                            }
+                        });
+                    }
+
+                }
+            });
+
+        })
+    })
+
+</script>

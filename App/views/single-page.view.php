@@ -150,70 +150,59 @@
                                     </div>
                                 </div>
                                 <hr>
+
                                 <div class="row mx-auto justify-content-between bg-black align-items-center mt-5 ">
                                     <div class="col-md-12">
                                         <h4>دیدگاه ها</h4>
                                     </div>
+                                    <?php if(auth()): ?>
                                     <div class="col-md-12">
                                         <div class="type_msg">
                                             <div class="input_msg_write">
-                                                <input type="text" class="write_msg pr-4" placeholder="دیدگاه خود را بیان کنید" />
+                                                <input type="text" class="write_msg pr-4" data-video-id="<?= $video['id'] ?>" placeholder="دیدگاه خود را بیان کنید" />
                                                 <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mx-auto justify-content-between bg-black align-items-center mt-5 ">
+
+                                <?php else: ?>
+
                                     <div class="col-md-12">
-                                        <div class="card border-1">
-                                            <!--begin::Body-->
-                                            <div class="card-body">
-                                                <!--begin::Wrapper-->
-                                                <div class="row">
-                                                <div class=" col-md-2 mb-4">
-                                                    <!--begin::Container-->
-                                                    <div class=" align-items-center ml-5  ">
-                                                        <!--begin::Author-->
-                                                        <div class="ml-2">
-                                                            <div  class="text-small text-success">
-                                                                <img src="<?= asset('upload/avatars/150-1.jpg') ?>" class="rounded-circle" width="50px" alt="">
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Author-->
-                                                        <!--begin::Info-->
-                                                        <div class=" text-dark">
-                                                            <!--begin::Text-->
-                                                            <div class=" align-items-center">
-                                                                <!--begin::Username-->
-                                                                <h6  class="mt-2 font-weight-bold">Sandra Piquet</h6>
-                                                                <!--end::Username-->
-                                                                <span class="text-muted "><small>2 Days ago</small></span>
-                                                            </div>
-                                                            <!--end::Text-->
-                                                            <!--begin::Date-->
+                                        <small class="text-danger">برای ایجاد دیدگاه خود نسبت به این ویدیو لطفا ابتدا وارد شوید ! </small>
+                                    </div>
 
-                                                            <!--end::Date-->
-                                                        </div>
-                                                        <!--end::Info-->
-                                                    </div>
-                                                    <!--end::Container-->
-                                                    <!--begin::Actions-->
+                                <?php endif; ?>
+                                </div>
+                                <div class="col-md-12" style="height: 50px"></div>
+                                <?php if(!is_null($comments)): ?>
+                                <?php foreach($comments as $comment): ?>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="d-flex flex-column align-items-start p-4  " style="border: .1px solid rgba(255,0,0,0.16)">
+                                            <!--begin::User-->
+                                            <div class="d-flex align-items-center mb-2">
+                                                <!--begin::Avatar-->
+                                                <div class="symbol  rounded-circle">
+                                                    <img alt="Pic" class="" width="35px" src="<?= asset($comment['avatar_image']) ?>">
+                                                </div>
+                                                <!--end::Avatar-->
+                                                <!--begin::Details-->
+                                                <div class="m-3">
+                                                    <a style="font-size: 12px" href="<?= asset('channel/'.trim($comment['chanel_name'])) ?>" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1"><?= $comment['nick_name'] ?></a>
 
-                                                    <!--end::Actions-->
+                                                    <p class="text-muted   mb-1" style="font-size: 12px"><?= jalaliTimeAgo($comment['created_at']) ?></p>
                                                 </div>
-                                                <div class=" col-md-10 mt-5 pt-2">
-                                                    <p class="font-normal">I run a team of 20 product managers, developers, QA and UX Previously we designed everything ourselves.</p>
-                                                </div>
-                                                </div>
-
-                                                <!--end::Wrapper-->
-                                                <!--begin::Desc-->
-                                                <!--end::Desc-->
+                                                <!--end::Details-->
                                             </div>
-                                            <!--end::Body-->
+                                            <!--end::User-->
+                                            <!--begin::Text-->
+                                            <div class="p-2 pr-4 rounded bg-light-info text-dark fw-bold  text-start" data-kt-element="message-text">
+                                            <?= $comment['text'] ?>
+                                            </div>
+                                            <!--end::Text-->
                                         </div>
                                     </div>
-                                </div>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
 
                             </div>
                             <div class="col-md-3">
@@ -263,6 +252,57 @@
     <!--footer-->
 <?php loadPartial('footer'); ?>
 <script type="text/javascript">
+    $(document).on('click', '.msg_send_btn' , function (e) {
+        e.preventDefault()
+        var element = $('.write_msg');
+        var id = element.data('video-id');
+        var text= element.val();
+        $.ajax({
+            url: 'http://aparat-expert.local/comment/submit',
+            type: 'POST',
+            dataType: "json",
+            data: { text:text, id:id},
+            success: function(response){
+                if(response.process == "success"){
+                    Swal.fire({
+                        text: "کامنت شما بارگزاری شد و پس از تایید مدیر کانال به نمایش در خواهد آمد  ",
+                        icon: "warning",
+                        buttonsStyling: false,
+                        confirmButtonText: "متوجه شدم!",
+                        customClass: {
+                            confirmButton: "btn btn-info",
+                        }
+                    })
+                }
+                if(response.process == "error"){
+                    var error = response.data.text;
+                    console.log(error)
+                    Swal.fire({
+                        text:error,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "متوجه شدم!",
+                        customClass: {
+                            confirmButton: "btn btn-danger",
+                        }
+                    })
+                }
+                if(response.process == "notAjax"){
+                    Swal.fire({
+                        text:"مشکلی پیش آمده است دقایقی دیگر مجددا امتحان کنید!",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "متوجه شدم!",
+                        customClass: {
+                            confirmButton: "btn btn-danger",
+                        }
+                    })
+                }
+
+            }
+        });
+
+    })
     // $(document).on('click','.video-revision' , function (e){
     $(document).on('click','.go-video' ,function (e) {
         var clicked_id = $(this).data('id')

@@ -126,6 +126,23 @@ class UserController
         }
     }
 
+    public function unfollowMe()
+    {
+        if (strtolower($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'xmlhttprequest' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user_follow_me = $_POST['id'];
+            $user_me = auth();
+
+            $sql ="delete from followers where user_id=:user_id and follower_id=:follower_id";
+
+            $record = $this->db->query($sql , [
+                'user_id' => $user_follow_me ,
+                'follower_id' => $user_me['id']
+            ]);
+            $data = ['data' => 'true'];
+            echo json_encode($data);
+        }
+    }
+
 
     public function update($params)
     {

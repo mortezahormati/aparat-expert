@@ -5,6 +5,13 @@
                 <i class="fa fa-home ml-2 icon-sidebar-ho"></i>
                 <span>صفحه نخست </span>
             </a>
+
+        </li>
+        <li class="sidebar-bran ">
+            <a href="<?= asset('most-revision-videos') ?>">
+                <i class="fa fa-camera ml-2 icon-sidebar-ho"></i>
+                <span>پربازدیدترین ها</span>
+            </a>
         </li>
 
 

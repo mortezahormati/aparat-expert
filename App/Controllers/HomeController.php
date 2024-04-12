@@ -16,6 +16,16 @@ class HomeController
     public function index()
     {
         $sql = "select id,persian_name from category";
+        $sql2 = "select
+                    title,description,user_id,
+                    video_path,revision_count,like_count,
+                    video_image, confirm_at,chanel_name,avatar_image,video.created_at,video.id
+                 from video INNER JOIN users on video.user_id = users.id where revision_count > 0
+                 order by revision_count DESC limit 8";
+        $most_revision_videos = $this->db->query($sql2)->fetchAll();
+
+
+
         $categories = $this->db->query($sql)->fetchAll();
         Session::set('categories' , $categories);
         $videos = [];
@@ -31,7 +41,24 @@ class HomeController
 
         loadView('home' ,[
             'videos' => $videos,
-            'categories' => $categories
+            'categories' => $categories ,
+            'most_revision_videos'=>$most_revision_videos ?? null
+        ]);
+    }
+
+    public function mostRevision()
+    {
+        $sql2 = "select
+                    title,description,user_id,
+                    video_path,revision_count,like_count,
+                    video_image, confirm_at,chanel_name,avatar_image,video.created_at,video.id
+                 from video INNER JOIN users on video.user_id = users.id where revision_count > 0
+                 order by revision_count DESC ";
+        $most_revision_videos = $this->db->query($sql2)->fetchAll();
+
+
+        loadView('most-revision-video' ,[
+            'most_revision_videos'=>$most_revision_videos ?? null
         ]);
     }
 
@@ -149,8 +176,8 @@ class HomeController
             //update - revision- count
             $this->updateRevisionVideo($video);
             //channel_info
-            $sql ="select * from users where id=:user_id";
-            $user_channel_info = $this->db->query($sql , [
+            $sql1 ="select * from users where id=:user_id";
+            $user_channel_info = $this->db->query($sql1 , [
                 'user_id' =>$video['user_id']
             ])->fetch();
 
@@ -159,15 +186,24 @@ class HomeController
             //user - follow -status
             if($user_channel_info && auth()){
                     $user_auth = auth();
-                    $sql = "select follower_id from followers where user_id=:user_id";
-                    $folowers = $this->db->query($sql , [
+                    $sql2 = "select follower_id from followers where user_id=:user_id";
+                    $folowers = $this->db->query($sql2 , [
                         'user_id' => $user_auth['id']
                     ])->fetchAll();
                     if($folowers){
                         $followers_id = $this->reduceByFollowersID($folowers);
                     }
             }
-            //
+            //get-comments
+//            $sql3 ="select * from comments where video_id=:video_id";
+            $sql3 ="select nick_name,avatar_image,chanel_name,comments.created_at,text,users.id,comments.id,like_count,show_comments from comments  
+                    INNER JOIN users ON comments.user_id=users.id 
+                    where video_id=:video_id AND show_comments=1";
+            $comments = $this->db->query($sql3 , [
+                'video_id' => $video['id']
+            ])->fetchAll();
+
+
 
             //similar_video
             $sql = "select * from video where category_id=:category_id and id!=:id";
@@ -197,6 +233,7 @@ class HomeController
                 'user_channel_info' => $user_channel_info ?? null,
                 'followers_id' =>$followers_id ?? null,
                 'followers_count' =>$followers_count ?? '0',
+                'comments' =>$comments ?? null,
             ]);
         }else{
            redirect('404');
