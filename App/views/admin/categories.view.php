@@ -393,7 +393,7 @@
             }).then(function (result) {
                 if (result.value) {
 
-                    console.log(deleteid);
+
                         $.ajax({
                             url: 'http://aparat-expert.local/administrator/category/delete/ajax',
                             type: 'POST',

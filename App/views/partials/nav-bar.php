@@ -11,7 +11,7 @@
                 aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a href="">
+        <a href="<?= asset('') ?>">
             <img src="<?= asset('upload/logo.png') ?>" alt="" height="50px">
         </a>
     </div>

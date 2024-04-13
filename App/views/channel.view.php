@@ -52,12 +52,21 @@
                                                </h5>
                                             </div>
                                         </div>
-                                        <?php if(auth() && $user['id'] !== auth()['id']): ?>
+                                        <?php if(auth() && $user['id'] !== auth()['id']  &&  !in_array($user['id'] ,$followers_id ?? [])): ?>
                                         <div class="col-md-3">
                                             <div class="description-block">
 
-                                                <a class="btn btn-danger p-2 text-white follow-btn" data-follower-id="<?= $user['id'] ?>" style="width: 100px">  <i class="fa fa-plus "></i>
+                                                <a class="btn btn-danger p-2 text-white btn-add-followers" data-follower-id="<?= $user['id'] ?>" style="width: 100px">  <i class="fa fa-plus "></i>
                                                     دنبال کردن</a>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
+                                        <?php if(auth() && $user['id'] !== auth()['id']  && in_array($user['id'] ,$followers_id ?? [])): ?>
+                                        <div class="col-md-3">
+                                            <div class="description-block">
+
+                                                <a class="btn btn-outline-danger p-2 btn-remove-followers" data-follower-id="<?= $user['id'] ?>" style="width: 100px">  <i class="fa fa-minus "></i>
+                                                    دنبال نکردن</a>
                                             </div>
                                         </div>
                                         <?php endif; ?>
@@ -68,11 +77,11 @@
                                 <div class="col-sm-4 text-center">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <h5 class="description-header">112.5 هزار</h5>
+                                            <h5 class="description-header"><?= $followers_count ?></h5>
                                             <small class="text-muted">دنبال کننده</small>
                                         </div>
                                         <div class="col-md-6">
-                                            <h5 class="description-header">61.8 میلیون</h5>
+                                            <h5 class="description-header"><?= $channel_revision_count['revision_all'] ?? '0'; ?></h5>
                                             <small class="text-sm text-muted">بازدید</small>
                                         </div>
                                     </div>
@@ -117,8 +126,9 @@
                                                 <div class="col-md-12 mt-3 mb-5">
                                                     <div class="row">
                                                         <video width="20%"
+                                                               data-id="<?= $last_video['id']?>"
                                                                 poster="<?= asset($last_video['video_image'])?>"
-                                                                class="video-play"
+                                                                class="video-play video-link"
                                                                muted
                                                                 src="<?= asset($last_video['video_path'])?>">
                                                         </video>
@@ -126,7 +136,7 @@
                                                             <h5 class="bold"><?= $last_video['title']?></h5>
 
                                                             <p class="text-muted text-sm">
-                                                                <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($last_video['created_at']) ?> </small>
+                                                                <small><?= $last_video['revision_count'] ?? '0' ?>  بازدید .</small> <small> <?= jalaliTimeAgo($last_video['created_at']) ?> </small>
                                                             </p>
                                                             <p  class="text-muted text-sm">
                                                                 <?= $last_video['description']?>
@@ -148,8 +158,9 @@
                                                 <?php foreach ($old_videos as $video): ?>
                                                 <div class="card mr-3" style="border: none;width: 19%;">
                                                     <video
+                                                            data-id="<?= $video['id']?>"
                                                             poster="<?= asset($video['video_image'])?>"
-                                                            class="video-play"
+                                                            class="video-play video-link"
                                                             muted
                                                             src="<?= asset($video['video_path'])?>">
                                                     </video>
@@ -157,7 +168,10 @@
                                                         <p class="card-text"><?= $video['title']?></p>
 
                                                         <p class="card-text">
-                                                            <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
+                                                            <small>
+                                                                <?= $video['revision_count'] ?? '0' ?>  بازدید .
+                                                            </small>
+                                                            <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -170,8 +184,9 @@
                                                 <?php foreach ($videos as $video): ?>
                                                     <div class="card mr-3" style="border: none;width: 19%;">
                                                         <video
+                                                                data-id="<?= $video['id']?>"
                                                                 poster="<?= asset($video['video_image'])?>"
-                                                                class="video-play"
+                                                                class="video-play video-link"
                                                                 muted
                                                                 src="<?= asset($video['video_path'])?>">
                                                         </video>
@@ -179,7 +194,7 @@
                                                             <p class="card-text"><?= $video['title']?></p>
 
                                                             <p class="card-text">
-                                                                <small>45 بازدید .</small> <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
+                                                                <small><?= $video['revision_count'] ?? '0' ?> بازدید .</small> <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -191,20 +206,8 @@
                                         <div class="tab-pane" id="about_channel">
                                             <b>تیتر</b>
 
-                                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-                                                طراحان گرافیک است.
-                                                چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و
-                                                برای شرایط فعلی تکنولوژی مورد
-                                                نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
-                                                زیادی در شصت و سه درصد گذشته،
-                                                حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها
-                                                شناخت بیشتری را برای طراحان
-                                                رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
-                                                در این صورت می توان امید
-                                                داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان
-                                                رسد وزمان مورد نیاز شامل
-                                                حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی
-                                                اساسا مورد استفاده قرار گیرد.
+                                            <p>
+                                                <?= $user['channel_description'] ?>
                                             </p>
                                         </div>
                                         <!-- /.tab-pane -->
@@ -226,20 +229,38 @@
 
 <!--footer-->
 <?php loadPartial('footer'); ?>
+
 <script>
+    $(document).on('click' , '.video-link', function (e) {
+        var clicked_id = $(this).data('id')
+        window.location = "http://aparat-expert.local/video/"+clicked_id;
+    })
     $(document).ready(function () {
-        $('.follow-btn').on('click',function (e) {
+        $('.btn-add-followers').on('click' , function (e) {
             e.preventDefault();
-            var data = $('.follow-btn').data('follower-id');
+            var follower_id = $('.btn-add-followers').data('follower-id');
             $.ajax({
                 url: 'http://aparat-expert.local/channel/follows',
                 type: 'POST',
-                dataType: 'json',
-                data: { id:data },
-                success: function(data){
-                    if(data.process ==='existed'){
+                dataType: "json",
+                data: { id:follower_id },
+                success: function(response){
+                    if(response.process ==="true"){
                         Swal.fire({
-                            text: "قبلا اضافه شده به فالوورهات",
+                            text: "درخواست شما با موفقیت انجام شد",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-info",
+                            }
+                        }).then((result) => {
+                              location.reload()
+                        });
+                    }
+                    if(response.process ==="existed"){
+                        Swal.fire({
+                            text: "این کانال قبلا توسط شما دنبال شده است",
                             icon: "success",
                             buttonsStyling: false,
                             confirmButtonText: "متوجه شدم!",
@@ -248,26 +269,62 @@
                             }
                         });
                     }
-
-                    if(data.process === 'true'){
+                    if(response.process ===false) {
                         Swal.fire({
-                            text: "با موفقیت به فالوورها اضافه شد.",
-                            icon: "success",
+                            text: "مشکلی پیش آمده است مجددا امتحان کنید.",
+                            icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "متوجه شدم!",
                             customClass: {
                                 confirmButton: "btn btn-info",
                             }
-                        }).then(function (result){
-                            if (result.value){
-                                location.reload()
-                            }
                         });
-
                     }
                 }
             });
+
         })
+        $('.btn-remove-followers').on('click' , function (e) {
+            e.preventDefault();
+            var follower_id = $('.btn-remove-followers').data('follower-id');
+            $.ajax({
+                url: 'http://aparat-expert.local/channel/unfollows',
+                type: 'POST',
+                dataType: "json",
+                data: { id:follower_id },
+                success: function(response){
+
+                    if(response.data ==="true"){
+                        Swal.fire({
+                            text: "شما کانال مورد نظر را آنفالوو کردید.!",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-primary",
+                            }
+                        }).then((result) => {
+
+                            location.reload()
+
+                        });
+                    }else{
+                            Swal.fire({
+                                text: "مشکلی پیش آمده است مجددا امتحان کنید.",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "متوجه شدم!",
+                                customClass: {
+                                    confirmButton: "btn btn-info",
+                                }
+                            });
+                    }
+
+                }
+            });
+
+        })
+
     })
 </script>
 
