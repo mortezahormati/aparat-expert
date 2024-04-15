@@ -28,6 +28,15 @@
         </li>
 
         <?php endforeach; ?>
+
+        <?php endif; ?>
+        <?php if(auth()): ?>
+        <li class="sidebar-brand ">
+            <a href="<?= asset('favorites') ?>">
+                <i class="fa fa-plus-square ml-2 icon-sidebar-ho"></i>
+                <span><?='علاقه مندی های من' ?></span>
+            </a>
+        </li>
         <?php endif; ?>
         <hr>
         <p class="text-right mr-3 font-weight-light" style="font-size: 12px!important;">برای دنبال کردن کانال ها،

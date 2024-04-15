@@ -6,6 +6,7 @@
 $router->get('/' , 'HomeController@index');
 $router->get('/video/{id}' , 'HomeController@singleVideo');
 $router->get('/most-revision-videos' , 'HomeController@mostRevision');
+$router->get('/favorites' , 'HomeController@favorites' , ['auth']);
 //$router->post('/video/revision' , 'HomeController@revision');
 $router->post('/video/likes' , 'HomeController@likes');
 $router->post('/video/unlikes' , 'HomeController@unlikes');

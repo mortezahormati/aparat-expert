@@ -23,8 +23,8 @@ class DashboardController
             $sql1 = "SELECT COUNT(id) as count FROM video WHERE user_id = :user_id ";
             $sql2 = "SELECT title,created_at,revision_count,like_count,confirm_at,video_path,video_image FROM video WHERE user_id = :user_id Limit 4 ";
             $sql3= "SELECT SUM(revision_count) as revision_all FROM video WHERE user_id= :user_id";
-            $sql = "select count(id) as followers from followers where follower_id=:user_id";
-            $user_followers_count = $this->db->query($sql,[
+            $sql4 = "select count(id) as followers from followers where follower_id=:user_id";
+            $user_followers_count = $this->db->query($sql4,[
                 'user_id' => $this->user['id']
             ])->fetch();
 

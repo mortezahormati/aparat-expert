@@ -22,7 +22,14 @@ class HomeController
                     video_image, confirm_at,chanel_name,avatar_image,video.created_at,video.id
                  from video INNER JOIN users on video.user_id = users.id where revision_count > 0
                  order by revision_count DESC limit 8";
+        $sql3 = "select
+                    title,description,user_id,
+                    video_path,revision_count,like_count,
+                    video_image, confirm_at,chanel_name,avatar_image,video.created_at,video.id
+                 from video INNER JOIN users on video.user_id = users.id where rate_percent > 0
+                 order by rate_percent DESC limit 5";
         $most_revision_videos = $this->db->query($sql2)->fetchAll();
+        $best_videos = $this->db->query($sql3)->fetchAll();
 
 
 
@@ -42,7 +49,8 @@ class HomeController
         loadView('home' ,[
             'videos' => $videos,
             'categories' => $categories ,
-            'most_revision_videos'=>$most_revision_videos ?? null
+            'most_revision_videos'=>$most_revision_videos ?? null,
+            'best_videos'=>$best_videos ?? null,
         ]);
     }
 
@@ -226,6 +234,17 @@ class HomeController
                 ])->fetchAll();
             }
 
+            //get users favorite
+            if(auth()){
+                $sql4= "select video_id from favorites where user_id=:user_id";
+                $favorites = $this->db->query($sql4 , [
+                    'user_id' => auth()['id']
+                ])->fetchAll();
+
+                $user_video_fave_ids = array_column($favorites , 'video_id');
+
+            }
+
             loadView('single-page' , [
                 'video' => $video ,
                 'similar_videos' => $similar_videos ,
@@ -234,10 +253,41 @@ class HomeController
                 'followers_id' =>$followers_id ?? null,
                 'followers_count' =>$followers_count ?? '0',
                 'comments' =>$comments ?? null,
+                'user_video_fave_ids' =>$user_video_fave_ids ?? null,
             ]);
         }else{
            redirect('404');
         }
+
+    }
+
+    protected function addVideoToFavorite($video_id){
+        $sql = "select id from favorites where user_id=:user_id and video_id=:video_id";
+        $favorite = $this->db->query($sql , [
+           'user_id' => auth()['id'],
+           'video_id' => $video_id
+        ])->fetch();
+        if(!$favorite){
+            $sql2= "insert into favorites (user_id, video_id, created_at) values (:user_id, :video_id, :created_at)";
+            $this->db->query($sql2,[
+                'user_id' => auth()['id'],
+                'video_id' => $video_id ,
+                'created_at' => Carbon::now()
+            ]);
+        }
+        return;
+    }
+
+    protected function updateRatePercent($video){
+
+        $sql = "Update video set  rate_percent=:rate_percent  where id=:id ";
+        if($video['revision_count'] >= 10){
+            return $this->db->query($sql , [
+                'rate_percent' => ($video['like_count']/$video['revision_count'])*100 ,
+                'id' =>$video['id']
+            ]);
+        }
+        return ;
 
     }
 
@@ -254,10 +304,16 @@ class HomeController
                     'like_count' => ($video['like_count']?? '0') +1 ,
                     'id' => $video['id']
                 ]);
+                //add-to-favorite
+                $this->addVideoToFavorite($video['id']);
+
                 $sql1 = "select * from video where id=:id";
                 $video_u = $this->db->query($sql1 , [
                     'id' => $video['id']
                 ])->fetch();
+
+                //update-rate-percent
+                $this->updateRatePercent($video_u);
                 echo json_encode(['proccess' => 'success'  , 'video_like' => $video_u['like_count']]);
                 return;
             }else{
@@ -266,6 +322,15 @@ class HomeController
             }
         }
 
+    }
+
+    protected function RemoveVideoFromFavorite($video_id){
+        $sql = "delete  from favorites where user_id=:user_id and video_id=:video_id";
+        $favorite = $this->db->query($sql , [
+            'user_id' => auth()['id'],
+            'video_id' => $video_id
+        ]);
+        return;
     }
 
     public function unlikes()
@@ -280,15 +345,49 @@ class HomeController
                 'like_count' => ($video['like_count']?? '0') -1 ,
                 'id' => $video['id']
             ]);
+            //remove-from-favorite
+            $this->RemoveVideoFromFavorite($video['id']);
             $sql1 = "select * from video where id=:id";
             $video_u = $this->db->query($sql1 , [
                 'id' => $video['id']
             ])->fetch();
+
+            //update-rate-percent
+            $this->updateRatePercent($video_u);
             echo json_encode(['proccess' => 'success'  , 'video_like' => $video_u['like_count']]);
             return;
         }else{
             echo json_encode(['proccess' => 'failed']);
             return;
         }
+    }
+
+    public function favorites()
+    {
+        $sql = "select * from favorites where user_id=:user_id";
+
+        $favorites = $this->db->query($sql , [
+            'user_id' =>auth()['id']
+        ])->fetchAll();
+
+       if(count($favorites) > 0 ){
+           foreach ($favorites as $favorite){
+
+//               $sql = "select * from video inner join users on users.id=video.id where video_id=:video_id";
+               $sql2= "select   title,description,user_id,
+                    video_path,revision_count,like_count,
+                    video_image, confirm_at,chanel_name,avatar_image,video.created_at,video.id
+                 from video INNER JOIN users on video.user_id = users.id where video.id= :video_id";
+               $videos[] =$this->db->query($sql2 , [
+                  'video_id' => $favorite['video_id']
+               ])->fetch();
+           }
+       }
+
+
+
+       loadView('favorites' , [
+           'videos' => $videos ?? null
+       ]);
     }
 }

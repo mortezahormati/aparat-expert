@@ -90,19 +90,33 @@
                                          <span style="font-size: 14px;margin-left: 15px">
                                                 <?= $followers_count['follows_count'].'   ' ?>دنبال شونده
                                          </span>
+
+                                        <?php if(auth()): ?>
+                                        <?php if(!in_array($video['id'] , $user_video_fave_ids)): ?>
                                         <a href="" class="btn-link  mt-4 like-place"
                                            style="text-decoration: none; color: #000000b2;">
                                             <img class="rounded-circle like-count" data-id="<?= $video['id'] ?>" src="<?= asset('upload/aparat/svgexport-49.svg') ?>"
                                                  style="width: 24px" alt="">
-                                        </a>
+
                                         <span class="ml-3 like-counter" style="font-size: 12px">
 
                                            <?= $video['like_count'] ?? '0' ?>
                                         </span>
-
-
-
                                         </a>
+                                         <?php else: ?>
+                                                <a href="" class="btn-link  mt-4 like-place"
+                                                   style="text-decoration: none; color: #000000b2;">
+                                                    <img class="rounded-circle unlike-count" data-id="<?= $video['id'] ?>" src="<?= asset('upload/aparat/svgexport-180.svg') ?>"
+                                                         style="width: 24px" alt="">
+
+                                                    <span class="ml-3 like-counter" style="font-size: 12px">
+
+                                           <?= $video['like_count'] ?? '0' ?>
+                                        </span>
+                                                </a>
+                                        <?php endif; ?>
+                                        <?php endif; ?>
+
                                         <a href="<?= asset($video['video_path']) ?? '' ?>" class="btn-link ml-3 mt-4"
                                            style="text-decoration: none; color: #000000b2;" download>
                                             <img class="rounded-circle" src="<?= asset('upload/aparat/svgexport-51.svg') ?>"
