@@ -15,6 +15,9 @@ $router->post('/video/unlikes' , 'HomeController@unlikes');
 $router->get('/channel/{channel_name}' , 'HomeController@channel');
 $router->get('/category/{id}' , 'HomeController@categoryVideos');
 
+//search-box
+$router->get('/search' ,'SearchController@search' );
+
 //send-comments
 $router->post('/comment/submit' , 'Admin\CommentController@store');
 //admin-channel-comments

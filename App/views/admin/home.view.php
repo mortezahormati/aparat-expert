@@ -186,7 +186,69 @@
                                 <!--end::Card header-->
                                 <!--begin::Card body-->
                                 <div class="card-body mt-12 pt-3 text-center justify-content-center">
-                                    <img src="<?= asset('upload/aparat/empty-comment.png') ?>" alt="">
+                                    <?php if (!is_null($comments) && !empty($comments) ): ?>
+                                        <div class="row">
+
+
+                                                <div class="col-md-12 ">
+
+                                                    <div class="table-responsive">
+                                                        <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                                                               id="kt_table_users">
+                                                            <!--begin::Table head-->
+                                                            <thead>
+                                                            <!--begin::Table row-->
+                                                            <tr class="text-center text-muted fw-bolder fs-7 text-uppercase gs-0">
+
+                                                                <th class="min-w-125px sorting">
+                                                                    نام
+                                                                </th>
+
+                                                                <th class="min-w-250px sorting">
+                                                                    متن دیدگاه
+                                                                </th>
+
+
+                                                                <th class=" min-w-100px sorting_disabled">
+                                                                    عملیات
+                                                                </th>
+                                                            </tr>
+                                                            <!--end::Table row-->
+                                                            </thead>
+                                                            <!--end::Table head-->
+                                                            <!--begin::Table body-->
+                                                            <tbody class="text-gray-600 fw-bold text-center">
+                                                            <?php foreach ($comments as $commentis): ?>
+                                                            <?php foreach ($commentis as $ca ): ?>
+                                                                <tr class="">
+                                                                    <td>
+                                                                        <div class=""><img class="rounded-circle ml-2" width="25px" src="<?= asset($ca['avatar_image'] ?? '') ?>" alt=""><p><?= $ca['nick_name'] ?></p></div>
+                                                                    </td>
+                                                                    <td class=" align-items-center">
+                                                                        <span class="text-center"> <?= $ca['text'] ?></span>
+                                                                    </td>
+                                                                    <td class="">
+                                                                        <a href="<?= asset('administrator/comments/').$ca['video_id'] ?>" class=" btn-sm btn-success px-3 cm-confirm">مشاهده</a>
+                                                                    </td>
+                                                                </tr>
+
+                                                            <?php endforeach; ?>
+                                                            <?php endforeach; ?>
+
+                                                            </tbody>
+                                                            <!--end::Table body-->
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+
+
+                                        </div>
+
+                                    <?php else: ?>
+                                        <img src="<?= asset('upload/aparat/empty-comment.png') ?>" alt="">
+                                    <?php endif; ?>
+
                                     <!--end::Permissions-->
                                 </div>
 

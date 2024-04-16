@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use Carbon\Carbon;
 use Framework\Database;
+use Framework\Elequent;
 use Framework\Session;
 
 class HomeController
@@ -15,6 +16,10 @@ class HomeController
     }
     public function index()
     {
+
+//        $check_orm_elequent = new Elequent();
+//        $a = $check_orm_elequent->capsule::table('users')->where('id' , '=' ,23 )->first();
+//        dd($a->nick_name);
         $sql = "select id,persian_name from category";
         $sql2 = "select
                     title,description,user_id,
@@ -229,9 +234,7 @@ class HomeController
                 $tags_id = $this->reduceByTagsID($tag_video_ids);
                 $string_tags_id = implode(',',$tags_id);
                 $sql3= "select * from tags where id in (".$string_tags_id.")";
-                $tags = $this->db->query($sql3, [
-                   'string_tags_id' => $string_tags_id
-                ])->fetchAll();
+                $tags = $this->db->query($sql3)->fetchAll();
             }
 
             //get users favorite
@@ -390,4 +393,6 @@ class HomeController
            'videos' => $videos ?? null
        ]);
     }
+
+
 }

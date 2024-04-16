@@ -97,7 +97,7 @@
                                                     <td> <?= $us['name'] .'   '.$us['family']  ?></td>
                                                     <td> <?= $us['email']  ?></td>
                                                     <td> <?= $us['role']=='admin' ? 'ادمین' :' کاربر '  ?></td>
-                                                    <td data-order=""> <?= date('Y-m-d', strtotime($us['created_at'])) ?></td>
+                                                    <td data-order=""> <?= \Morilog\Jalali\Jalalian::forge($us['created_at'])->format('Y-m-d') ?></td>
                                                     <td class="">
                                                         <div class="row">
                                                             <div class="col-md-6">

@@ -15,6 +15,7 @@
     ],
     "require": {
         "morilog/jalali": "3.*",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+        "illuminate/database": "^11.3"
     }
 }

@@ -1,3 +1,9 @@
+<style>
+    .search-input:focus{
+        border-radius: 50px;
+        background-color: #f5f5f9;
+    }
+</style>
 <nav class="navbar navbar-expand navbar-dark" style="border-bottom: 1px solid #f5f5f9;">
     <div class="col-md-3">
         <a href="#menu-toggle" id="menu-toggle" class="navbar-brand-2">
@@ -20,12 +26,30 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <div class="form">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                    <input type="text" class="form-control form-input"
+                    <i class="fa fa-search "  aria-hidden="true"></i>
+                    <input type="text" id="search" class="form-control form-input search-input"
                            placeholder="جستجوی ویدیوهای رویدادها، شخصیت‌ها و ...">
                 </div>
             </div>
             <div class="col-md-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 serach-box d-none " style="min-height: 90px;background-color: #f5f5f9;border-radius: 16px;padding: 20px 30px;margin-top: 2px;position: absolute;z-index: 999;margin-right: 10%;border: 1px solid #df1a5d;">
+<!--               users -->
+               <div class="row users-search" >
+
+
+
+
+               </div>
+<!--                video-->
+                <div class="row videos-search justify-content-center">
+
+
+                </div>
+            </div>
+            <div class="col-md-1"></div>
         </div>
 
     </div>
@@ -87,4 +111,83 @@
         </div>
     </div>
 
+
 </nav>
+
+<script>
+
+
+
+    $('#search').on('keyup' , function (e) {
+       var count_char = $(this).val().length;
+       if($(this).val() === ''){
+            $('.serach-box').addClass('d-none');
+           $('.videos-search').html('');
+           $('.users-search').html('');
+        }
+       if(count_char >= 4){
+           $data = $(this).val()
+           $.ajax({
+               type : 'get',
+               dataType: "json",
+               url : 'http://aparat-expert.local/search',
+               data:{'search_name':$data},
+               success:function(data){
+                   // console.log(data.users);
+                   var videos = data.videos;
+                   var users = data.users;
+
+
+                   if(videos.length > 0 ){
+                       $('.serach-box').removeClass('d-none');
+                       $('.videos-search').html('')
+                       $('.videos-search').append(
+                           `<div class="col-md-12 mb-3 mt-3"><h5>ویدیوها </h5><hr></div>`
+                       )
+                       $.each(videos , function ($key , $value){
+
+                           $('.videos-search').append(
+                               `
+                        <div class="card mr-1" style="width: 20%; border: none !important;">
+                            <video data-id="`+ $value.id +`" poster="http://aparat-expert.local/`+$value.video_image+`" class="video-play go-video"  muted="">
+                            </video>
+                            <div class="card-body">
+                                <p class="card-text" style="font-size: 12px">
+                                    `+$value.title +`
+                                </p>
+
+                            </div>
+                        </div>
+                           `
+                           );
+                       })
+                   }
+
+                   if(users.length > 0 ){
+                       $('.serach-box').removeClass('d-none');
+                       $('.users-search').html('')
+                       $('.users-search').append(
+                           `<div class="col-md-12 mb-3 "><h5>کانال ها  </h5><hr></div>`
+                       );
+                       $.each(users , function ($key , $value){
+                           $('.users-search').append(
+                               `
+                               <div class="col-md-3 " >
+                                   <a href="http://aparat-expert.local/channel/`+ $value.chanel_name + `" class="text-dark" style="text-decoration: none;cursor: pointer">
+                                   <img class="rounded rounded-circle" style="width: 35px" src="http://aparat-expert.local/`+ $value.avatar_image +`" alt="">
+                                       <small>`+ $value.chanel_name +`</small>
+                                   </a>
+                               </div>
+
+                               `
+                           );
+                       })
+                   }
+
+               }
+
+           })
+       }
+
+    })
+</script>
