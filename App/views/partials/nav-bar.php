@@ -189,5 +189,9 @@
            })
        }
 
+    });
+    $(document).on('click','.go-video' ,function (e) {
+        var clicked_id = $(this).data('id')
+        window.location = "http://aparat-expert.local/video/"+clicked_id;
     })
 </script>

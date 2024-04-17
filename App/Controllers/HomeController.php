@@ -33,6 +33,8 @@ class HomeController
                     video_image, confirm_at,chanel_name,avatar_image,video.created_at,video.id
                  from video INNER JOIN users on video.user_id = users.id where rate_percent > 0
                  order by rate_percent DESC limit 5";
+
+
         $most_revision_videos = $this->db->query($sql2)->fetchAll();
         $best_videos = $this->db->query($sql3)->fetchAll();
 
@@ -94,6 +96,20 @@ class HomeController
         return $this->db->query($sql , [
            'user_id' => $user['id']
         ])->fetch();
+    }
+
+    public function bestVideos()
+    {
+        $sql2 = "select
+                    title,description,user_id,
+                    video_path,revision_count,like_count,
+                    video_image, confirm_at,chanel_name,avatar_image,video.created_at,video.id
+                 from video INNER JOIN users on video.user_id = users.id where rate_percent is not null 
+                 order by revision_count DESC ";
+        $best_videos = $this->db->query($sql2)->fetchAll();
+        loadView('best-video' ,[
+            'best_videos'=>$best_videos ?? null
+        ]);
     }
 
     public function channel($params)

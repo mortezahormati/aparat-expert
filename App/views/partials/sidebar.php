@@ -37,8 +37,10 @@
                 <span><?='علاقه مندی های من' ?></span>
             </a>
         </li>
-        <?php endif; ?>
+
         <hr>
+        <?php endif; ?>
+        <?php if(!auth()): ?>
         <p class="text-right mr-3 font-weight-light" style="font-size: 12px!important;">برای دنبال کردن کانال ها،
             مشاهده ویدیوهای پیشنهادی مطابق با سلیقه شما و تجربه کاربری بهتر وارد شوید.
         </p>
@@ -46,7 +48,8 @@
             <i class="fa fa-user"></i>
             <span> ورود به آپارات</span>
         </a>
-        <hr>
+        
+        <?php endif; ?>
         <hr>
         <li class="sidebar-brand ">
             <a href="#">
