@@ -27,6 +27,7 @@
 <!--    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/v5-font-face.min.css">
 <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <!--end::Global Stylesheets Bundle-->
 </head>

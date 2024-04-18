@@ -16,6 +16,7 @@
     "require": {
         "morilog/jalali": "3.*",
       "ext-pdo": "*",
-        "illuminate/database": "^11.3"
+        "illuminate/database": "^11.3",
+        "google/recaptcha": "^1.3"
     }
 }

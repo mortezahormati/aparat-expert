@@ -17,9 +17,7 @@ class HomeController
     public function index()
     {
 
-//        $check_orm_elequent = new Elequent();
-//        $a = $check_orm_elequent->capsule::table('users')->where('id' , '=' ,23 )->first();
-//        dd($a->nick_name);
+
         $sql = "select id,persian_name from category";
         $sql2 = "select
                     title,description,user_id,

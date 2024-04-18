@@ -23,6 +23,7 @@ class SearchController
                     ->orWhere('family' , 'LIKE' , '%'.$keyword.'%')
                     ->orWhere('chanel_name' , 'LIKE' , '%'.$keyword.'%')
                     ->orWhere('nick_name' , 'LIKE' , '%'.$keyword.'%')->get();
+
             $videos = $this->db->capsule::table('video')->select('id' ,'title', 'video_image','user_id')->where('title' , 'LIKE' , '%'.$keyword.'%')
                 ->orWhere('description' , 'LIKE' , '%'.$keyword.'%')
                 ->get();
