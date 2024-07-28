@@ -98,7 +98,7 @@ var KTCategoryEdit = function () {
                                         data:data,
                                         success: function(data){
                                             modal.hide();
-
+                                            // console.log(data);
                                             location.reload();
                                         }
                                     })

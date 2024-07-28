@@ -28,21 +28,26 @@ class CategoryController
     {
         if (strtolower($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'xmlhttprequest') {
 
+
             if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 $sql = "SELECT id,persian_name from category";
                 $data = $this->db->query($sql)->fetchAll();
                 echo json_encode($data);
                 return;
             }
+
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
                 $sql = "insert into category (name , persian_name , parent_id ,created_at) values (:name , :persian_name , :parent_id , :created_at)";
                 $params = [
                     'name' => $_POST['name'],
                     'persian_name' => $_POST['persian_name'],
-                    'parent_id' => $_POST['parent_id'],
+                    'parent_id' => $_POST['parent_id'] ,
                     'created_at' => date('Y-m-d'),
                 ];
+
                 $this->db->query($sql, $params);
+                dd(123);
 
                 echo json_encode('inserted in database !!!');
                 return;
@@ -86,6 +91,7 @@ class CategoryController
                     'parent_id' => $_POST['parent_id'] == 0 ? null : $_POST['parent_id'],
                     'id' => $_POST['cat_id'],
                 ];
+                dd($this->db->query($sql, $params));
                 $this->db->query($sql, $params);
                 echo json_encode('updated finish in database !!!');
                 return;

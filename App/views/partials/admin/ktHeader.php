@@ -75,7 +75,7 @@
                                 <div class="menu-content d-flex align-items-center px-3">
                                     <!--begin::Avatar-->
                                     <div class="symbol symbol-50px me-5">
-                                        <img alt="Logo" src="<?= asset('upload/avatars/150-26.jpg')?>" />
+                                        <img alt="Logo" src="<?=!empty(\Framework\Session::get('user')['avatar_image']) ? asset(\Framework\Session::get('user')['avatar_image']) :  asset('upload/avatars/150-26.jpg') ?>" />
                                     </div>
                                     <!--end::Avatar-->
                                     <!--begin::Username-->

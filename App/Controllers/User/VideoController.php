@@ -211,7 +211,7 @@ class VideoController
                 $newListData['confirm_at'] = toGeorgian($_POST['confirm_at']);
                 //add video
 
-//                dd($newListData);
+
                 $this->insertVideostable($newListData,'video');
                 //add_video_tag
 
