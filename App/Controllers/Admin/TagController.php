@@ -31,20 +31,19 @@ class TagController
             if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 $sql = "SELECT id,persian_name from tags";
                 $data = $this->db->query($sql)->fetchAll();
-
+//                dd($data);
                 echo json_encode($data);
                 return;
             }
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ///
-                $sql = "insert into tags (name , persian_name,created_at) values (:name , :persian_name , :created_at)";
+                $sql = "insert into tags (name, persian_name, created_at) values (:name , :persian_name , :created_at)";
                 $params = [
                     'name' => $_POST['name'],
                     'persian_name' => $_POST['persian_name'],
                     'created_at' =>date('Y-m-d'),
                 ];
                 $this->db->query($sql, $params);
-
                 echo json_encode('inserted in database !!!');
                 return;
             }

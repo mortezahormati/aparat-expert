@@ -47,7 +47,6 @@ class CategoryController
                 ];
 
                 $this->db->query($sql, $params);
-                dd(123);
 
                 echo json_encode('inserted in database !!!');
                 return;
@@ -91,7 +90,7 @@ class CategoryController
                     'parent_id' => $_POST['parent_id'] == 0 ? null : $_POST['parent_id'],
                     'id' => $_POST['cat_id'],
                 ];
-                dd($this->db->query($sql, $params));
+
                 $this->db->query($sql, $params);
                 echo json_encode('updated finish in database !!!');
                 return;
