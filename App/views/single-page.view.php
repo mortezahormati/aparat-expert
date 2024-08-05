@@ -43,9 +43,8 @@
                                 <!-- video-->
                                 <div id="trailer"
                                      class="section d-flex justify-content-center embed-responsive embed-responsive-16by9">
-                                    <video id="video" class="embed-responsive-item" controls loop muted>
-                                        <source src="<?= asset('upload/videos/digital-timer.mp4') ?>" type="video/mp4">
-                                        Your browser does not support the video tag.
+                                    <video id="video" class="embed-responsive-item video-revision" data-id="<?= $video['id'] ?>" controls loop >
+                                        <source src="<?= asset($video['video_path'] ?? '') ?>" type="video/mp4">
                                     </video>
                                 </div>
                                 <!-- end_video-->
@@ -54,7 +53,7 @@
                                 <div class="row mx-auto justify-content-between bg-black ">
                                     <div class="col-md-8">
                                         <h4>
-                                            تایم کانتر 5 ثانیه ای
+                                            <?= $video['title'] ?? '' ?>
                                         </h4>
                                     </div>
                                     <div class="col-md-2">
@@ -62,8 +61,8 @@
                                     </div>
                                     <div class="col-md-2 text-left">
                                         <p>
-                                            <?= number_format('8543'); ?>
-                                            <img src="<?= asset('upload/videos/digital-timer.mp4') ?>" width="14px" alt="">
+                                            <span class="revision-span" ><?= number_format($video['revision_count'] ?? '0'); ?></span>
+                                            <i class="fa fa-eye"></i>
                                         </p>
                                     </div>
 
@@ -74,14 +73,12 @@
                                 <div class="row mx-auto justify-content-between bg-black align-items-center ">
 
                                     <div class="col-md-5">
-                                        <a class="btn-link">
+                                        <a href="<?= asset('channel/').trim($user_channel_info['chanel_name']) ?>" class="btn text-dark ">
                                             <img class="rounded-circle" src="<?= asset('upload/channel_banner/nm2.webp') ?>"
                                                  style="width: 60px" alt="">
-                                            <span style="font-size: 12px">
-                                            نام کانال ویدیو
-                                            <span style="font-size: 10px">
-                                                898 دنبال شونده
-                                            </span>
+                                            <span style="font-size: 14px"><?= $user_channel_info['chanel_name'] ?>
+                                                <br>
+
                                         </span>
 
                                         </a>
@@ -90,26 +87,38 @@
 
                                     <div class="col-md-5 justify-content-around align-items-center text-left ">
 
-                                        <a href="" class="btn-link ml-3 mt-4"
-                                           style="text-decoration: none; color: #000000b2;">
-                                            <img class="rounded-circle" src="<?= asset('upload/aparat/svgexport-49.svg') ?>"
-                                                 style="width: 24px" alt="">
-                                            <span style="font-size: 12px">
-                                           16
-                                        </span>
+                                         <span style="font-size: 14px;margin-left: 15px">
+                                                <?= $followers_count['follows_count'].'   ' ?>دنبال شونده
+                                         </span>
 
-                                        </a>
-                                        <a href="" class="btn-link ml-3 mt-4"
+                                        <?php if(auth()): ?>
+                                        <?php if(!in_array($video['id'] , $user_video_fave_ids)): ?>
+                                        <a href="" class="btn-link  mt-4 like-place"
                                            style="text-decoration: none; color: #000000b2;">
-                                            <img class="rounded-circle" src="<?= asset('upload/aparat/svgexport-50.svg') ?>"
+                                            <img class="rounded-circle like-count" data-id="<?= $video['id'] ?>" src="<?= asset('upload/aparat/svgexport-49.svg') ?>"
                                                  style="width: 24px" alt="">
-                                            <span style="font-size: 12px">
-                                           ذخیره
-                                        </span>
 
+                                        <span class="ml-3 like-counter" style="font-size: 12px">
+
+                                           <?= $video['like_count'] ?? '0' ?>
+                                        </span>
                                         </a>
-                                        <a href="" class="btn-link ml-3 mt-4"
-                                           style="text-decoration: none; color: #000000b2;">
+                                         <?php else: ?>
+                                                <a href="" class="btn-link  mt-4 like-place"
+                                                   style="text-decoration: none; color: #000000b2;">
+                                                    <img class="rounded-circle unlike-count" data-id="<?= $video['id'] ?>" src="<?= asset('upload/aparat/svgexport-180.svg') ?>"
+                                                         style="width: 24px" alt="">
+
+                                                    <span class="ml-3 like-counter" style="font-size: 12px">
+
+                                           <?= $video['like_count'] ?? '0' ?>
+                                        </span>
+                                                </a>
+                                        <?php endif; ?>
+                                        <?php endif; ?>
+
+                                        <a href="<?= asset($video['video_path']) ?? '' ?>" class="btn-link ml-3 mt-4"
+                                           style="text-decoration: none; color: #000000b2;" download>
                                             <img class="rounded-circle" src="<?= asset('upload/aparat/svgexport-51.svg') ?>"
                                                  style="width: 24px" alt="">
                                             <span style="font-size: 12px">
@@ -117,10 +126,19 @@
                                         </span>
 
                                         </a>
-                                        <a href="" class="btn   btn-danger ml-3" style="border-radius: 5%">
-                                            <img src="<?= asset('upload/aparat/svgexport-55.svg') ?>" alt="" width="14px">
-                                            <span>دنبال کردن</span>
-                                        </a>
+                                        <?php if(auth() && $user_channel_info['id'] !== auth()['id']  &&  !in_array($user_channel_info['id'] ,$followers_id ?? [])): ?>
+                                            <a href="" class="btn   btn-danger ml-3 btn-add-followers" data-follower-id="<?= $user_channel_info['id'] ?>" style="border-radius: 5%">
+                                                <i class="fa fa-plus"></i>
+                                                <span>دنبال کردن</span>
+                                            </a>
+                                        <?php endif; ?>
+                                        <?php if(auth() && $user_channel_info['id'] !== auth()['id']  && in_array($user_channel_info['id'] ,$followers_id ?? [])): ?>
+                                            <a href="" class="btn  btn-outline-danger ml-3 btn-remove-followers" data-follower-id="<?= $user_channel_info['id'] ?>" style="border-radius: 5%">
+                                                <i class="fa fa-minus"></i>
+                                                <span>دنبال نکردن</span>
+                                            </a>
+                                        <?php endif; ?>
+
 
 
                                     </div>
@@ -130,89 +148,75 @@
                                 <div class="row mx-auto justify-content-between bg-black align-items-center mt-5 ">
                                     <div class="col-md-12">
                                         <p class="text-right">
-                                            در قسمت دهم سراغ موضوع جذاب برندسازی رفتیم، توی این قسمت رضا مهدوی، موسس
-                                            آژانس برندینگ و خلاقیت رضا مهدوی و حامد فتاحی برنامه‌ساز و تهیه‌کننده
-                                            تیزرهای تبلیغاتی درباره "تاثیر ویدیوهای ویروسی و بازاریابی چریکی در
-                                            برندسازی" با هم گپ زدن.
-                                            اگه موضوع برندسازی از طریق ساخت ویدیوهای ویروسی و بازاریابی چریکی برای شما
-                                            هم جذابه پیشنهاد می‌کنیم این قسمت رو از دست ندین.
-                                            برنامه توتاک رو دوشنبه‌ هر هفته از آپارات تماشا کنین.
-                                            در ضمن ورژن صوتی این برنامه رو می‌تونین از شنوتو، کست باکس، اپل پادکست، گوگل
-                                            پادکست و یوتیوب گوش کنین.
+                                          <?= $video['description'] ?>
                                         </p>
                                     </div>
                                     <div class="col-md-12">
+                                    <?php if (!is_null($tags)): ?>
+                                        <?php foreach ($tags as $tag): ?>
                                         <a href="" class="btn-link "
-                                           style="font-size:12px;text-decoration: none;color: #768484;">
-                                            #تماشا کنین
+                                           style="font-size:12px;text-decoration: none;color: #768484;margin-right: 5px">
+
+                                            <?= '#'.$tag['persian_name'] ?>
                                         </a>
+                                        <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <hr>
+
                                 <div class="row mx-auto justify-content-between bg-black align-items-center mt-5 ">
                                     <div class="col-md-12">
                                         <h4>دیدگاه ها</h4>
                                     </div>
+                                    <?php if(auth()): ?>
                                     <div class="col-md-12">
                                         <div class="type_msg">
                                             <div class="input_msg_write">
-                                                <input type="text" class="write_msg" placeholder="دیدگاه خود را بیان کنید" />
+                                                <input type="text" class="write_msg pr-4" data-video-id="<?= $video['id'] ?>" placeholder="دیدگاه خود را بیان کنید" />
                                                 <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mx-auto justify-content-between bg-black align-items-center mt-5 ">
+
+                                <?php else: ?>
+
                                     <div class="col-md-12">
-                                        <div class="card border-1">
-                                            <!--begin::Body-->
-                                            <div class="card-body">
-                                                <!--begin::Wrapper-->
-                                                <div class="row">
-                                                <div class=" col-md-2 mb-4">
-                                                    <!--begin::Container-->
-                                                    <div class=" align-items-center ml-5  ">
-                                                        <!--begin::Author-->
-                                                        <div class="ml-2">
-                                                            <div  class="text-small text-success">
-                                                                <img src="<?= asset('upload/avatars/150-1.jpg') ?>" class="rounded-circle" width="50px" alt="">
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Author-->
-                                                        <!--begin::Info-->
-                                                        <div class=" text-dark">
-                                                            <!--begin::Text-->
-                                                            <div class=" align-items-center">
-                                                                <!--begin::Username-->
-                                                                <h6  class="mt-2 font-weight-bold">Sandra Piquet</h6>
-                                                                <!--end::Username-->
-                                                                <span class="text-muted "><small>2 Days ago</small></span>
-                                                            </div>
-                                                            <!--end::Text-->
-                                                            <!--begin::Date-->
+                                        <small class="text-danger">برای ایجاد دیدگاه خود نسبت به این ویدیو لطفا ابتدا وارد شوید ! </small>
+                                    </div>
 
-                                                            <!--end::Date-->
-                                                        </div>
-                                                        <!--end::Info-->
-                                                    </div>
-                                                    <!--end::Container-->
-                                                    <!--begin::Actions-->
+                                <?php endif; ?>
+                                </div>
+                                <div class="col-md-12" style="height: 50px"></div>
+                                <?php if(!is_null($comments)): ?>
+                                <?php foreach($comments as $comment): ?>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="d-flex flex-column align-items-start p-4  " style="border: .1px solid rgba(255,0,0,0.16)">
+                                            <!--begin::User-->
+                                            <div class="d-flex align-items-center mb-2">
+                                                <!--begin::Avatar-->
+                                                <div class="symbol  rounded-circle">
+                                                    <img alt="Pic" class="" width="35px" src="<?= asset($comment['avatar_image']) ?>">
+                                                </div>
+                                                <!--end::Avatar-->
+                                                <!--begin::Details-->
+                                                <div class="m-3">
+                                                    <a style="font-size: 12px" href="<?= asset('channel/'.trim($comment['chanel_name'])) ?>" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1"><?= $comment['nick_name'] ?></a>
 
-                                                    <!--end::Actions-->
+                                                    <p class="text-muted   mb-1" style="font-size: 12px"><?= jalaliTimeAgo($comment['created_at']) ?></p>
                                                 </div>
-                                                <div class=" col-md-10 mt-5 pt-2">
-                                                    <p class="font-normal">I run a team of 20 product managers, developers, QA and UX Previously we designed everything ourselves.</p>
-                                                </div>
-                                                </div>
-
-                                                <!--end::Wrapper-->
-                                                <!--begin::Desc-->
-                                                <!--end::Desc-->
+                                                <!--end::Details-->
                                             </div>
-                                            <!--end::Body-->
+                                            <!--end::User-->
+                                            <!--begin::Text-->
+                                            <div class="p-2 pr-4 rounded bg-light-info text-dark fw-bold  text-start" data-kt-element="message-text">
+                                            <?= $comment['text'] ?>
+                                            </div>
+                                            <!--end::Text-->
                                         </div>
                                     </div>
-                                </div>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
 
                             </div>
                             <div class="col-md-3">
@@ -226,40 +230,27 @@
                                 </div>
                                 <div class="row mx-auto justify-content-between bg-black "
                                      style="background-color: #6c757d0f!important;padding: 5px">
-                                    <div class="col-md-5  mt-3  ">
-                                        <video
-                                                poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
-                                                class="video-play"
-                                                style="max-width: 145px"
-                                                src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
-                                        </video>
-                                    </div>
-                                    <div class="col-md-7  mt-3  ">
-                                        <p>
-                                            ویدیوی بررسی گوشی گلکسی s24
-                                            <br>
-
-                                            <small class="text-muted">3 ماه پیش</small>
-                                            <small class="text-muted">نام کانال ویدیو </small>
-                                        </p>
-                                    </div>
+                                   <?php foreach ($similar_videos as $l): ?>
                                     <div class="col-md-5">
                                         <video
-                                                poster="https://static.cdn.asset.aparat.cloud/avt/57279991-5075-l__3632.jpg?width=300&quality=90&secret=FlWOqJWqfdFpQl27IzJ8cQ"
-                                                class="video-play"
+                                                data-id="<?= $l['id'] ?>"
+                                                poster="<?= asset($l['video_image']) ?>"
+                                                class="video-play go-video"
                                                 style="max-width: 145px"
-                                                src="https://static.cdn.asset.aparat.com/avt/57279991_15s.mp4">
+                                                src="<?= asset($l['video_path']) ?> " muted loop>
                                         </video>
                                     </div>
                                     <div class="col-md-7">
-                                        <p>
-                                            ویدیوی بررسی گوشی گلکسی s24
+                                        <p style="font-size: 12px">
+                                            <?= $l['title'] ?>
                                             <br>
+                                            <small class="text-muted"> <?= jalaliTimeAgo($l['created_at']) ?> </small>
 
-                                            <small class="text-muted">3 ماه پیش</small>
-                                            <small class="text-muted">نام کانال ویدیو </small>
+
+                                            <small class="text-muted"></small>
                                         </p>
                                     </div>
+                                    <?php endforeach; ?>
 
                                 </div>
                             </div>
@@ -275,6 +266,199 @@
     <!--footer-->
 <?php loadPartial('footer'); ?>
 <script type="text/javascript">
+    $(document).on('click', '.msg_send_btn' , function (e) {
+        e.preventDefault()
+        var element = $('.write_msg');
+        var id = element.data('video-id');
+        var text= element.val();
+        $.ajax({
+            url: 'http://aparat-expert.local/comment/submit',
+            type: 'POST',
+            dataType: "json",
+            data: { text:text, id:id},
+            success: function(response){
+                if(response.process == "success"){
+                    Swal.fire({
+                        text: "کامنت شما بارگزاری شد و پس از تایید مدیر کانال به نمایش در خواهد آمد  ",
+                        icon: "warning",
+                        buttonsStyling: false,
+                        confirmButtonText: "متوجه شدم!",
+                        customClass: {
+                            confirmButton: "btn btn-info",
+                        }
+                    })
+                }
+                if(response.process == "error"){
+                    var error = response.data.text;
+                    console.log(error)
+                    Swal.fire({
+                        text:error,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "متوجه شدم!",
+                        customClass: {
+                            confirmButton: "btn btn-danger",
+                        }
+                    })
+                }
+                if(response.process == "notAjax"){
+                    Swal.fire({
+                        text:"مشکلی پیش آمده است دقایقی دیگر مجددا امتحان کنید!",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "متوجه شدم!",
+                        customClass: {
+                            confirmButton: "btn btn-danger",
+                        }
+                    })
+                }
+
+            }
+        });
+
+    })
+    // $(document).on('click','.video-revision' , function (e){
+    $(document).on('click','.go-video' ,function (e) {
+        var clicked_id = $(this).data('id')
+        window.location = "http://aparat-expert.local/video/"+clicked_id;
+    })
+
+    $(document).on('click' , '.like-count' , function (e) {
+
+        e.preventDefault()
+        var id =$(this).data('id')
+        var element = $(this)
+        $.ajax({
+            url: 'http://aparat-expert.local/video/likes',
+            type: 'POST',
+            dataType: "json",
+            data: { id:id },
+            success: function(response){
+                if(response.proccess ==="success"){
+                    element.attr('src' , 'http://aparat-expert.local/upload/aparat/svgexport-180.svg');
+                    element.removeClass('like-count')
+                    element.addClass('unlike-count')
+                    $('.like-counter').html(response.video_like)
+                }
+            }
+        });
+    })
+    $(document).on('click' , '.unlike-count' , function (e) {
+
+        e.preventDefault()
+        var id =$(this).data('id')
+        var element = $(this)
+        $.ajax({
+            url: 'http://aparat-expert.local/video/unlikes',
+            type: 'POST',
+            dataType: "json",
+            data: { id:id },
+            success: function(response){
+                if(response.proccess ==="success"){
+                    element.attr('src' , 'http://aparat-expert.local/upload/aparat/svgexport-49.svg');
+                    element.removeClass('unlike-count')
+                    element.addClass('like-count')
+                    $('.like-counter').html(response.video_like)
+                }
+            }
+        });
+    })
+    $(document).ready(function () {
+        $('.btn-add-followers').on('click' , function (e) {
+            e.preventDefault();
+            var follower_id = $('.btn-add-followers').data('follower-id');
+            $.ajax({
+                url: 'http://aparat-expert.local/channel/follows',
+                type: 'POST',
+                dataType: "json",
+                data: { id:follower_id },
+                success: function(response){
+                    if(response.process ==="true"){
+                        Swal.fire({
+                            text: "درخواست شما با موفقیت انجام شد",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-info",
+                            }
+                        }).then((result) => {
+                            location.reload()
+                        });
+                    }
+                    if(response.process ==="existed"){
+                        Swal.fire({
+                            text: "این کانال قبلا توسط شما دنبال شده است",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-info",
+                            }
+                        });
+                    }
+                    if(response.process ===false) {
+                        Swal.fire({
+                            text: "مشکلی پیش آمده است مجددا امتحان کنید.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-info",
+                            }
+                        });
+                    }
+                }
+            });
+
+        })
+        $('.btn-remove-followers').on('click' , function (e) {
+            e.preventDefault();
+            var follower_id = $('.btn-remove-followers').data('follower-id');
+            $.ajax({
+                url: 'http://aparat-expert.local/channel/unfollows',
+                type: 'POST',
+                dataType: "json",
+                data: { id:follower_id },
+                success: function(response){
+
+                    if(response.data ==="true"){
+                        Swal.fire({
+                            text: "شما کانال مورد نظر را آنفالوو کردید.!",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-primary",
+                            }
+                        }).then((result) => {
+
+                            location.reload()
+
+                        });
+                    }else{
+                        Swal.fire({
+                            text: "مشکلی پیش آمده است مجددا امتحان کنید.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "متوجه شدم!",
+                            customClass: {
+                                confirmButton: "btn btn-info",
+                            }
+                        });
+                    }
+
+                }
+            });
+
+        })
+
+    })
+
+
+
+
+    // })
     $(document).ready(function () {
         var video =$("#video");
         console.log(video.duration);

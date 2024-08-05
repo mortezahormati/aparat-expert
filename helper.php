@@ -75,9 +75,13 @@ function adminView($name , $data=[])
  * @return void
  *
  */
-function loadPartial($name){
+function loadPartial($name ,$data=[]){
+
     $pathPartial = basePath("App/views/partials/{$name}.php");
+
+
     if(file_exists($pathPartial)){
+        extract($data);
         require $pathPartial;
     }else{
         echo "partial {$name} not existed";

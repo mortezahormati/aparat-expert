@@ -5,7 +5,7 @@
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <!--begin::Logo-->
-        <a href="http://aparat-expert.local">
+        <a href="<?= asset('') ?>">
             <img alt="Logo" src="<?= asset('upload/logo.png') ?>" class="h-50px logo"/>
         </a>
         <!--end::Logo-->
@@ -76,6 +76,19 @@
                                             <!--end::Svg Icon-->
 										</span>
                         <span class="menu-title">تنظیمات</span>
+                    </a>
+                </div>
+                <div class="menu-item mt-8">
+                    <a class="menu-link active" href="<?= asset('administrator/followers') ?>">
+										<span class="menu-icon">
+											<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+											<span class="svg-icon svg-icon-2">
+                                                <img src="<?= asset('upload/aparat/svgexport-181.svg') ?>" alt="">
+
+											</span>
+                                            <!--end::Svg Icon-->
+										</span>
+                        <span class="menu-title">دنبال کنندگان من</span>
                     </a>
                 </div>
 <!--                --><?php //endif; ?>

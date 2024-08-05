@@ -5,6 +5,7 @@ namespace App\Controllers\Auth;
 use Framework\Database;
 use Framework\Session;
 use Framework\Validation;
+use ReCaptcha\ReCaptcha;
 
 class LoginController
 {
@@ -15,6 +16,8 @@ class LoginController
         $config = require basePath('config/db.php');
         $this->db = new Database($config);
     }
+
+
 
     public function login()
     {
@@ -30,6 +33,18 @@ class LoginController
             if (!Validation::stringSize($password, 5)) {
                 $errors['password'] = 'پسورد اشتباه است .';
             }
+
+
+
+            // check recaptcha
+            $recaptcha = new ReCaptcha('6LfP5L4pAAAAABnBLDFJsye9F0sEiF-dMS7Y9BV_');
+            $resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+
+
+            if (!$resp->isSuccess()) {
+                $errors['recaptcha'] = 'من ربات نیستم را فعال کنید';
+            }
+
             if (!empty($errors)) {
                 //reload user page register with old data
                 $oldLoginData = array(
@@ -43,6 +58,7 @@ class LoginController
             }
             //2- email exists
             $user = $this->userExists($email);
+
             //3- check password
             if (!password_verify($password, $user['password'])) {
                 $oldLoginData = array(

@@ -1,3 +1,5 @@
+
+
 <?php ?>
 
 <?php loadPartial('head'); ?>
@@ -21,11 +23,11 @@
                     <div class="box box-widget widget-user">
                         <!-- Add the bg color to the header using any of the bg-* classes -->
                         <div class="widget-user-header"
-                             style="background: url('<?= asset($selected_category['cover_image']) ?>') center center;">
+                             style="background: url('<?= asset('upload/channel_banner/favorites.png') ?>') center center;">
                         </div>
                         <div class="widget-user-image">
                             <img class="img-circle"
-                                 src="<?= asset($selected_category['avatar_image']) ?>"
+                                 src="<?= asset('upload/channel_banner/favorites.png') ?>"
                                  alt="User Avatar">
                         </div>
 
@@ -36,7 +38,7 @@
                                         <div class="col-md-3 mr-5">
                                             <div class="description-block">
                                                 <h5 class="mt-2 mr-5" style="font-weight: 800">
-                                                    <?= $selected_category['persian_name'] ?>
+                                                    <?= 'علاقه مندی های من ' ?>
                                                 </h5>
                                             </div>
                                         </div>

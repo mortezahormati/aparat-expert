@@ -36,6 +36,7 @@
                         <input class="form-control form-control-lg form-control-solid" type="text" name="email" value="<?= $clientInfo['email'] ?? '' ?>" autocomplete="off" />
                         <!--end::Input-->
                     </div>
+
                     <!--end::Input group-->
                     <!--begin::Input group-->
                     <div class="fv-row mb-10">
@@ -53,6 +54,13 @@
                         <input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
                         <!--end::Input-->
                     </div>
+                    <div class="fv-row mb-10">
+                        <!--begin::Label-->
+                        <div class="g-recaptcha" data-sitekey="6LfP5L4pAAAAAGmgFwR1VTa0u4BjD2bu276bKgAi"></div>
+
+                        <!--end::Input-->
+                    </div>
+
                     <!--end::Input group-->
                     <!--begin::Actions-->
                     <div class="text-center">
@@ -88,4 +96,9 @@
 <script src="assets/js/custom/authentication/sign-in/general.js"></script>
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
+<script type="text/javascript">
+    var onloadCallback = function() {
+        alert("grecaptcha is ready!");
+    };
+</script>
 </body>

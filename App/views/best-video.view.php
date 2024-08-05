@@ -21,11 +21,11 @@
                     <div class="box box-widget widget-user">
                         <!-- Add the bg color to the header using any of the bg-* classes -->
                         <div class="widget-user-header"
-                             style="background: url('<?= asset($selected_category['cover_image']) ?>') center center;">
+                             style="background: url('<?= asset('upload/channel_banner/best-video.png') ?>') center center;">
                         </div>
                         <div class="widget-user-image">
                             <img class="img-circle"
-                                 src="<?= asset($selected_category['avatar_image']) ?>"
+                                 src="<?= asset('upload/channel_banner/best-video.png') ?>"
                                  alt="User Avatar">
                         </div>
 
@@ -36,7 +36,7 @@
                                         <div class="col-md-3 mr-5">
                                             <div class="description-block">
                                                 <h5 class="mt-2 mr-5" style="font-weight: 800">
-                                                    <?= $selected_category['persian_name'] ?>
+                                                    <?= 'برترین ویدیوها' ?>
                                                 </h5>
                                             </div>
                                         </div>
@@ -59,25 +59,36 @@
             <div class="row" style="margin-top: 5%">
                 <div class="col-md-12  ">
                     <div class="row justify-content-right  ">
-                        <?php foreach ($videos as $video): ?>
+                        <?php if(!is_null($best_videos)): ?>
+                        <?php foreach ($best_videos as $video): ?>
                             <div class="card mr-3" style="border: none;width: 19%;">
                                 <video
-                                        data-id="<?= $video['id']?>"
-                                        poster="<?= asset($video['video_image']) ?>"
-                                        class="video-play video-link"
-                                        muted
-                                        src="<?= asset($video['video_path']) ?>">
+                                        data-id="<?= $video['id'] ?>"
+                                        poster="<?= asset($video['video_image'])  ?>"
+                                        class="video-play go-video"
+                                        src="<?= asset($video['video_path'])  ?>"
+                                        muted>
                                 </video>
-                                <div class="card-body">
-                                    <p class="card-text"><?= $video['title'] ?></p>
 
-                                    <p class="card-text">
-                                        <small><?= $video['revision_count'] ?? '0' ?> بازدید .</small>
-                                        <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
+                                <div class="card-body">
+                                    <p class="card-text" style="font-size: 12px">
+                                        <?= $video['title']  ?>
                                     </p>
+                                    <small>
+                                        <a href="<?= asset('channel/').trim($video['chanel_name']) ?>" class="text-dark" style="text-decoration: none">
+                                            <img src="<?= asset($video['avatar_image'])?>" width="20px" class="rounded-circle" alt="Cinque Terre">
+
+                                            <?=  str_replace('-',' ', $video['chanel_name']) ?>
+                                        </a>
+                                    </small>
+                                    <br>
+                                    <span>
+                                                <small> <?= $video['revision_count'] ?? '0' ?> بازدید .</small> <small> <?= jalaliTimeAgo($video['created_at']) ?> </small>
+                                            </span>
                                 </div>
                             </div>
                         <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -94,7 +105,7 @@
 <!--footer-->
 <?php loadPartial('footer'); ?>
 <script>
-    $(document).on('click' , '.video-link', function (e) {
+    $(document).on('click' , '.go-video', function (e) {
         var clicked_id = $(this).data('id')
         window.location = "http://aparat-expert.local/video/"+clicked_id;
     })

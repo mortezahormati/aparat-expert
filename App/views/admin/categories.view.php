@@ -377,6 +377,8 @@
             e.preventDefault()
 
             var deleteid = $(this).data('id');
+
+
             Swal.fire({
                 text: "مطمعن از حذف این دسته بندی هستید ؟",
                 icon: "error",
@@ -390,7 +392,8 @@
                 }
             }).then(function (result) {
                 if (result.value) {
-                    console.log(deleteid);
+
+
                         $.ajax({
                             url: 'http://aparat-expert.local/administrator/category/delete/ajax',
                             type: 'POST',
@@ -422,6 +425,7 @@
             url: 'http://aparat-expert.local/administrator/category/ajax',
             datatype: 'json',
             success: function (datas) {
+
                 var data2 = JSON.parse(datas);
                 console.log(data2)
                 $("#select_cat").append(`<option value="0" >بدون دسته بندی  </option>`)
